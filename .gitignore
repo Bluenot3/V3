@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.DS_Store
+coverage
+.vscode
+.codex-devfull.log
+.playwright-cli/

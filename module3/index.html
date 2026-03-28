@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEN VANGUARD · Module 3</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
+      }
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-bg': '#E6E7EE',
+              'brand-text': '#4A5568',
+              'brand-text-light': '#718096',
+              'brand-primary': '#8B5CF6',
+              'brand-secondary': '#F472B6',
+              'brand-shadow-light': '#F9F9FB',
+              'brand-shadow-dark': '#D1D9E6',
+              'pale-green': '#10B981',
+              'pale-yellow': '#F59E0B',
+              'pale-purple': '#A78BFA',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            boxShadow: {
+              'neumorphic-out': '6px 6px 12px #D1D9E6, -6px -6px 12px #F9F9FB',
+              'neumorphic-in': 'inset 6px 6px 12px #D1D9E6, inset -6px -6px 12px #F9F9FB',
+              'neumorphic-out-sm': '3px 3px 6px #D1D9E6, -3px -3px 6px #F9F9FB',
+              'neumorphic-out-lg': '10px 10px 20px #D1D9E6, -10px -10px 20px #F9F9FB',
+              'glow': '0 0 20px theme(colors.brand-primary/40), 0 0 8px theme(colors.brand-secondary/40)',
+            },
+            animation: {
+                'fade-in': 'fade-in 0.6s ease-out forwards',
+                'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+                'aurora': 'aurora 20s ease infinite',
+                'pulse-glow': 'pulse-glow 3s infinite ease-in-out',
+            },
+            keyframes: {
+                'fade-in': {
+                    'from': { opacity: 0 },
+                    'to': { opacity: 1 },
+                },
+                'fade-in-up': {
+                    'from': { opacity: 0, transform: 'translateY(24px)' },
+                    'to': { opacity: 1, transform: 'translateY(0)' },
+                },
+                'aurora': {
+                    '0%': { backgroundPosition: '0% 50%' },
+                    '50%': { backgroundPosition: '100% 50%' },
+                    '100%': { backgroundPosition: '0% 50%' },
+                },
+                 'pulse-glow': {
+                    '0%, 100%': { boxShadow: '0 0 20px theme(colors.brand-primary/40), 0 0 8px theme(colors.brand-secondary/40)' },
+                    '50%': { boxShadow: '0 0 35px theme(colors.brand-primary/60), 0 0 15px theme(colors.brand-secondary/60)' },
+                }
+            }
+          },
+        },
+      }
+    </script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/mermaid@8.14.0/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(125deg, rgba(139, 92, 246, 0.07), rgba(244, 114, 182, 0.07), rgba(16, 185, 129, 0.07));
+            background-size: 400% 400%;
+            animation: aurora 20s ease infinite;
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(209, 217, 230, 0.3) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(209, 217, 230, 0.3) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -2;
+            opacity: 0.5;
+        }
+        ::selection {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #4A5568;
+        }
+
+        .liquid-scrollbar::-webkit-scrollbar {
+            width: 10px;
+        }
+        .liquid-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .liquid-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #A78BFA, #F472B6);
+            border-radius: 10px;
+            border: 2px solid #E6E7EE;
+        }
+        .mermaid-container svg {
+            width: 100%;
+            height: auto;
+        }
+        .glassmorphic {
+            background: rgba(230, 231, 238, 0.75);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .stagger-children > * {
+            opacity: 0;
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg">
+    <div id="root"></div>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                background: '#E6E7EE',
+                primaryColor: '#F9F9FB',
+                primaryTextColor: '#4A5568',
+                lineColor: '#8B5CF6',
+                textColor: '#4A5568',
+                fontSize: '14px',
+                nodeBorder: '#8B5CF6'
+            },
+            flowchart: {
+                curve: 'basis'
+            }
+        });
+    </script>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

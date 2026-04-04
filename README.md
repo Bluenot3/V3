@@ -1,165 +1,205 @@
-# ZEN Vanguard
+<div align="center">
+  <img src="docs/zen-logo.png" alt="ZEN AI Co" width="120" />
 
-ZEN Vanguard is a React and Vite learning platform for AI literacy, agent systems, automation, and beginner-to-builder deployment workflows. It includes gated curriculum modules, a program hub, learner progress tracking, subscription access, and a starter guide that shows how to ship a first Hugging Face Space safely.
+  <h1>ZEN VANGUARD</h1>
+  <p><strong>The Professional AI Literacy Platform</strong></p>
 
-The current repository is still a local-first application, but this pass moves it closer to a production baseline by tightening auth and billing behavior, removing client-side secret exposure patterns, simplifying mobile navigation, and adding clearer deployment documentation.
+  <p>
+    <img src="https://img.shields.io/badge/Version-3.0-6366f1?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite" alt="Vite" />
+    <img src="https://img.shields.io/badge/Status-Production-22c55e?style=flat-square" alt="Status" />
+  </p>
+</div>
 
-## What is in this app
+---
 
-- Program hub for multiple ZEN learning tracks
-- Four core learning modules with interactive labs
-- Starter guide for AI, LLMs, automation, and Hugging Face Spaces
-- Subscription gating via Stripe-backed server endpoints
-- Admin workflow support through server-configured bypass credentials only
-- Local API server for Stripe and AI proxy calls
+## The Program Behind the Platform
 
-## Stack
+ZEN Vanguard is the professional evolution of the **first youth AI literacy program in United States history** — developed, deployed, and facilitated by **ZEN AI Co** in partnership with **Boys & Girls Clubs of America**. Now entering its **third year in 2026**, that foundational initiative has empowered thousands of young people across the country with the tools and mindset to navigate an AI-driven world.
 
-- Frontend: React 19, TypeScript, Vite, Tailwind CSS
-- Routing: React Router
-- Data/Auth: Supabase client
-- Backend: Express
-- Payments: Stripe
-- AI proxy: Azure AI / OpenAI-compatible chat completions via backend
+ZEN Vanguard carries that mission forward for **professionals, entrepreneurs, and individuals** who refuse to be outpaced by change. This platform doesn't just explain AI — it immerses you in it. You'll develop working fluency with next-generation tools, workflows, and systems so you can move at the speed of innovation rather than fall behind it.
 
-## Local development
+Whether you're leading a team, building a product, or simply committed to staying ahead — this is where serious practitioners come to get current.
 
-1. Install dependencies.
+---
+
+## Platform Preview
+
+<div align="center">
+  <img src="docs/screenshots/module-overview.png" alt="ZEN Vanguard — Module Overview" width="100%" />
+  <p><em>Module experience — immersive, interactive, structured for depth</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/screenshots/program-hub.png" alt="ZEN Vanguard — Program Hub" width="100%" />
+  <p><em>Program Hub — your launchpad into the full curriculum</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/screenshots/dashboard.png" alt="ZEN Vanguard — Dashboard" width="100%" />
+  <p><em>Learner Dashboard — track progress, XP, and completed labs</em></p>
+</div>
+
+---
+
+## Curriculum
+
+The Vanguard program is structured across four progressive modules. Each one builds on the last — from foundational literacy to advanced deployment patterns.
+
+| Module | Title | Focus |
+|--------|-------|-------|
+| **01** | Foundations of Modern AI | How large language models work, prompt engineering, reasoning patterns, and responsible use |
+| **02** | Agents & Automation Frameworks | Agent design, tool use, orchestration, memory, and API-backed workflows |
+| **03** | Applied AI in the Real World | Production-grade use cases — from analysis pipelines to creative and business applications |
+| **04** | Advanced Systems & Emerging Frontiers | Multimodal systems, enterprise architecture, AI ethics at scale, and what's coming next |
+
+Every module includes:
+- **Structured reading** with annotated examples and visual aids
+- **Interactive labs** — hands-on exercises running live in the browser
+- **AI-assisted search** — ask questions about the curriculum, get answers in context
+- **Progress tracking** — XP, completion state, and section-level navigation
+
+---
+
+## Experience Design
+
+ZEN Vanguard was built to the same standard we hold AI tools to: it should be fast, clear, and genuinely useful. No fluff.
+
+- **Zero page loads between sections** — content streams in with scroll-triggered reveals
+- **Persistent command center** — the sidebar navigation panel is your control hub: track completion, jump between sections, and navigate across modules
+- **Keyboard-driven** — press `/` anywhere to open the command palette
+- **Fully responsive** — desktop-first, mobile-aware
+- **Glassmorphism design system** — dark-mode-ready with per-module accent theming
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 19 + TypeScript |
+| Build | Vite 6 with manual chunk splitting |
+| Routing | React Router 7 |
+| Styling | Tailwind CSS + custom design tokens |
+| AI Integration | Gemini 2.5 Flash (via server-side proxy) |
+| Auth & Data | Supabase |
+| Payments | Stripe |
+| Hosting | Vercel / any static host |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Bluenot3/V3.git
+cd V3
+
+# Install dependencies
 npm install
-```
 
-2. Copy the example environment file.
-
-```bash
+# Copy environment variables
 cp .env.example .env
+# Add your API keys to .env
 ```
 
-3. Fill in the required environment variables.
-
-4. Start the frontend and API server together.
+### Development
 
 ```bash
+# Start frontend + API server together
 npm run dev:full
+
+# Frontend only
+npm run dev
 ```
 
-5. Open the frontend at `http://localhost:5173`.
+Open `http://localhost:5173`
 
-## Preview command
-
-If `vite preview` fails on your machine, the repository now includes a built-in static preview server.
-The command now:
-
-- auto-builds `dist` if it is missing
-- auto-finds the next open port if `4173` is busy
-- auto-starts the API server on `3001` if needed
-- keeps server logs visible in the terminal
+### Production Build
 
 ```bash
+npm run build
 npm run preview
 ```
 
-Optional browser auto-open:
-
-```bash
-npm run preview:open
-```
-
-Windows launcher (bypasses PowerShell npm script policy issues):
-
-```bat
-preview.cmd
-```
-
-Default preview URL (first attempt):
-
-- `http://127.0.0.1:4173`
-
-## Production direction
-
-This repository should now follow these rules:
-
-- Do not put private model keys in `VITE_*` environment variables.
-- Keep OpenAI, Azure AI, Stripe secret keys, and admin bypass credentials on the server only.
-- Use the backend AI proxy route for browser-driven AI interactions.
-- Only expose publishable keys to the frontend.
-- Test the dashboard, program hub, guide, login flow, paywall flow, and at least one module flow on mobile widths before deployment.
-
-## Environment variables
-
-See [.env.example](/Users/AlexLeschik/OneDrive%20-%20BGCGW/Desktop/Vanguard/VANGUARD/.env.example) for the full list.
-
-### Frontend-safe variables
-
-- `VITE_API_BASE_URL`
-- `VITE_ENABLE_DEMO_LOGIN`
-- `VITE_STRIPE_PUBLISHABLE_KEY`
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
-
-### Server-only variables
-
-- `API_PORT`
-- `AZURE_AI_ENDPOINT`
-- `AZURE_AI_KEY`
-- `AZURE_AI_MODEL`
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET`
-- `STRIPE_PRICE_ID`
-- `ADMIN_BYPASS_USERNAME`
-- `ADMIN_BYPASS_PASSWORD`
-- `CORS_ORIGINS`
-
-## Hugging Face beginner target
-
-The in-app Starter Guide is now the shortest onboarding path for a new learner. At minimum, a beginner should leave this app understanding:
-
-- what AI, machine learning, and LLMs mean
-- what automation means beyond prompting
-- why secret management matters
-- how to deploy one Gradio-based Hugging Face Space
-- how to load an API key with `os.getenv(...)`
-
-Minimal Hugging Face README metadata:
-
-```yaml
 ---
-title: My First AI Space
-emoji: 🚀
-colorFrom: blue
-colorTo: cyan
-sdk: gradio
-sdk_version: 5.49.1
-app_file: app.py
-pinned: false
-short_description: Beginner AI project
+
+## Environment Variables
+
+### Frontend-safe (VITE_ prefix)
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_SUPABASE_URL` | Your Supabase project URL |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon key |
+| `VITE_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key |
+| `VITE_API_BASE_URL` | Backend API base URL |
+| `VITE_ENABLE_DEMO_LOGIN` | `false` in production |
+
+### Server-only (never expose to client)
+
+| Variable | Description |
+|----------|-------------|
+| `STRIPE_SECRET_KEY` | Stripe secret key |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
+| `STRIPE_PRICE_ID` | Subscription price ID |
+| `ADMIN_BYPASS_USERNAME` | Admin access username |
+| `ADMIN_BYPASS_PASSWORD` | Admin access password |
+
 ---
+
+## Project Structure
+
+```
+src/
+├── components/          # Shared UI components
+│   └── vanguard/        # Core platform components (Frame, NavCard, Footer)
+├── modules/
+│   ├── module1/         # Foundations of Modern AI
+│   ├── module2/         # Agents & Automation Frameworks
+│   ├── module3/         # Applied AI in the Real World
+│   └── module4/         # Advanced Systems & Emerging Frontiers
+├── pages/               # Route-level page components
+├── hooks/               # Shared hooks (auth, module experience, scroll)
+├── types/               # Global TypeScript types
+└── assets/              # Static assets and icons
 ```
 
-## API server endpoints
+---
 
-- `GET /api/health`
-- `POST /api/ai/generate`
-- `GET /api/billing/status`
-- `POST /api/admin/bypass`
-- `POST /api/stripe/create-checkout-session`
-- `POST /api/stripe/webhook`
+## API Server Endpoints
 
-## Deployment checklist
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/health` | Health check |
+| `POST` | `/api/ai/generate` | AI proxy (server-side key) |
+| `GET` | `/api/billing/status` | Subscription status |
+| `POST` | `/api/stripe/create-checkout-session` | Start checkout |
+| `POST` | `/api/stripe/webhook` | Stripe webhook handler |
 
-- Set every server-only secret in the deployment environment, not in source.
-- Configure `CORS_ORIGINS` for the real frontend domain.
-- Set Stripe keys and webhook secret before enabling payments.
-- Set Azure AI server credentials before enabling live AI features.
-- Verify program hub, guide, dashboard, login, paywall, and mobile navigation on a phone viewport.
-- Keep `VITE_ENABLE_DEMO_LOGIN=false` in production unless you explicitly want demo access.
+---
 
-## Known follow-up work
+## About ZEN AI Co
 
-This pass improves the architecture and polish, but a full production launch still needs:
+ZEN AI Co is an AI education and advisory organization committed to building AI literacy at every level — from youth programs to professional development. Founded on the belief that access to AI fluency should not be gated by background or budget, ZEN has been at the forefront of applied AI education since before it became a headline.
 
-- automated tests for auth, billing, and critical routes
-- stronger persistence and auditing for admin/billing events
-- tighter content QA across all legacy module interactives
-- deployment-specific hardening for the final hosting environment
+**Our work:**
+- Launched the first youth AI literacy program in U.S. history with Boys & Girls Clubs of America
+- Delivered curriculum and training to thousands of learners across the country
+- Built ZEN Vanguard as the professional-grade extension of that same mission
+
+---
+
+<div align="center">
+  <p>Built with intention. Designed for the pace of now.</p>
+  <p><strong>ZEN AI Co &copy; 2026</strong></p>
+</div>

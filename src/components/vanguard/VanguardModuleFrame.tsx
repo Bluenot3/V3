@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ZenBrandMark, ZenTelemetryCard } from '../zen';
 
 interface VanguardModuleFrameProps {
@@ -58,6 +58,8 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
     footer,
     bleed = true,
 }) => {
+    const [moduleSidebarOpen, setModuleSidebarOpen] = useState(true);
+
     const progressPercent = totalSections > 0
         ? Math.min(100, Math.round((completedSections / totalSections) * 100))
         : 0;
@@ -74,25 +76,14 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
         >
             {/* ─── Ambient Background ───────────────────────────────── */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {/* Dynamic module-colored orbs */}
                 <div className={`absolute left-[-10rem] top-[-10rem] h-80 w-80 rounded-full ${ambient.orb2} blur-3xl`} />
                 <div className={`absolute right-[-8rem] top-32 h-96 w-96 rounded-full ${ambient.orb1} blur-3xl`} />
                 <div className={`absolute bottom-[-8rem] left-1/3 h-[28rem] w-[28rem] rounded-full ${ambient.orb3} blur-3xl`} />
-
-                {/* Static gold orbs */}
                 <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-zen-gold/[0.04] blur-3xl" />
                 <div className="absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full bg-zen-gold/[0.03] blur-2xl" />
-
-                {/* Grid pattern */}
                 <div className="absolute inset-0 bg-grid-pattern [--grid-color:rgba(201,168,76,0.06)] [--grid-size:34px]" />
-
-                {/* Top light leak */}
                 <div className="absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-white/[0.04] to-transparent" />
-
-                {/* Bottom glow */}
                 <div className={`absolute inset-x-[12%] bottom-0 h-52 rounded-full bg-gradient-to-r ${ambient.ring} opacity-[0.08] blur-3xl`} />
-
-                {/* Subtle scan lines */}
                 <div className="absolute inset-0 opacity-[0.015]" style={{
                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.08) 3px, rgba(255,255,255,0.08) 4px)',
                 }} />
@@ -101,31 +92,50 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
             <div className="relative flex min-h-screen flex-col">
                 {header}
 
-                {/* ─── Outer padding shell ─────────────────────────── */}
-                <div className="w-full flex-1 px-3 pb-16 pt-4 sm:px-4 lg:px-5">
+                {/* ─── Main layout area ────────────────────────────── */}
+                <div className="w-full flex-1 px-2 pb-16 pt-3 sm:px-3 lg:px-4">
 
                     {/*
-                      ┌──────────────────────────────────────────────────────┐
-                      │  2-col grid: [sidebar] [right-column]                │
-                      │  The sidebar is sticky and spans the full height.    │
-                      │  The right column holds hero + content + footer.     │
-                      └──────────────────────────────────────────────────────┘
+                      Layout: when moduleSidebarOpen → [sidebar | content]
+                              when closed           → [content full-width]
+                      Transition between both with CSS transition on grid columns.
                     */}
-                    <div className="lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-4 xl:grid-cols-[256px_minmax(0,1fr)]">
+                    <div className={`lg:grid lg:items-start lg:gap-3 transition-all duration-300 ${
+                        moduleSidebarOpen
+                            ? 'lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[280px_minmax(0,1fr)]'
+                            : 'lg:grid-cols-[0px_minmax(0,1fr)]'
+                    }`}>
 
-                        {/* ── LEFT COLUMN — Sticky Sidebar ─────────────── */}
-                        <div className="hidden lg:block lg:sticky lg:top-24 lg:self-start lg:pt-1">
+                        {/* ── LEFT: Collapsible Module Sidebar ─────────── */}
+                        <div className={`overflow-hidden transition-all duration-300 ${
+                            moduleSidebarOpen
+                                ? 'hidden lg:block lg:sticky lg:top-4 lg:self-start'
+                                : 'hidden'
+                        }`}>
                             {sidebar}
                         </div>
 
-                        {/* ── RIGHT COLUMN — Hero + Content + Footer ────── */}
-                        <div className="min-w-0">
+                        {/* ── RIGHT: Hero + Content + Footer ──────────── */}
+                        <div className="relative min-w-0">
+
+                            {/* Sidebar toggle button — floats on the left edge of the content area */}
+                            <button
+                                onClick={() => setModuleSidebarOpen((v) => !v)}
+                                title={moduleSidebarOpen ? 'Hide navigation panel' : 'Show navigation panel'}
+                                aria-label={moduleSidebarOpen ? 'Hide navigation panel' : 'Show navigation panel'}
+                                className={`absolute top-4 z-30 hidden lg:flex items-center justify-center h-8 w-8 rounded-full border border-white/15 bg-white/[0.06] text-slate-400 shadow-lg backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/[0.12] hover:text-white ${
+                                    moduleSidebarOpen ? '-left-4' : '-left-4'
+                                }`}
+                            >
+                                <svg className="h-3.5 w-3.5 transition-transform duration-300" style={{ transform: moduleSidebarOpen ? 'rotate(0deg)' : 'rotate(180deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
 
                             {/* ─── Hero Module Banner ───────────────────── */}
-                            <section className="zen-hero-panel relative mb-5 overflow-hidden rounded-[1.9rem] px-5 py-5 text-white shadow-[0_24px_70px_rgba(2,6,23,0.38)] backdrop-blur-xl sm:px-6 xl:px-7">
+                            <section className="zen-hero-panel relative mb-4 overflow-hidden rounded-[1.6rem] px-5 py-5 text-white shadow-[0_24px_70px_rgba(2,6,23,0.38)] backdrop-blur-xl sm:px-6">
                                 {/* Accent line top */}
                                 <div className={`absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r ${accentClassName} opacity-80`} />
-
                                 {/* Corner glow */}
                                 <div className={`pointer-events-none absolute -right-12 -top-12 h-56 w-56 rounded-full bg-gradient-to-br ${accentClassName} opacity-[0.10] blur-3xl`} />
                                 <div className={`pointer-events-none absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-gradient-to-tr ${accentClassName} opacity-[0.07] blur-2xl`} />
@@ -133,7 +143,7 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
                                 <div className="relative">
                                     <div className="min-w-0">
                                         {/* Eyebrow chips */}
-                                        <div className="flex flex-wrap items-center gap-2.5">
+                                        <div className="flex flex-wrap items-center gap-2">
                                             <span className="zen-eyebrow-chip">Module {moduleNumber}</span>
                                             <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-white">
                                                 Vanguard
@@ -156,20 +166,20 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
                                         </div>
 
                                         {/* Title */}
-                                        <div className="mt-4 flex items-start gap-4">
+                                        <div className="mt-3 flex items-start gap-3">
                                             <ZenBrandMark size="sm" />
                                             <div className="min-w-0">
-                                                <h1 className="font-display max-w-4xl text-[2rem] font-semibold tracking-[0.04em] text-[#f8e5b3] sm:text-3xl lg:text-[2.8rem] lg:leading-[1.04]">
+                                                <h1 className="font-display max-w-4xl text-[1.7rem] font-semibold tracking-[0.04em] text-[#f8e5b3] sm:text-2xl lg:text-[2.2rem] lg:leading-[1.1]">
                                                     {title}
                                                 </h1>
-                                                <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300 sm:text-[15px]">
+                                                <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
                                                     {subtitle}
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* Topic chips */}
-                                        <div className="mt-4 flex flex-wrap gap-2.5">
+                                        <div className="mt-3 flex flex-wrap gap-2">
                                             {chipLabels.map((label) => (
                                                 <span
                                                     key={label}
@@ -181,18 +191,17 @@ const VanguardModuleFrame: React.FC<VanguardModuleFrameProps> = ({
                                         </div>
 
                                         {/* Telemetry row */}
-                                        <div className="mt-5 grid gap-3 md:grid-cols-3">
+                                        <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
                                             <ZenTelemetryCard title="Progress" value={`${progressPercent}%`} subtitle="Live section completion" icon="progress" variant="progress" />
                                             <ZenTelemetryCard title="Completed" value={`${completedSections}`} subtitle="Sections cleared" icon="verify" variant="integrity" />
                                             <ZenTelemetryCard title="Remaining" value={`${Math.max(totalSections - completedSections, 0)}`} subtitle="Sections left in queue" icon="readiness" variant="readiness" />
                                         </div>
                                     </div>
-
                                 </div>
                             </section>
 
                             {/* Mobile sidebar — below hero on small screens only */}
-                            <div className="mb-5 lg:hidden">
+                            <div className="mb-4 lg:hidden">
                                 {sidebar}
                             </div>
 

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../hooks/useAuth';
+import { useSidebar } from '../contexts/SidebarContext';
 import zenMonogramLogoWebp from '../assets/branding/zen-monogram-signature.webp';
 import zenMonogramLogoAvif from '../assets/branding/zen-monogram-signature.avif';
 import { ZenModuleGlyph } from './zen';
@@ -46,12 +47,24 @@ const primaryLinks = [
     { to: '/profile', label: 'Profile', hint: 'Identity and progress record', icon: 'identity' as ZenGlyphName },
 ];
 
+/** Tooltip wrapper that appears on the right side when sidebar is collapsed */
+const Tooltip: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+    <div className="group/tip relative flex items-center">
+        {children}
+        <div className="pointer-events-none absolute left-full ml-3 z-[200] hidden group-hover/tip:flex items-center whitespace-nowrap rounded-xl border border-zen-gold/20 bg-zen-navy/95 px-3 py-1.5 text-xs font-semibold text-white shadow-xl backdrop-blur-xl">
+            {label}
+            <div className="absolute right-full mr-0 border-4 border-transparent border-r-zen-navy/95" />
+        </div>
+    </div>
+);
+
 const GlobalSidebar: React.FC = () => {
     const { user, logout, getModuleProgress } = useAuth();
     const { isDark, mode, openSettings } = useTheme();
+    const { isCollapsed, toggle } = useSidebar();
     const location = useLocation();
     const navigate = useNavigate();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
 
     const currentPath = location.pathname;
 
@@ -69,7 +82,7 @@ const GlobalSidebar: React.FC = () => {
     );
 
     const handleNavigate = () => {
-        setIsOpen(false);
+        setIsMobileOpen(false);
     };
 
     const handleLogout = () => {
@@ -77,32 +90,126 @@ const GlobalSidebar: React.FC = () => {
         navigate('/login');
     };
 
-    return (
-        <>
-            <button
-                onClick={() => setIsOpen((open) => !open)}
-                className="fixed left-4 top-4 z-50 rounded-2xl border border-zen-gold/20 bg-zen-navy/95 p-3 text-zen-gold shadow-zen-card backdrop-blur-xl lg:hidden"
-                aria-label="Toggle navigation"
-            >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    {isOpen ? (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    )}
-                </svg>
-            </button>
+    /* ─────────────────────────────────────────────────────────
+       COLLAPSED — icon rail (w-16 = 64px)
+    ───────────────────────────────────────────────────────── */
+    const iconRail = (
+        <aside className="fixed left-0 top-0 z-[55] hidden h-screen w-16 flex-col items-center overflow-hidden border-r border-zen-gold/10 bg-[linear-gradient(180deg,rgba(6,11,24,0.98)_0%,rgba(15,23,42,0.96)_52%,rgba(6,11,24,0.98)_100%)] shadow-[20px_0_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl lg:flex">
 
-            {isOpen ? (
+            {/* Logo + Expand button */}
+            <div className="flex w-full flex-col items-center gap-2 border-b border-zen-gold/10 py-4">
+                <Tooltip label="ZEN Vanguard">
+                    <NavLink to="/hub" className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-[1rem] border border-zen-gold/24 bg-[radial-gradient(circle_at_28%_22%,rgba(201,168,76,0.32),rgba(6,11,24,0.92)_58%)] shadow-[0_8px_20px_rgba(2,6,23,0.5)]">
+                        <picture>
+                            <source srcSet={zenMonogramLogoAvif} type="image/avif" />
+                            <source srcSet={zenMonogramLogoWebp} type="image/webp" />
+                            <img src={zenMonogramLogoWebp} alt="ZEN" width={32} height={32} className="h-8 w-8 object-contain" />
+                        </picture>
+                    </NavLink>
+                </Tooltip>
+
+                {/* Expand button */}
+                <Tooltip label="Expand sidebar">
+                    <button
+                        onClick={toggle}
+                        className="flex h-8 w-8 items-center justify-center rounded-xl border border-zen-gold/15 bg-zen-gold/[0.06] text-zen-gold/70 transition hover:border-zen-gold/30 hover:bg-zen-gold/[0.12] hover:text-zen-gold"
+                        aria-label="Expand sidebar"
+                    >
+                        <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </Tooltip>
+            </div>
+
+            {/* Icon navigation */}
+            <nav className="flex flex-1 flex-col items-center gap-1.5 overflow-y-auto py-3 w-full px-2">
+
+                {/* Workspace links */}
+                {primaryLinks.map((link) => {
+                    const isActive = currentPath === link.to || currentPath.startsWith(link.to + '/');
+                    return (
+                        <Tooltip key={link.to} label={link.label}>
+                            <NavLink
+                                to={link.to}
+                                onClick={handleNavigate}
+                                className={`flex h-9 w-9 items-center justify-center rounded-xl border transition ${
+                                    isActive
+                                        ? 'border-zen-gold/30 bg-zen-gold/[0.12] text-zen-gold'
+                                        : 'border-transparent text-slate-500 hover:border-zen-gold/15 hover:bg-zen-gold/[0.06] hover:text-zen-gold/80'
+                                }`}
+                            >
+                                <ZenModuleGlyph name={link.icon} className="h-4 w-4" />
+                            </NavLink>
+                        </Tooltip>
+                    );
+                })}
+
+                {/* Divider */}
+                <div className="my-1 h-px w-8 bg-zen-gold/10" />
+
+                {/* Module links */}
+                {moduleInfo.map((module) => {
+                    const isActive = currentPath.startsWith(`/module/${module.id}`);
+                    const pct = moduleCompletion[module.id] ?? 0;
+                    return (
+                        <Tooltip key={module.id} label={`${module.title} — ${module.subtitle} (${pct}%)`}>
+                            <NavLink
+                                to={`/module/${module.id}`}
+                                onClick={handleNavigate}
+                                className={`relative flex h-9 w-9 items-center justify-center rounded-xl border transition ${
+                                    isActive
+                                        ? `border-zen-gold/30 bg-gradient-to-br ${module.color} text-zen-navy shadow-[0_6px_16px_rgba(0,0,0,0.3)]`
+                                        : 'border-white/[0.06] bg-white/[0.02] text-slate-400 hover:border-zen-gold/20 hover:text-zen-gold/70'
+                                }`}
+                            >
+                                <ZenModuleGlyph name={module.icon} className="h-4 w-4" />
+                                {/* Completion dot */}
+                                {pct > 0 && (
+                                    <div className={`absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full border border-zen-navy ${pct >= 100 ? 'bg-emerald-400' : 'bg-zen-gold'}`} />
+                                )}
+                            </NavLink>
+                        </Tooltip>
+                    );
+                })}
+            </nav>
+
+            {/* User avatar at bottom */}
+            {user && (
+                <div className="border-t border-zen-gold/10 py-4">
+                    <Tooltip label={`${user.name} — ${user.totalPoints || 0} XP`}>
+                        <button
+                            onClick={handleLogout}
+                            className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-zen-surface ring-2 ring-zen-gold/15 transition hover:ring-zen-gold/30"
+                        >
+                            <img
+                                src={user.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name || 'User'}`}
+                                alt={user.name || 'User'}
+                                className="h-10 w-10 object-cover"
+                            />
+                        </button>
+                    </Tooltip>
+                </div>
+            )}
+        </aside>
+    );
+
+    /* ─────────────────────────────────────────────────────────
+       EXPANDED — full sidebar (w-72 = 288px)
+    ───────────────────────────────────────────────────────── */
+    const fullSidebar = (
+        <>
+            {/* Mobile overlay */}
+            {isMobileOpen && (
                 <div
                     className="fixed inset-0 z-40 bg-zen-void/80 backdrop-blur-sm lg:hidden"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsMobileOpen(false)}
                 />
-            ) : null}
+            )}
 
             <aside
                 className={`fixed left-0 top-0 z-[55] flex h-screen w-72 flex-col overflow-hidden border-r border-zen-gold/10 bg-[linear-gradient(180deg,rgba(6,11,24,0.98)_0%,rgba(15,23,42,0.96)_52%,rgba(6,11,24,0.98)_100%)] text-white shadow-[20px_0_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-transform duration-300 lg:translate-x-0 ${
-                    isOpen ? 'translate-x-0' : '-translate-x-full'
+                    isMobileOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
                 <div className="relative z-20 shrink-0 overflow-hidden border-b border-zen-gold/10 bg-[linear-gradient(180deg,rgba(9,16,31,0.94)_0%,rgba(8,15,28,0.9)_100%)] px-5 pb-4 pt-6">
@@ -110,6 +217,18 @@ const GlobalSidebar: React.FC = () => {
                         <div className="absolute left-6 top-2 h-24 w-24 rounded-full bg-zen-gold/[0.06] blur-3xl" />
                         <div className="absolute right-5 top-8 h-28 w-28 rounded-full bg-brand-cyan/[0.04] blur-3xl" />
                     </div>
+
+                    {/* Collapse button */}
+                    <button
+                        onClick={toggle}
+                        className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-xl border border-zen-gold/15 bg-zen-gold/[0.06] text-zen-gold/60 transition hover:border-zen-gold/30 hover:text-zen-gold"
+                        title="Collapse sidebar"
+                        aria-label="Collapse sidebar"
+                    >
+                        <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
 
                     <NavLink to="/hub" className="relative block transition-transform duration-300 hover:translate-x-0.5" onClick={handleNavigate}>
                         <div className="flex items-start gap-3.5">
@@ -280,7 +399,7 @@ const GlobalSidebar: React.FC = () => {
                         <button
                             onClick={() => {
                                 openSettings();
-                                setIsOpen(false);
+                                setIsMobileOpen(false);
                             }}
                             className="flex w-full items-center justify-between rounded-[1.3rem] border border-transparent bg-white/[0.01] px-4 py-3.5 text-left transition hover:border-zen-gold/10 hover:bg-zen-gold/[0.03]"
                         >
@@ -339,6 +458,28 @@ const GlobalSidebar: React.FC = () => {
                     </div>
                 </div>
             </aside>
+        </>
+    );
+
+    return (
+        <>
+            {/* Mobile hamburger — always shown */}
+            <button
+                onClick={() => setIsMobileOpen((open) => !open)}
+                className="fixed left-4 top-4 z-50 rounded-2xl border border-zen-gold/20 bg-zen-navy/95 p-3 text-zen-gold shadow-zen-card backdrop-blur-xl lg:hidden"
+                aria-label="Toggle navigation"
+            >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {isMobileOpen ? (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
+                </svg>
+            </button>
+
+            {/* Desktop: show icon rail when collapsed, full sidebar when expanded */}
+            {isCollapsed ? iconRail : fullSidebar}
         </>
     );
 };

@@ -13,7 +13,8 @@
       "Bash(python3 -c \"import sys, json; d = json.load\\(sys.stdin\\); print\\(''''main:'''', d.get\\(''''main''''\\)\\); print\\(''''module:'''', d.get\\(''''module''''\\)\\); print\\(''''exports type:'''', type\\(d.get\\(''''exports''''\\)\\).__name__\\)\")",
       "Bash(node -e \"const p = require\\(''/c/Users/AlexT/OneDrive/Desktop/VV33/V3-main/node_modules/@google/genai/package.json''\\); console.log\\(''main:'', p.main\\); console.log\\(''module:'', p.module\\); console.log\\(''exports keys:'', p.exports ? Object.keys\\(p.exports\\).slice\\(0,5\\) : ''none''\\)\")",
       "Bash(node -e \"const p = require\\(''C:\\\\\\\\Users\\\\\\\\AlexT\\\\\\\\OneDrive\\\\\\\\Desktop\\\\\\\\VV33\\\\\\\\V3-main\\\\\\\\node_modules\\\\\\\\@google\\\\\\\\genai\\\\\\\\package.json''\\); console.log\\(''main:'', p.main\\); console.log\\(''module:'', p.module\\); console.log\\(''exports:'', JSON.stringify\\(p.exports\\).slice\\(0,200\\)\\)\")",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find C:/Users/AlexT/OneDrive/Desktop/VV33/V3-main -name *.png -o -name *.webp -o -name *.avif)"
     ]
   }
 }

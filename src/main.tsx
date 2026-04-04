@@ -7,6 +7,7 @@ import { AdminProvider } from './contexts/AdminContext';
 import { BillingProvider } from './contexts/BillingContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { OpsThemeProvider } from './theme/OpsThemeContext';
+import { SidebarProvider } from './contexts/SidebarContext';
 const SettingsPanel = React.lazy(() => import('./components/SettingsPanel'));
 import './index.css';
 import './styles/zen-ops.css';
@@ -21,10 +22,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <AuthProvider>
                         <AdminProvider>
                             <BillingProvider>
-                                <App />
-                                <Suspense fallback={null}>
-                                    <SettingsPanel />
-                                </Suspense>
+                                <SidebarProvider>
+                                    <App />
+                                    <Suspense fallback={null}>
+                                        <SettingsPanel />
+                                    </Suspense>
+                                </SidebarProvider>
                             </BillingProvider>
                         </AdminProvider>
                     </AuthProvider>

@@ -161,7 +161,8 @@ const StickySectionNavCard = <TSection extends NavSection>({
 
             animationFrame = window.requestAnimationFrame(() => {
                 const desktopMode = window.innerWidth >= 1024;
-                const topOffset = 80;
+                // No global header on module pages — float from near the top
+                const topOffset = 16;
 
                 if (!desktopMode) {
                     setFloatingMetrics((previous) => (
@@ -376,12 +377,12 @@ const StickySectionNavCard = <TSection extends NavSection>({
                 className={`relative overflow-hidden rounded-[1.65rem] border border-white/20 bg-[linear-gradient(165deg,rgba(15,23,42,0.8)_0%,rgba(10,18,34,0.72)_52%,rgba(7,13,26,0.84)_100%)] shadow-[0_24px_70px_rgba(2,6,23,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-[22px] ${isIconMode ? 'w-[4.6rem] p-2' : compact ? 'p-2.5' : 'p-3'}`}
                 style={floatingMetrics.enabled ? {
                     position: 'fixed',
-                    top: 80,
+                    top: 16,
                     left: floatingMetrics.left,
                     width: isIconMode ? Math.min(78, floatingMetrics.width) : floatingMetrics.width,
-                    maxHeight: 'calc(100vh - 12rem)',
+                    maxHeight: 'calc(100vh - 2rem)',
                     zIndex: 30,
-                } : { maxHeight: 'calc(100vh - 12rem)' }}
+                } : { maxHeight: 'calc(100vh - 2rem)' }}
             >
                 <div className="pointer-events-none absolute inset-0">
                     <div className={`absolute inset-x-0 top-0 h-20 bg-gradient-to-r ${accentClassName} opacity-[0.12]`} />
@@ -652,7 +653,7 @@ const StickySectionNavCard = <TSection extends NavSection>({
 
                 {isExpanded ? (
                     <div className="relative min-h-0 flex-1 pt-2.5">
-                        <div className="max-h-[calc(100vh-22rem)] overflow-y-auto pr-1 pb-1 [scrollbar-color:rgba(139,92,246,0.45)_transparent] [scrollbar-width:thin]">
+                        <div className="max-h-[calc(100vh-14rem)] overflow-y-auto pr-1 pb-1 [scrollbar-color:rgba(139,92,246,0.45)_transparent] [scrollbar-width:thin]">
                             <ul>{renderLinks(filteredSections)}</ul>
                             {filteredFlatSections.length === 0 ? (
                                 <div className="rounded-[1rem] border border-dashed border-white/20 bg-white/[0.08] px-4 py-6 text-center backdrop-blur-xl">

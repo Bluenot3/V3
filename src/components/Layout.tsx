@@ -7,6 +7,7 @@ import Header from './Header';
 import MobileBottomNav from './MobileBottomNav';
 import OpsShell from './ops/OpsShell';
 import { useOpsThemeSafe } from '../theme/OpsThemeContext';
+import { useSidebar } from '../contexts/SidebarContext';
 import LuxuryClickEffects from './LuxuryClickEffects';
 
 const Layout: React.FC = () => {
@@ -14,6 +15,9 @@ const Layout: React.FC = () => {
     const mainContentRef = React.useRef<HTMLDivElement>(null);
     const opsTheme = useOpsThemeSafe();
     const isOpsMode = opsTheme?.isOpsMode ?? false;
+    const { isCollapsed } = useSidebar();
+
+    const isModulePage = pathname.startsWith('/module/');
 
     React.useLayoutEffect(() => {
         if (window.location.hash) {
@@ -46,6 +50,10 @@ const Layout: React.FC = () => {
         };
     }, [pathname]);
 
+    // Dynamic left margin based on sidebar state
+    // Collapsed = icon rail (64px = w-16), Expanded = full sidebar (288px = w-72)
+    const sidebarMargin = isCollapsed ? 'lg:ml-16' : 'lg:ml-72';
+
     const content = (
         <div className={`relative flex min-h-screen font-sans text-brand-text ${isOpsMode ? 'bg-[var(--ops-base)]' : 'bg-transparent'}`}>
             {!isOpsMode && <AnimatedBackground />}
@@ -53,31 +61,39 @@ const Layout: React.FC = () => {
 
             <GlobalSidebar />
 
-            <div className="relative z-10 flex min-h-screen flex-1 flex-col transition-all duration-300 lg:ml-72">
-                <Header />
-                <main ref={mainContentRef} className={`no-scrollbar flex-1 ${pathname.startsWith('/module/') ? 'p-0' : 'p-4 lg:p-8'}`}>
+            <div className={`relative z-10 flex min-h-screen flex-1 flex-col transition-all duration-300 ${sidebarMargin}`}>
+                {/* Hide the global header on module pages — each module has its own header */}
+                {!isModulePage && <Header />}
+
+                <main
+                    ref={mainContentRef}
+                    className={`no-scrollbar flex-1 ${isModulePage ? 'p-0' : 'p-4 lg:p-8'}`}
+                >
                     <Outlet />
                 </main>
 
-                <footer
-                    className={`border-t py-8 text-center text-sm lg:mb-0 ${
-                        isOpsMode
-                            ? 'border-[var(--ops-border)] bg-[var(--ops-surface-1)]/80 text-[var(--ops-text-muted)] backdrop-blur-sm'
-                            : 'border-zen-gold/8 bg-zen-navy/60 text-slate-500 backdrop-blur-sm'
-                    }`}
-                    style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)', paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)' }}
-                >
-                    <p>&copy; {new Date().getFullYear()} ZEN AI Co. — Vanguard Program. All rights reserved.</p>
-                    <p
-                        className={`mt-1 font-medium ${
+                {/* Footer — hidden on module pages (ModuleFooter inside each module handles this) */}
+                {!isModulePage && (
+                    <footer
+                        className={`border-t py-8 text-center text-sm lg:mb-0 ${
                             isOpsMode
-                                ? 'text-[var(--ops-primary)]'
-                                : 'bg-gradient-to-r from-zen-gold to-brand-cyan bg-clip-text text-transparent'
+                                ? 'border-[var(--ops-border)] bg-[var(--ops-surface-1)]/80 text-[var(--ops-text-muted)] backdrop-blur-sm'
+                                : 'border-zen-gold/8 bg-zen-navy/60 text-slate-500 backdrop-blur-sm'
                         }`}
+                        style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)', paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)' }}
                     >
-                        Powered by ZEN Vanguard AI Literacy Certification
-                    </p>
-                </footer>
+                        <p>&copy; {new Date().getFullYear()} ZEN AI Co. — Vanguard Program. All rights reserved.</p>
+                        <p
+                            className={`mt-1 font-medium ${
+                                isOpsMode
+                                    ? 'text-[var(--ops-primary)]'
+                                    : 'bg-gradient-to-r from-zen-gold to-brand-cyan bg-clip-text text-transparent'
+                            }`}
+                        >
+                            Powered by ZEN Vanguard AI Literacy Certification
+                        </p>
+                    </footer>
+                )}
             </div>
 
             <BackToTopButton />

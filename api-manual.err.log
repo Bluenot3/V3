@@ -1,0 +1,737 @@
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5
+AI generation error: Error: Azure AI is not configured on the server.
+    at createAzureChatCompletion (file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:88:15)
+    at file:///C:/Users/AlexT/OneDrive/Desktop/Vanguard/VANGUARD-2-codex-vanguard-2-desktop/server/index.js:328:28
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\AlexT\OneDrive\Desktop\Vanguard\VANGUARD-2-codex-vanguard-2-desktop\node_modules\body-parser\lib\read.js:137:5

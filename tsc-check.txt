@@ -1,0 +1,3 @@
+﻿src/modules/module3/components/interactive/NeuralEvolutionChronicle.tsx(1,15): error TS1005: '{' expected.
+src/modules/module3/components/interactive/VoiceDrivenEditingDesk.tsx(60,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module4/components/interactive/VoiceDrivenEditingDesk.tsx(60,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?

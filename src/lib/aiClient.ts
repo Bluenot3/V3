@@ -1,0 +1,226 @@
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
+type Message = {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+};
+
+function buildMessages(config: any): Message[] {
+    const messages: Message[] = [];
+
+    if (config?.config?.systemInstruction) {
+        messages.push({ role: 'system', content: config.config.systemInstruction });
+    }
+
+    if (Array.isArray(config?.history)) {
+        for (const item of config.history) {
+            messages.push({
+                role: item.role === 'model' ? 'assistant' : 'user',
+                content: item.parts?.map((part: any) => part.text || '').join('') || '',
+            });
+        }
+    }
+
+    const contents = config?.contents;
+
+    if (typeof contents === 'string') {
+        messages.push({ role: 'user', content: contents });
+    } else if (contents?.parts) {
+        messages.push({
+            role: contents.role === 'model' ? 'assistant' : 'user',
+            content: contents.parts.map((part: any) => part.text || '').join(''),
+        });
+    } else if (contents && typeof contents === 'object') {
+        messages.push({
+            role: contents.role === 'model' ? 'assistant' : 'user',
+            content: contents.parts
+                ? contents.parts.map((part: any) => part.text || '').join('')
+                : JSON.stringify(contents),
+        });
+    }
+
+    if (messages.length === 0) {
+        messages.push({ role: 'user', content: JSON.stringify(config ?? {}) });
+    }
+
+    return messages;
+}
+
+async function proxyChatCompletion(messages: Message[], temperature = 0.7, maxTokens = 2048): Promise<string> {
+    const response = await fetch(`${API_BASE}/api/ai/generate`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            messages,
+            temperature,
+            maxTokens,
+        }),
+    });
+
+    if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(errorBody || `AI proxy request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.text || '';
+}
+
+const IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.0-flash-image'];
+
+function isImageRequest(config: any): boolean {
+    if (IMAGE_MODELS.includes(config?.model)) {
+        return true;
+    }
+
+    return config?.config?.responseModalities?.some?.((mode: string) => mode.toUpperCase() === 'IMAGE') === true;
+}
+
+class ProxyAIClient {
+    models = {
+        generateContent: async (config: any) => {
+            if (isImageRequest(config)) {
+                return {
+                    text: 'Image generation is not configured in this environment.',
+                    candidates: [
+                        {
+                            content: {
+                                parts: [{ text: 'Image generation is not configured in this environment.' }],
+                            },
+                        },
+                    ],
+                };
+            }
+
+            const messages = buildMessages(config);
+            const temperature = config?.config?.temperature ?? 0.7;
+            const maxTokens = config?.config?.maxOutputTokens ?? 2048;
+            const text = await proxyChatCompletion(messages, temperature, maxTokens);
+
+            return {
+                text,
+                response: {
+                    text: () => text,
+                },
+                candidates: [
+                    {
+                        content: {
+                            parts: [{ text }],
+                        },
+                    },
+                ],
+            };
+        },
+    };
+
+    chats = {
+        create: (config: any) => {
+            const history: Message[] = [];
+
+            if (config?.config?.systemInstruction) {
+                history.push({ role: 'system', content: config.config.systemInstruction });
+            }
+
+            return {
+                sendMessage: async (message: string | { message: string }) => {
+                    const userText = typeof message === 'string' ? message : message.message;
+                    history.push({ role: 'user', content: userText });
+
+                    const text = await proxyChatCompletion(history);
+                    history.push({ role: 'assistant', content: text });
+
+                    return { text };
+                },
+            };
+        },
+    };
+
+    getGenerativeModel(config: { model: string }) {
+        return {
+            startChat: (chatConfig?: any) => this.chats.create(chatConfig),
+            generateContent: async (prompt: any) => {
+                const resolvedConfig =
+                    typeof prompt === 'string'
+                        ? { model: config.model, contents: prompt }
+                        : { model: config.model, ...prompt };
+
+                return this.models.generateContent(resolvedConfig);
+            },
+        };
+    }
+}
+
+class MockChat {
+    async sendMessage(): Promise<{ text: string }> {
+        return {
+            text: 'Simulation mode is active. Start the API server and configure AZURE_AI_ENDPOINT and AZURE_AI_KEY to enable live responses.',
+        };
+    }
+}
+
+class MockAIClient {
+    getGenerativeModel() {
+        return {
+            startChat: () => new MockChat(),
+            generateContent: async () => ({
+                response: {
+                    text: () => 'Simulation mode is active. Configure the backend AI proxy for live responses.',
+                },
+                text: 'Simulation mode is active. Configure the backend AI proxy for live responses.',
+            }),
+        };
+    }
+
+    chats = {
+        create: () => new MockChat(),
+    };
+
+    models = {
+        generateContent: async () => ({
+            text: 'Simulation mode is active. Configure the backend AI proxy for live responses.',
+            response: {
+                text: () => 'Simulation mode is active. Configure the backend AI proxy for live responses.',
+            },
+            candidates: [
+                {
+                    content: {
+                        parts: [{ text: 'Simulation mode is active. Configure the backend AI proxy for live responses.' }],
+                    },
+                },
+            ],
+        }),
+    };
+}
+
+let aiClientInstance: ProxyAIClient | MockAIClient | null = null;
+
+export async function getAiClient(): Promise<any> {
+    if (aiClientInstance) {
+        return aiClientInstance;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/api/health`);
+
+        if (!response.ok) {
+            throw new Error('Backend health check failed.');
+        }
+
+        aiClientInstance = new ProxyAIClient();
+    } catch (error) {
+        console.warn('AI proxy unavailable. Falling back to simulation mode.', error);
+        aiClientInstance = new MockAIClient();
+    }
+
+    return aiClientInstance;
+}
+
+export function clearAiClient(): void {
+    aiClientInstance = null;
+}
+
+export function isImageSimulationMode(): boolean {
+    return true;
+}

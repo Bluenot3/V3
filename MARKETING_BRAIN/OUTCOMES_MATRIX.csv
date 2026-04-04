@@ -1,0 +1,41 @@
+Learner_Type,Module,Week,Artifact_Produced,Deploy_Target,Verification_Method,Credential_Tag
+Youth,Module 1,1,Neural network diagram,Local worksheet,Mentor review,ZEN-M1-FOUNDATIONS
+Youth,Module 1,2,Token analysis report,Google Doc,Quiz + self-check,ZEN-M1-TOKENS
+Youth,Module 1,3,Bias audit log,Shared drive,Peer review,ZEN-M1-ETHICS
+Youth,Module 1,4,Email writer app,Hugging Face Space,Deployment verification,ZEN-M1-DEPLOY
+Youth,Module 1,5,Meeting summarizer,Local demo,Live demo to mentor,ZEN-M1-CAPSTONE
+Youth,Module 1,6,Privacy checklist + reflection,Portfolio,Final submission,ZEN-M1-COMPLETE
+Youth,Module 2,1,Agent architecture diagram,Miro/Figma,Mentor review,ZEN-M2-DESIGN
+Youth,Module 2,2,Memory map (STM/LTM),Documentation,Quiz + walkthrough,ZEN-M2-MEMORY
+Youth,Module 2,3,Tool registry + API integration,GitHub repo,Code review,ZEN-M2-TOOLS
+Youth,Module 2,4,Plan-graph visualization,Screenshot gallery,Peer review,ZEN-M2-PLANNING
+Youth,Module 2,5,Single-purpose agent,Hugging Face Space,Deployment verification,ZEN-M2-AGENT
+Youth,Module 2,6-7,Multi-agent simulation,Sandbox environment,Live demonstration,ZEN-M2-MULTIAGENT
+Youth,Module 2,8,Security policy + capstone,Portfolio,Final evaluation,ZEN-M2-COMPLETE
+Youth,Module 3,1,Prompt library (20+ prompts),Notion/Doc,Mentor review,ZEN-M3-PROMPTS
+Youth,Module 3,2,Image generation gallery,Portfolio gallery,Peer feedback,ZEN-M3-IMAGES
+Youth,Module 3,3,Audio/voice project,Local export,Playback demo,ZEN-M3-AUDIO
+Youth,Module 3,4,Video storyboard,Screen recording,Mentor review,ZEN-M3-VIDEO
+Youth,Module 3,5,3D environment design,Interactive demo,Live walkthrough,ZEN-M3-3D
+Youth,Module 3,6,Ethics position paper,Written submission,Rubric grading,ZEN-M3-ETHICS
+Youth,Module 3,7,Multi-modal portfolio (10+),Public gallery,Final showcase,ZEN-M3-COMPLETE
+Youth,Module 4,1-2,Production deployment playbook,GitHub wiki,Documentation review,ZEN-M4-DOCS
+Youth,Module 4,3,RAG pipeline setup,Cloud deployment,Technical verification,ZEN-M4-RAG
+Youth,Module 4,4,Governance policy,Written document,Compliance check,ZEN-M4-GOVERNANCE
+Youth,Module 4,5,Monitoring dashboard,Web application,Live demo,ZEN-M4-MONITORING
+Youth,Module 4,6-7,Multi-agent production system,Cloud (HF/Vercel),Full deployment review,ZEN-M4-PRODUCTION
+Youth,Module 4,8,Final capstone + certification,Portfolio,Certification committee,ZEN-CERTIFIED
+Pro,Module 1,1,Neural concepts mastery,Self-assessment,Quiz battery,ZEN-M1-FOUNDATIONS
+Pro,Module 1,1,Deployed email app,Hugging Face Space,Automated check,ZEN-M1-DEPLOY
+Pro,Module 1,2,Full module completion,Portfolio,Self-reported + verify,ZEN-M1-COMPLETE
+Pro,Module 2,1,Agent architecture + tools,GitHub repo,Code review,ZEN-M2-ARCHITECTURE
+Pro,Module 2,2,Single-purpose agent deployed,Hugging Face Space,Deployment check,ZEN-M2-AGENT
+Pro,Module 2,3,Multi-agent system,Cloud environment,Technical review,ZEN-M2-MULTIAGENT
+Pro,Module 2,4,Full governance docs,Documentation,Compliance audit,ZEN-M2-COMPLETE
+Pro,Module 3,1,Generative portfolio (15+),Public gallery,Portfolio review,ZEN-M3-CREATIVE
+Pro,Module 3,2,Multi-modal application,Live deployment,Demo verification,ZEN-M3-APPLICATION
+Pro,Module 3,3,Ethics + business canvas,Written + presented,Review board,ZEN-M3-COMPLETE
+Pro,Module 4,1,Production agent + RAG,Cloud deployment,Technical audit,ZEN-M4-PRODUCTION
+Pro,Module 4,2,Enterprise integration,Corporate sandbox,Integration test,ZEN-M4-ENTERPRISE
+Pro,Module 4,3,Full governance package,Documentation suite,Compliance review,ZEN-M4-GOVERNANCE
+Pro,Module 4,4,Final capstone + presenter deck,Showcase event,Certification board,ZEN-CERTIFIED-PRO

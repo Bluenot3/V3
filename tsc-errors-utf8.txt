@@ -1,0 +1,14 @@
+﻿src/modules/module2/components/interactive/AudioVisualSyncLab.tsx(229,136): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/AudioVisualSyncLab.tsx(230,140): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(305,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(306,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(307,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(308,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(309,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/CapstoneAgentBuilder.tsx(310,64): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/EventOpsLab.tsx(291,118): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/TokenEconomySimulator.tsx(179,50): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module2/components/interactive/VoiceDrivenEditingDesk.tsx(60,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module3/components/interactive/NeuralEvolutionChronicle.tsx(1,15): error TS1005: '{' expected.
+src/modules/module3/components/interactive/VoiceDrivenEditingDesk.tsx(60,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/modules/module4/components/interactive/VoiceDrivenEditingDesk.tsx(60,62): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?

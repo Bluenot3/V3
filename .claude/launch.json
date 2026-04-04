@@ -1,0 +1,47 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "zen-vanguard (preview build)",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "preview", "--port", "4173", "--host"],
+      "port": 4173
+    },
+    {
+      "name": "zen-vanguard (Vite frontend)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "zen-vanguard (Express API server)",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/index.js"],
+      "port": 3001
+    },
+    {
+      "name": "zen-vanguard (full stack — Vite + API)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:full"],
+      "port": 3000
+    },
+    {
+      "name": "module1 (production-zen-vanguard-module-1)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "module1"],
+      "port": 3000
+    },
+    {
+      "name": "module3 (zvm3-cc)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "module3"],
+      "port": 3000
+    },
+    {
+      "name": "module4 (zen-vanguard-module-4)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "module4"],
+      "port": 3000
+    }
+  ]
+}

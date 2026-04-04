@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZEN VANGUARD MODULE 1</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'brand-bg': '#F0F2F5',
+            'brand-text': '#1F2937',
+            'brand-text-light': '#4B5563',
+            'brand-primary': '#7C3AED',
+            'brand-primary-light': '#A78BFA',
+            'brand-secondary': '#C4B5FD',
+            'brand-shadow-light': '#FFFFFF',
+            'brand-shadow-dark': '#D1D9E6',
+            'pale-green': '#10B981',
+            'pale-yellow': '#F59E0B',
+            'pale-purple': '#8B5CF6',
+            'brand-blue': '#3B82F6',
+          },
+          boxShadow: {
+            'neumorphic-out': '6px 6px 12px #D1D9E6, -6px -6px 12px #FFFFFF',
+            'neumorphic-in': 'inset 6px 6px 12px #D1D9E6, inset -6px -6px 12px #FFFFFF',
+            'neumorphic-out-sm': '3px 3px 6px #D1D9E6, -3px -3px 6px #FFFFFF',
+            'neumorphic-in-sm': 'inset 3px 3px 6px #D1D9E6, inset -3px -3px 6px #FFFFFF',
+            'soft-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            'soft-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            'soft-inner': 'inset 0 2px 4px 0 rgba(0,0,0,0.05)',
+            'glowing': '0 0 15px rgba(124, 58, 237, 0.4)',
+            'glowing-blue': '0 0 25px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.3)',
+          },
+          keyframes: {
+            'fade-in': {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            'slide-in-up': {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+             'slide-in-tilt': {
+              '0%': { transform: 'translateY(40px) perspective(800px) rotateX(-15deg)', opacity: '0' },
+              '100%': { transform: 'translateY(0) perspective(800px) rotateX(0deg)', opacity: '1' },
+            },
+            'chat-bubble-pulse': {
+              '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.7)' },
+              '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(124, 58, 237, 0)' },
+            },
+            'glow-red': {
+                '0%, 100%': { boxShadow: '0 0 5px rgba(239, 68, 68, 0.5)' },
+                '50%': { boxShadow: '0 0 20px rgba(239, 68, 68, 0.8)' },
+            },
+            'loss-landscape': {
+              '0%': { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+              '20%': { transform: 'translate(80px, 100px) scale(0.9)', opacity: 1 },
+              '50%': { transform: 'translate(180px, 40px) scale(0.8)', opacity: 1 },
+              '80%': { transform: 'translate(220px, 85px) scale(0.7)', opacity: 1 },
+              '100%': { transform: 'translate(250px, 55px) scale(0.6)', opacity: 0 },
+            },
+            'gravity': {
+                '0%': { transform: 'translateY(var(--start-y))', opacity: 1 },
+                '100%': { transform: 'translateY(var(--end-y))', opacity: 1 },
+            },
+            'float': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+            },
+            'shake': {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+                '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            'paint-drip': {
+                '0%': { transform: 'translateY(-100%)', opacity: 1 },
+                '100%': { transform: 'translateY(100%)', opacity: 0 },
+            },
+            'noise': {
+              '0%, 100%': { transform: 'translate(0, 0)' },
+              '10%': { transform: 'translate(-5%, -10%)' },
+              '20%': { transform: 'translate(-15%, 5%)' },
+              '30%': { transform: 'translate(7%, -25%)' },
+              '40%': { transform: 'translate(-5%, 25%)' },
+              '50%': { transform: 'translate(-15%, 10%)' },
+              '60%': { transform: 'translate(15%, 0%)' },
+              '70%': { transform: 'translate(0%, 15%)' },
+              '80%': { transform: 'translate(3%, 35%)' },
+              '90%': { transform: 'translate(-10%, 10%)' },
+            },
+            'aurora': {
+                '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+                '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' },
+            },
+            'float-up-fade': {
+                '0%': { transform: 'translateY(0) scale(0.8)', opacity: '1' },
+                '100%': { transform: 'translateY(-50px) scale(1)', opacity: '0' },
+            },
+            'glitch': {
+                '0%': { transform: 'translate(0)' },
+                '20%': { transform: 'translate(-2px, 2px)' },
+                '40%': { transform: 'translate(-2px, -2px)' },
+                '60%': { transform: 'translate(2px, 2px)' },
+                '80%': { transform: 'translate(2px, -2px)' },
+                '100%': { transform: 'translate(0)' },
+            },
+            'shimmer': {
+                '0%': { backgroundPosition: '-1000px 0' },
+                '100%': { backgroundPosition: '1000px 0' }
+            },
+            'tassel-swing': {
+                '0%, 100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(15deg)' },
+                '75%': { transform: 'rotate(-15deg)' },
+            },
+            'liquid-bubble': {
+                '0%': { transform: 'translateY(0) scale(1)', opacity: 0 },
+                '50%': { opacity: 1 },
+                '100%': { transform: 'translateY(-20px) scale(1.2)', opacity: 0 },
+            },
+            'vapor-rise': {
+                '0%': { transform: 'translateY(0) scale(1)', opacity: 0.6 },
+                '100%': { transform: 'translateY(-12px) scale(1.5)', opacity: 0 },
+            },
+            'star-burst': {
+                '0%': { transform: 'scale(0) rotate(0deg)', opacity: 0 },
+                '50%': { opacity: 1 },
+                '100%': { transform: 'scale(1.5) rotate(45deg)', opacity: 0 },
+            },
+            'shake-tilt': {
+                '0%, 100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(-5deg)' },
+                '75%': { transform: 'rotate(5deg)' },
+            }
+          },
+          animation: {
+            'fade-in': 'fade-in 0.5s ease-out forwards',
+            'slide-in-up': 'slide-in-up 0.5s ease-out forwards',
+            'slide-in-tilt': 'slide-in-tilt 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+            'chat-bubble-pulse': 'chat-bubble-pulse 2s infinite',
+            'glow-red': 'glow-red 1.5s infinite',
+            'loss-landscape': 'loss-landscape 3s ease-in-out forwards',
+            'gravity': 'gravity 1s ease-in forwards',
+            'float': 'float 3s ease-in-out infinite',
+            'shake': 'shake 0.5s ease-in-out forwards',
+            'paint-drip': 'gravity 2s linear infinite',
+            'aurora': 'aurora 60s linear infinite',
+            'float-up-fade': 'float-up-fade 1.5s ease-out forwards',
+            'glitch': 'glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'tassel-swing': 'tassel-swing 1s ease-in-out infinite',
+            'liquid-bubble': 'liquid-bubble 2s ease-out infinite',
+            'vapor-rise': 'vapor-rise 2.5s ease-out infinite',
+            'star-burst': 'star-burst 0.8s ease-out forwards',
+            'shake-tilt': 'shake-tilt 0.5s ease-in-out forwards',
+          }
+        },
+      },
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F0F2F5;
+      color: #1F2937;
+      overflow-x: hidden;
+    }
+    
+    /* Premium Selection Style */
+    ::selection {
+      background: rgba(124, 58, 237, 0.2); /* Brand Primary with opacity */
+      color: #7C3AED;
+    }
+
+    /* Cinematic Noise Overlay */
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .aurora-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        overflow: hidden;
+    }
+    .aurora-bg::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150vw;
+        height: 150vh;
+        background-image: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(16, 185, 129, 0.1) 35%, rgba(245, 158, 11, 0.1) 70%, rgba(240, 242, 245, 0) 100%);
+        animation: aurora 60s linear infinite;
+        transform-origin: center;
+    }
+     .mouse-spotlight {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 60%);
+        pointer-events: none;
+        z-index: -1;
+        transition: transform 0.1s ease-out;
+        will-change: transform;
+        mix-blend-mode: overlay;
+    }
+    .glass-header {
+      background-color: rgba(240, 242, 245, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.6), rgba(240,242,245,0.4));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.03),
+        inset 0 0 20px rgba(255,255,255,0.5);
+    }
+    .border-glass-stroke {
+      border-color: rgba(0, 0, 0, 0.07);
+    }
+    .liquid-scrollbar::-webkit-scrollbar {
+        width: 8px;
+    }
+    .liquid-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .liquid-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(124, 58, 237, 0.3);
+        border-radius: 20px;
+        transition: background 0.3s ease;
+    }
+    .liquid-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(124, 58, 237, 0.6);
+    }
+    .sidebar-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 75%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+        transform: skewX(-25deg);
+        transition: left 0.75s;
+    }
+    .sidebar-link:hover::after {
+        left: 125%;
+    }
+    /* Confetti styles */
+    .confetti-piece {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        z-index: 9999;
+    }
+    /* For range slider thumb */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #7C3AED;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        transition: transform 0.2s;
+    }
+    input[type=range]:active::-webkit-slider-thumb {
+      transform: scale(1.2);
+    }
+    input[type=range]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #7C3AED;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid white;
+    }
+    .bg-grid-pattern {
+        background-image:
+            linear-gradient(var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px);
+        background-size: var(--grid-size) var(--grid-size);
+    }
+    /* Custom Focus State */
+    *:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+    }
+    /* Reset for specific elements if needed */
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+       box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+    }
+    
+    /* Glitch Effect Class */
+    .glitch-text {
+        position: relative;
+        animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        color: #10B981;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .glitch-text::before {
+        left: 2px;
+        text-shadow: -2px 0 #ff00c1;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch 5s infinite linear alternate-reverse;
+    }
+    .glitch-text::after {
+        left: -2px;
+        text-shadow: -2px 0 #00fff9;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch 5s infinite linear alternate-reverse;
+    }
+
+  </style>
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="aurora-bg"></div>
+  <div class="mouse-spotlight"></div>
+  <div id="root"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ 
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+            background: '#F0F2F5',
+            primaryColor: '#e0e5ec',
+            primaryTextColor: '#1F2937',
+            lineColor: '#7C3AED',
+            textColor: '#4B5563',
+            fontSize: '14px',
+        }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

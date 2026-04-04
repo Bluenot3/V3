@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEN VANGUARD · Module 4</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
+      }
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'brand-bg': '#f8fafc', // Slate 50
+              'brand-surface': '#ffffff', // White
+              'brand-surface-highlight': '#f1f5f9', // Slate 100
+              'brand-text': '#0f172a', // Slate 900
+              'brand-text-light': '#475569', // Slate 600
+              'brand-primary': '#2563eb', // Blue 600
+              'brand-primary-dark': '#1e40af', // Blue 800
+              'brand-secondary': '#0891b2', // Cyan 600
+              'brand-accent': '#e11d48', // Rose 600
+              'pale-green': '#059669', // Emerald 600
+              'pale-yellow': '#d97706', // Amber 600
+              'pale-purple': '#7c3aed', // Violet 600
+              'glass-border': 'rgba(255, 255, 255, 0.5)',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['Fira Code', 'monospace'],
+            },
+            boxShadow: {
+              'glow-blue': '0 0 20px -5px rgba(37, 99, 235, 0.3)',
+              'neumorphic-out': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+              'neumorphic-in': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
+              'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+              'soft': '0 10px 40px -10px rgba(0,0,0,0.05)'
+            },
+            animation: {
+              'blob': 'blob 20s infinite alternate',
+              'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'fade-in': 'fade-in 0.5s ease-out forwards',
+              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              'fade-in-up': {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'fade-in': {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/mermaid@8.14.0/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+        }
+
+        .liquid-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .liquid-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .liquid-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 10px;
+        }
+        .liquid-scrollbar::-webkit-scrollbar-thumb:hover {
+             background: rgba(148, 163, 184, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text selection:bg-brand-primary/10 selection:text-brand-primary-dark">
+    <div id="root"></div>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'neutral',
+            themeVariables: {
+                fontFamily: 'Inter',
+                primaryColor: '#e0e7ff',
+                primaryTextColor: '#1e3a8a',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#fff'
+            },
+            flowchart: {
+                curve: 'basis'
+            }
+        });
+    </script>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

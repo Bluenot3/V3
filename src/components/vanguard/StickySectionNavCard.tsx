@@ -1,5 +1,7 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+/* ─── Types ─────────────────────────────────────────────────────────────── */
 
 type NavSection = {
     id: string;
@@ -21,70 +23,91 @@ interface StickySectionNavCardProps<TSection extends NavSection> {
     moduleNumber?: number;
 }
 
-type RailViewMode = 'icon' | 'compact' | 'expanded';
+/* ─── Helpers ───────────────────────────────────────────────────────────── */
 
-const flattenSections = <TSection extends NavSection>(sections: TSection[]): TSection[] => {
-    const flattened: TSection[] = [];
-
-    const visit = (items: TSection[]) => {
+const flattenSections = <T extends NavSection>(sections: T[]): T[] => {
+    const result: T[] = [];
+    const visit = (items: T[]) => {
         items.forEach((item) => {
-            flattened.push(item);
-
-            if (item.subSections?.length) {
-                visit(item.subSections as TSection[]);
-            }
+            result.push(item);
+            if (item.subSections?.length) visit(item.subSections as T[]);
         });
     };
-
     visit(sections);
-    return flattened;
+    return result;
 };
 
-const buildParentMap = <TSection extends NavSection>(
-    sections: TSection[],
+const buildParentMap = <T extends NavSection>(
+    sections: T[],
     parentId?: string,
     map: Record<string, string | undefined> = {},
-) => {
-    sections.forEach((section) => {
-        map[section.id] = parentId;
-
-        if (section.subSections?.length) {
-            buildParentMap(section.subSections as TSection[], section.id, map);
-        }
+): Record<string, string | undefined> => {
+    sections.forEach((s) => {
+        map[s.id] = parentId;
+        if (s.subSections?.length) buildParentMap(s.subSections as T[], s.id, map);
     });
-
     return map;
 };
 
-const filterSections = <TSection extends NavSection>(sections: TSection[], query: string): TSection[] => {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    if (!normalizedQuery) {
-        return sections;
-    }
-
-    return sections.reduce<TSection[]>((filtered, section) => {
-        const matchingChildren = section.subSections?.length
-            ? filterSections(section.subSections as TSection[], normalizedQuery)
-            : [];
-        const selfMatches = section.title.toLowerCase().includes(normalizedQuery);
-
-        if (!selfMatches && matchingChildren.length === 0) {
-            return filtered;
-        }
-
-        filtered.push({
-            ...section,
-            subSections: selfMatches ? section.subSections : matchingChildren,
-        });
-
-        return filtered;
+const filterSections = <T extends NavSection>(sections: T[], query: string): T[] => {
+    const q = query.trim().toLowerCase();
+    if (!q) return sections;
+    return sections.reduce<T[]>((acc, s) => {
+        const kids = s.subSections?.length ? filterSections(s.subSections as T[], q) : [];
+        const self = s.title.toLowerCase().includes(q);
+        if (!self && kids.length === 0) return acc;
+        acc.push({ ...s, subSections: self ? s.subSections : kids });
+        return acc;
     }, []);
 };
 
-const quickButtonClassName = 'group relative flex h-8 items-center justify-center rounded-[0.95rem] border border-white/20 bg-white/[0.08] text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_24px_rgba(2,6,23,0.28)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.14] hover:text-white active:translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0';
+/* ─── Drag hook ──────────────────────────────────────────────────────────── */
 
-const utilityButtonClassName = 'group inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/24 bg-white/[0.08] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_26px_rgba(2,6,23,0.28)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/[0.16] hover:text-white';
+interface DragPos { x: number; y: number }
+
+function useDraggable(enabled: boolean) {
+    const [pos, setPos] = useState<DragPos>({ x: 0, y: 0 });
+    const dragging = useRef(false);
+    const origin = useRef<DragPos>({ x: 0, y: 0 });
+    const startPos = useRef<DragPos>({ x: 0, y: 0 });
+
+    const onPointerDown = useCallback((e: React.PointerEvent<HTMLElement>) => {
+        if (!enabled) return;
+        e.currentTarget.setPointerCapture(e.pointerId);
+        dragging.current = true;
+        origin.current = { x: e.clientX, y: e.clientY };
+        startPos.current = { ...pos };
+    }, [enabled, pos]);
+
+    const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
+        if (!dragging.current) return;
+        const dx = e.clientX - origin.current.x;
+        const dy = e.clientY - origin.current.y;
+        setPos({ x: startPos.current.x + dx, y: startPos.current.y + dy });
+    }, []);
+
+    const onPointerUp = useCallback(() => {
+        dragging.current = false;
+    }, []);
+
+    return { pos, onPointerDown, onPointerMove, onPointerUp };
+}
+
+/* ─── Tick / Check icons ─────────────────────────────────────────────────── */
+
+const CheckIcon = () => (
+    <svg viewBox="0 0 16 16" fill="none" className="h-3 w-3">
+        <path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
+const DotIcon = () => (
+    <svg viewBox="0 0 16 16" fill="none" className="h-3 w-3">
+        <circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+);
+
+/* ─── Component ──────────────────────────────────────────────────────────── */
 
 const StickySectionNavCard = <TSection extends NavSection>({
     sections,
@@ -95,617 +118,459 @@ const StickySectionNavCard = <TSection extends NavSection>({
     activeAccentClassName,
     onNavigate,
     renderIcon,
-    compact = false,
     moduleNumber,
 }: StickySectionNavCardProps<TSection>) => {
     const navigate = useNavigate();
-    const railSlotRef = useRef<HTMLDivElement>(null);
-    const railCardRef = useRef<HTMLDivElement>(null);
+
+    /* state */
+    const [isMinimized, setIsMinimized] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
+    const [filterQuery, setFilterQuery] = useState('');
+    const [optimisticSection, setOptimisticSection] = useState<string | null>(null);
+    const [collapsedSections, setCollapsedSections] = useState<Set<string>>(() => new Set());
+
+    /* derived */
     const allSections = useMemo(() => flattenSections(sections), [sections]);
     const parentMap = useMemo(() => buildParentMap(sections), [sections]);
-    const [optimisticSection, setOptimisticSection] = useState<string | null>(null);
-    const [filterQuery, setFilterQuery] = useState('');
-    const [collapsedSections, setCollapsedSections] = useState<Set<string>>(
-        () => new Set(allSections.filter((section) => section.subSections?.length).map((section) => section.id)),
-    );
-    const [viewMode, setViewMode] = useState<RailViewMode>('expanded');
-    const [isUtilityExpanded, setIsUtilityExpanded] = useState(false);
-    const [floatingMetrics, setFloatingMetrics] = useState({
-        enabled: false,
-        left: 0,
-        width: 0,
-        height: 0,
-    });
-    const resolvedActiveSection = optimisticSection ?? activeSection;
-    const lastSectionId = allSections[allSections.length - 1]?.id;
-    const activeTitle = allSections.find((section) => section.id === resolvedActiveSection)?.title ?? 'Overview';
-    const activeIndex = allSections.findIndex((section) => section.id === resolvedActiveSection);
-    const activePreviewSection = activeIndex >= 0 ? allSections[activeIndex] : allSections[0];
-    const previousSectionId = activeIndex > 0 ? allSections[activeIndex - 1]?.id : undefined;
-    const nextSectionId = activeIndex >= 0 ? allSections[activeIndex + 1]?.id : undefined;
-    const filteredSections = useMemo(() => filterSections(sections, filterQuery), [filterQuery, sections]);
-    const filteredFlatSections = useMemo(() => flattenSections(filteredSections), [filteredSections]);
-    const completionPercent = allSections.length > 0
+    const resolvedActive = optimisticSection ?? activeSection;
+    const activeIndex = allSections.findIndex((s) => s.id === resolvedActive);
+    const activeTitle = allSections[activeIndex]?.title ?? 'Overview';
+    const prevId = activeIndex > 0 ? allSections[activeIndex - 1]?.id : undefined;
+    const nextId = activeIndex >= 0 ? allSections[activeIndex + 1]?.id : undefined;
+    const firstId = allSections[0]?.id;
+    const lastId = allSections[allSections.length - 1]?.id;
+    const completionPct = allSections.length > 0
         ? Math.round((completedSections.length / allSections.length) * 100)
         : 0;
-    const completedCount = completedSections.length;
-    const remainingCount = Math.max(allSections.length - completedCount, 0);
-    const isExpanded = viewMode === 'expanded';
-    const isIconMode = viewMode === 'icon';
-    const showUtilityPanel = isExpanded && (isUtilityExpanded || filterQuery.trim().length > 0);
+    const filteredSections = useMemo(() => filterSections(sections, filterQuery), [sections, filterQuery]);
 
+    /* drag (only works when sticky/floating) */
+    const [isSticky, setIsSticky] = useState(false);
+    const slotRef = useRef<HTMLDivElement>(null);
+    const { pos, onPointerDown, onPointerMove, onPointerUp } = useDraggable(isSticky);
+
+    /* sticky detection */
+    useEffect(() => {
+        const slot = slotRef.current;
+        if (!slot || typeof window === 'undefined') return;
+        let raf = 0;
+        const update = () => {
+            raf = requestAnimationFrame(() => {
+                if (window.innerWidth < 1024) { setIsSticky(false); return; }
+                const rect = slot.getBoundingClientRect();
+                setIsSticky(rect.top <= 20);
+            });
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        return () => {
+            window.removeEventListener('scroll', update);
+            window.removeEventListener('resize', update);
+            cancelAnimationFrame(raf);
+        };
+    }, []);
+
+    /* auto-expand parent sections */
     useEffect(() => {
         setOptimisticSection(null);
     }, [activeSection]);
 
     useEffect(() => {
-        if (!isExpanded && isUtilityExpanded) {
-            setIsUtilityExpanded(false);
-        }
-    }, [isExpanded, isUtilityExpanded]);
-
-    useLayoutEffect(() => {
-        const slot = railSlotRef.current;
-        const card = railCardRef.current;
-
-        if (!slot || !card || typeof window === 'undefined') {
-            return undefined;
-        }
-
-        let animationFrame = 0;
-
-        const updateFloatingMetrics = () => {
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
+        setCollapsedSections((prev) => {
+            const next = new Set(prev);
+            let pid = parentMap[resolvedActive];
+            let changed = false;
+            while (pid) {
+                if (next.delete(pid)) changed = true;
+                pid = parentMap[pid];
             }
-
-            animationFrame = window.requestAnimationFrame(() => {
-                const desktopMode = window.innerWidth >= 1024;
-                // No global header on module pages — float from near the top
-                const topOffset = 16;
-
-                if (!desktopMode) {
-                    setFloatingMetrics((previous) => (
-                        previous.enabled
-                            ? { enabled: false, left: 0, width: 0, height: 0 }
-                            : previous
-                    ));
-                    return;
-                }
-
-                const slotRect = slot.getBoundingClientRect();
-                const shouldFloat = slotRect.top <= topOffset;
-                const nextMetrics = {
-                    enabled: shouldFloat,
-                    left: Math.round(slotRect.left),
-                    width: Math.round(slotRect.width),
-                    height: Math.round(card.offsetHeight),
-                };
-
-                setFloatingMetrics((previous) => (
-                    previous.enabled === nextMetrics.enabled
-                    && previous.left === nextMetrics.left
-                    && previous.width === nextMetrics.width
-                    && previous.height === nextMetrics.height
-                        ? previous
-                        : nextMetrics
-                ));
-            });
-        };
-
-        updateFloatingMetrics();
-
-        const resizeObserver = new ResizeObserver(updateFloatingMetrics);
-        resizeObserver.observe(slot);
-        resizeObserver.observe(card);
-        window.addEventListener('resize', updateFloatingMetrics);
-        window.addEventListener('scroll', updateFloatingMetrics, { passive: true });
-
-        return () => {
-            resizeObserver.disconnect();
-            window.removeEventListener('resize', updateFloatingMetrics);
-            window.removeEventListener('scroll', updateFloatingMetrics);
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
-            }
-        };
-    }, []);
-
-    useEffect(() => {
-        setCollapsedSections((previous) => {
-            const next = new Set(previous);
-            let parentId = parentMap[resolvedActiveSection];
-            let didChange = false;
-
-            while (parentId) {
-                if (next.delete(parentId)) {
-                    didChange = true;
-                }
-
-                parentId = parentMap[parentId];
-            }
-
-            return didChange ? next : previous;
+            return changed ? next : prev;
         });
-    }, [parentMap, resolvedActiveSection]);
+    }, [parentMap, resolvedActive]);
 
-    const handleNavigate = (sectionId?: string) => {
-        if (!sectionId) {
-            return;
-        }
-
-        setOptimisticSection(sectionId);
-        onNavigate(sectionId);
+    const handleNav = (id?: string) => {
+        if (!id) return;
+        setOptimisticSection(id);
+        onNavigate(id);
     };
 
-    const toggleSection = (sectionId: string) => {
-        setCollapsedSections((previous) => {
-            const next = new Set(previous);
-
-            if (next.has(sectionId)) {
-                next.delete(sectionId);
-            } else {
-                next.add(sectionId);
-            }
-
+    const toggleSection = (id: string) => {
+        setCollapsedSections((prev) => {
+            const next = new Set(prev);
+            next.has(id) ? next.delete(id) : next.add(id);
             return next;
         });
     };
 
-    const toggleExpandedMode = () => {
-        setViewMode((previous) => (previous === 'expanded' ? 'compact' : 'expanded'));
-    };
-
-    const renderStatusGlyph = (isActive: boolean, isCompleted: boolean) => {
-        if (isCompleted) {
-            return (
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                    <path d="M5.5 10.5L8.5 13.5L14.5 6.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            );
-        }
-
-        if (isActive) {
-            return (
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                    <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.6" />
-                    <circle cx="10" cy="10" r="1.8" fill="currentColor" />
-                </svg>
-            );
-        }
+    /* ── Section link renderer ────────────────────────────────────────────── */
+    const renderLinks = (items: TSection[], level = 0): React.ReactNode => items.map((section) => {
+        const isActive = resolvedActive === section.id;
+        const isDone = completedSections.includes(section.id);
+        const hasKids = Boolean(section.subSections?.length);
+        const isOpen = filterQuery.trim().length > 0 || !collapsedSections.has(section.id);
 
         return (
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                <path d="M8 6L12 10L8 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-        );
-    };
-
-    const renderLinks = (items: TSection[], level = 0) => items.map((section) => {
-        const isActive = resolvedActiveSection === section.id;
-        const isCompleted = completedSections.includes(section.id);
-        const hasChildren = Boolean(section.subSections?.length);
-        const isExpanded = filterQuery.trim().length > 0 || !collapsedSections.has(section.id);
-
-        return (
-            <li key={section.id} className="mb-1 last:mb-0">
-                <div className="group relative flex items-stretch gap-1.5">
-                    {hasChildren ? (
+            <li key={section.id} className="mb-0.5 last:mb-0">
+                {/* Row */}
+                <div className="flex items-center gap-1">
+                    {/* Expand toggle for parent sections */}
+                    {hasKids ? (
                         <button
                             type="button"
                             onClick={() => toggleSection(section.id)}
-                            aria-label={isExpanded ? `Collapse ${section.title}` : `Expand ${section.title}`}
-                            className="flex h-auto w-6 flex-shrink-0 items-center justify-center rounded-[0.9rem] border border-white/60 bg-white/55 text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-xl transition-all duration-200 hover:border-white hover:bg-white/70 hover:text-slate-700"
+                            className="flex h-6 w-5 shrink-0 items-center justify-center text-slate-500 transition hover:text-slate-300"
                         >
-                            <svg
-                                viewBox="0 0 20 20"
-                                fill="none"
-                                aria-hidden="true"
-                                className={`h-3 w-3 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
-                            >
-                                <path d="M7 5L12 10L7 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg viewBox="0 0 20 20" fill="none" className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-90' : ''}`}>
+                                <path d="M7 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </button>
                     ) : (
-                        <span className="w-6 flex-shrink-0" aria-hidden="true" />
+                        <span className="w-5 shrink-0" />
                     )}
 
+                    {/* Section button */}
                     <button
                         type="button"
-                        onClick={() => handleNavigate(section.id)}
+                        onClick={() => handleNav(section.id)}
+                        style={{ paddingLeft: `${0.5 + level * 0.75}rem` }}
                         className={[
-                            'group relative flex min-w-0 flex-1 items-center justify-between overflow-hidden rounded-[1.05rem] border px-2.5 py-1.5 text-left transition-all duration-200 transform-gpu',
-                            'hover:-translate-y-0.5 hover:border-white hover:shadow-[0_16px_32px_rgba(148,163,184,0.14)] active:translate-y-px active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/80',
+                            'group flex flex-1 items-center gap-2 overflow-hidden rounded-xl border px-2.5 py-2 text-left text-sm transition-all duration-150',
                             isActive
-                                ? `border-white/90 bg-gradient-to-r ${activeAccentClassName} text-white shadow-[0_18px_34px_rgba(99,102,241,0.18)]`
-                                : 'border-white/70 bg-white/65 text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_10px_28px_rgba(148,163,184,0.12)] backdrop-blur-xl hover:bg-white/78',
+                                ? `border-white/20 bg-gradient-to-r ${activeAccentClassName} text-white shadow-md`
+                                : isDone
+                                    ? 'border-emerald-400/20 bg-emerald-400/[0.07] text-emerald-200 hover:bg-emerald-400/[0.12]'
+                                    : 'border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/15 hover:bg-white/[0.07] hover:text-white',
                         ].join(' ')}
-                        style={{ paddingLeft: `${0.65 + level * 0.85}rem` }}
                     >
-                        {isActive && (
-                            <span className="absolute inset-y-1.5 left-1 w-1 rounded-full bg-white/85 shadow-[0_0_14px_rgba(255,255,255,0.7)]" />
+                        {/* Icon */}
+                        <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-lg transition-all ${
+                            isActive ? 'bg-white/20 text-white'
+                            : isDone ? 'bg-emerald-400/20 text-emerald-400'
+                            : 'bg-white/[0.06] text-slate-500 group-hover:text-slate-300'
+                        }`}>
+                            {renderIcon ? renderIcon(section, isActive)
+                                : isDone ? <CheckIcon />
+                                : <DotIcon />}
+                        </span>
+
+                        {/* Title */}
+                        <span className="min-w-0 flex-1 truncate text-[0.8rem] font-medium leading-5">{section.title}</span>
+
+                        {/* Status dot */}
+                        {isDone && !isActive && (
+                            <span className="shrink-0 text-emerald-400"><CheckIcon /></span>
                         )}
-
-                        <span className="relative flex min-w-0 items-center gap-2">
-                            <span
-                                className={[
-                                    'flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-[0.8rem] border transition-all duration-200',
-                                    isActive
-                                        ? 'border-white/20 bg-white/15 text-white'
-                                        : isCompleted
-                                            ? 'border-emerald-200/80 bg-emerald-50 text-emerald-600'
-                                            : 'border-white/70 bg-white/68 text-slate-400 group-hover:text-slate-700',
-                                ].join(' ')}
-                            >
-                                {renderIcon ? renderIcon(section, isActive) : <span className="h-2 w-2 rounded-full bg-current" />}
-                            </span>
-                            <span className="truncate text-[0.8rem] font-semibold leading-5">{section.title}</span>
-                        </span>
-
-                        <span
-                            className={[
-                                'relative ml-2 flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-200',
-                                isActive
-                                    ? 'border-white/20 bg-white/15 text-white'
-                                    : isCompleted
-                                        ? 'border-emerald-200/80 bg-emerald-50 text-emerald-600'
-                                        : 'border-white/70 bg-white/68 text-slate-400 group-hover:text-slate-700',
-                            ].join(' ')}
-                        >
-                            {renderStatusGlyph(isActive, isCompleted)}
-                        </span>
                     </button>
                 </div>
 
-                {hasChildren && isExpanded ? (
-                    <ul className="mt-2 border-l border-slate-200/80 pl-2">
+                {/* Children */}
+                {hasKids && isOpen && (
+                    <ul className="mt-0.5 border-l border-white/[0.06] pl-2">
                         {renderLinks(section.subSections as TSection[], level + 1)}
                     </ul>
-                ) : null}
+                )}
             </li>
         );
     });
 
-    return (
-        <div
-            ref={railSlotRef}
-            className="relative w-full lg:self-start"
-            style={floatingMetrics.enabled ? { minHeight: `${floatingMetrics.height}px` } : undefined}
-        >
-            <div
-                ref={railCardRef}
-                className={`relative overflow-hidden rounded-[1.65rem] border border-white/20 bg-[linear-gradient(165deg,rgba(15,23,42,0.8)_0%,rgba(10,18,34,0.72)_52%,rgba(7,13,26,0.84)_100%)] shadow-[0_24px_70px_rgba(2,6,23,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-[22px] ${isIconMode ? 'w-[4.6rem] p-2' : compact ? 'p-2.5' : 'p-3'}`}
-                style={floatingMetrics.enabled ? {
-                    position: 'fixed',
-                    top: 16,
-                    left: floatingMetrics.left,
-                    width: isIconMode ? Math.min(78, floatingMetrics.width) : floatingMetrics.width,
-                    maxHeight: 'calc(100vh - 2rem)',
-                    zIndex: 30,
-                } : { maxHeight: 'calc(100vh - 2rem)' }}
-            >
-                <div className="pointer-events-none absolute inset-0">
-                    <div className={`absolute inset-x-0 top-0 h-20 bg-gradient-to-r ${accentClassName} opacity-[0.12]`} />
-                    <div className="absolute left-4 top-3 h-14 w-14 rounded-full bg-white/80 blur-2xl" />
-                    <div className="absolute right-0 top-0 h-20 w-24 bg-gradient-to-l from-cyan-100/50 to-transparent" />
+    /* ── Module switcher buttons ──────────────────────────────────────────── */
+    const moduleSwitcher = moduleNumber !== undefined ? (
+        <div className="mb-3">
+            <p className="mb-1.5 px-0.5 text-[9px] font-bold uppercase tracking-[0.28em] text-slate-600">Modules</p>
+            <div className="flex items-center gap-1 rounded-2xl border border-white/10 bg-black/20 p-1">
+                {/* Prev arrow */}
+                <button
+                    type="button"
+                    onClick={() => navigate(`/module/${moduleNumber - 1}`)}
+                    disabled={moduleNumber <= 1}
+                    title="Previous module"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-slate-400 transition hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-20"
+                >
+                    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4"><path d="M12 5l-5 5 5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+
+                {/* M1–M4 chips */}
+                <div className="flex flex-1 gap-1">
+                    {[1, 2, 3, 4].map((n) => {
+                        const isCurrent = n === moduleNumber;
+                        const isPast = n < moduleNumber;
+                        const isLocked = n > moduleNumber && completionPct < 100;
+                        return (
+                            <button
+                                key={n}
+                                type="button"
+                                onClick={() => !isLocked && navigate(`/module/${n}`)}
+                                disabled={isLocked}
+                                title={isLocked ? `Complete Module ${n - 1} first` : `Go to Module ${n}`}
+                                className={[
+                                    'flex flex-1 items-center justify-center rounded-xl border py-2 text-[11px] font-bold uppercase transition-all duration-200',
+                                    isCurrent
+                                        ? `border-white/25 bg-gradient-to-r ${accentClassName} text-white shadow-[0_4px_12px_rgba(0,0,0,0.4)]`
+                                        : isPast
+                                            ? 'border-white/15 bg-white/[0.10] text-slate-200 hover:bg-white/[0.16]'
+                                            : isLocked
+                                                ? 'cursor-not-allowed border-white/5 bg-white/[0.03] text-slate-700'
+                                                : 'border-white/10 bg-white/[0.06] text-slate-400 hover:bg-white/[0.12] hover:text-slate-200',
+                                ].join(' ')}
+                            >
+                                M{n}
+                            </button>
+                        );
+                    })}
                 </div>
 
-                {/* ── Module Navigation Strip ─────────────────────── */}
-                {moduleNumber !== undefined && !isIconMode && (
-                    <div className="relative mb-3 space-y-1.5">
-                        {/* Label row */}
-                        <p className="px-1 text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">Navigate Modules</p>
-                        {/* Module chips row */}
-                        <div className="flex items-center gap-1.5 rounded-[1.15rem] border border-white/15 bg-white/[0.05] p-1.5">
-                            <button
-                                type="button"
-                                onClick={() => navigate(`/module/${moduleNumber - 1}`)}
-                                disabled={moduleNumber <= 1}
-                                title="Previous module"
-                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.08] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
-                            >
-                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
-                                    <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                            <div className="flex flex-1 gap-1">
-                                {[1, 2, 3, 4].map((n) => {
-                                    const isCurrent = n === moduleNumber;
-                                    const isPast = n < moduleNumber;
-                                    const isNextUnlocked = completionPercent >= 100;
-                                    const isLocked = n > moduleNumber && !isNextUnlocked;
-                                    return (
-                                        <button
-                                            key={n}
-                                            type="button"
-                                            onClick={() => !isLocked && navigate(`/module/${n}`)}
-                                            disabled={isLocked}
-                                            title={isLocked ? `Complete Module ${n - 1} first` : `Go to Module ${n}`}
-                                            className={[
-                                                'flex flex-1 items-center justify-center rounded-[0.7rem] border py-2 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-200',
-                                                isCurrent
-                                                    ? `border-white/30 bg-gradient-to-r ${accentClassName} text-white shadow-[0_6px_16px_rgba(0,0,0,0.3)]`
-                                                    : isPast
-                                                        ? 'border-white/20 bg-white/[0.12] text-slate-200 hover:bg-white/[0.2] hover:text-white'
-                                                        : isNextUnlocked
-                                                            ? 'border-white/15 bg-white/[0.07] text-slate-400 hover:bg-white/[0.14] hover:text-slate-200'
-                                                            : 'cursor-not-allowed border-white/10 bg-white/[0.04] text-slate-600',
-                                            ].join(' ')}
-                                        >
-                                            M{n}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                            <button
-                                type="button"
-                                onClick={() => navigate(`/module/${moduleNumber + 1}`)}
-                                disabled={moduleNumber >= 4 || completionPercent < 100}
-                                title={completionPercent < 100 ? 'Complete this module to unlock the next' : 'Next module'}
-                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.08] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
-                            >
-                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
-                                    <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                )}
+                {/* Next arrow */}
+                <button
+                    type="button"
+                    onClick={() => navigate(`/module/${moduleNumber + 1}`)}
+                    disabled={moduleNumber >= 4 || completionPct < 100}
+                    title={completionPct < 100 ? 'Complete this module to unlock next' : 'Next module'}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-slate-400 transition hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-20"
+                >
+                    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4"><path d="M8 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+            </div>
+        </div>
+    ) : null;
 
-                {isIconMode ? (
-                    <div className="relative flex flex-col items-center gap-2">
+    /* ── Quick nav row ────────────────────────────────────────────────────── */
+    const quickNav = (
+        <div className="mb-3 flex items-center gap-1">
+            {[
+                { id: prevId, label: 'Previous section', icon: <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5"><path d="M12 5l-5 5 5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg> },
+                { id: firstId, label: 'Jump to top', icon: <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5"><path d="M10 14V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M7 9l3-3 3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: resolvedActive, label: 'Current section', isCurrent: true, icon: <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5"><circle cx="10" cy="10" r="4" stroke="currentColor" strokeWidth="2"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/></svg> },
+                { id: lastId, label: 'Jump to bottom', icon: <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5"><path d="M10 6v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M7 11l3 3 3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: nextId, label: 'Next section', icon: <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5"><path d="M8 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg> },
+            ].map(({ id, label, icon, isCurrent }) => (
+                <button
+                    key={label}
+                    type="button"
+                    onClick={() => handleNav(id)}
+                    disabled={!id}
+                    title={label}
+                    aria-label={label}
+                    className={[
+                        'flex h-8 flex-1 items-center justify-center rounded-xl border transition-all duration-150',
+                        isCurrent
+                            ? `border-white/20 bg-gradient-to-r ${accentClassName} text-white shadow-[0_3px_10px_rgba(0,0,0,0.35)]`
+                            : 'border-white/[0.08] bg-white/[0.04] text-slate-400 hover:border-white/20 hover:bg-white/[0.10] hover:text-white disabled:cursor-not-allowed disabled:opacity-20',
+                    ].join(' ')}
+                >
+                    {icon}
+                    <span className="sr-only">{label}</span>
+                </button>
+            ))}
+        </div>
+    );
+
+    /* ── Minimized pill ──────────────────────────────────────────────────── */
+    if (isMinimized) {
+        return (
+            <div ref={slotRef} className="w-full">
+                <button
+                    type="button"
+                    onClick={() => setIsMinimized(false)}
+                    className={`flex w-full items-center gap-3 rounded-2xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.85)_0%,rgba(10,18,34,0.80)_100%)] px-4 py-3 text-left shadow-[0_8px_32px_rgba(2,6,23,0.4)] backdrop-blur-xl transition-all duration-200 hover:border-white/25 hover:shadow-[0_12px_40px_rgba(2,6,23,0.5)]`}
+                >
+                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r ${accentClassName} shadow-md`}>
+                        <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4 text-white">
+                            <path d="M4 6h12M4 10h8M4 14h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">{moduleLabel}</p>
+                        <p className="truncate text-sm font-semibold text-white">{activeTitle}</p>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-1">
+                        <span className={`rounded-full bg-gradient-to-r ${accentClassName} px-2 py-0.5 text-[10px] font-bold text-white`}>
+                            {completionPct}%
+                        </span>
+                        <span className="text-[9px] text-slate-600">{activeIndex + 1}/{allSections.length}</span>
+                    </div>
+                </button>
+            </div>
+        );
+    }
+
+    /* ── Floating styles when sticky ─────────────────────────────────────── */
+    const floatStyle: React.CSSProperties = isSticky
+        ? {
+            position: 'fixed',
+            top: 16 + pos.y,
+            left: (slotRef.current?.getBoundingClientRect().left ?? 0) + pos.x,
+            width: slotRef.current?.offsetWidth ?? 300,
+            zIndex: 40,
+            maxHeight: 'calc(100vh - 2rem)',
+        }
+        : { maxHeight: 'calc(100vh - 2rem)' };
+
+    /* ── Full panel ──────────────────────────────────────────────────────── */
+    return (
+        <div
+            ref={slotRef}
+            className="relative w-full lg:self-start"
+            style={isSticky ? { minHeight: slotRef.current?.firstElementChild ? (slotRef.current.firstElementChild as HTMLElement).offsetHeight : undefined } : undefined}
+        >
+            {/* The card */}
+            <div
+                className="relative flex flex-col overflow-hidden rounded-[1.5rem] border border-white/[0.12] bg-[linear-gradient(165deg,rgba(12,20,38,0.92)_0%,rgba(8,15,28,0.88)_100%)] shadow-[0_20px_60px_rgba(2,6,23,0.55),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-2xl"
+                style={floatStyle}
+                onPointerMove={isSticky ? onPointerMove : undefined}
+                onPointerUp={isSticky ? onPointerUp : undefined}
+            >
+                {/* Ambient glow inside card */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.5rem]">
+                    <div className={`absolute inset-x-0 top-0 h-16 bg-gradient-to-r ${accentClassName} opacity-[0.09]`} />
+                    <div className="absolute -left-4 top-0 h-20 w-20 rounded-full bg-white/[0.05] blur-2xl" />
+                </div>
+
+                {/* ── DRAG HANDLE / HEADER ────────────────────────────── */}
+                <div
+                    className={`relative flex items-center gap-2 border-b border-white/[0.08] px-3 py-3 ${isSticky ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                    onPointerDown={isSticky ? onPointerDown : undefined}
+                    title={isSticky ? 'Drag to reposition' : undefined}
+                >
+                    {/* Grip dots — visual drag indicator */}
+                    {isSticky && (
+                        <div className="flex shrink-0 flex-col gap-[3px]">
+                            {[0, 1, 2].map((i) => (
+                                <div key={i} className="flex gap-[3px]">
+                                    <div className="h-[3px] w-[3px] rounded-full bg-white/20" />
+                                    <div className="h-[3px] w-[3px] rounded-full bg-white/20" />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Module + title */}
+                    <div className="min-w-0 flex-1">
+                        <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">{moduleLabel}</p>
+                        <p className="truncate text-sm font-semibold text-white">Section Navigator</p>
+                    </div>
+
+                    {/* Header controls */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                        {/* Search toggle */}
                         <button
                             type="button"
-                            onClick={() => setViewMode('compact')}
-                            aria-label="Expand section navigator"
-                            title="Expand section navigator"
-                            className={`group flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/28 bg-gradient-to-r ${activeAccentClassName} text-white shadow-[0_18px_34px_rgba(99,102,241,0.22)] transition-all duration-200 hover:-translate-y-0.5`}
+                            onClick={() => { setShowSearch((v) => !v); if (showSearch) setFilterQuery(''); }}
+                            title={showSearch ? 'Hide search' : 'Search sections'}
+                            className={`flex h-7 w-7 items-center justify-center rounded-xl border transition-all ${showSearch ? 'border-white/30 bg-white/[0.14] text-white' : 'border-white/10 bg-white/[0.05] text-slate-500 hover:border-white/20 hover:text-slate-300'}`}
                         >
-                            {renderIcon && activePreviewSection
-                                ? renderIcon(activePreviewSection, true)
-                                : <span className="h-2 w-2 rounded-full bg-current" />}
-                        </button>
-                        <div className="rounded-full border border-white/20 bg-white/[0.1] px-1.5 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-slate-100">
-                            {completionPercent}%
-                        </div>
-                    </div>
-                ) : (
-                <>
-                {/* ── Header block ─────────────────────────────────── */}
-                <div className="relative shrink-0 space-y-2.5 border-b border-white/[0.12] pb-3">
-
-                    {/* Row 1: Module label + section counter + control buttons */}
-                    <div className="flex items-center gap-2">
-                        <div className="flex min-w-0 flex-1 items-center gap-1.5">
-                            <p className="shrink-0 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-300">
-                                {moduleLabel}
-                            </p>
-                            <span className="h-3 w-px shrink-0 bg-white/20" />
-                            <p className="text-[10px] font-semibold tabular-nums text-slate-400">
-                                {Math.max(activeIndex + 1, 1)}&thinsp;/&thinsp;{allSections.length}
-                            </p>
-                        </div>
-                        {/* Control buttons — each in its own space */}
-                        <button
-                            type="button"
-                            onClick={() => setIsUtilityExpanded((previous) => !previous)}
-                            aria-label={showUtilityPanel ? 'Collapse tools' : 'Expand tools'}
-                            title={showUtilityPanel ? 'Collapse tools' : 'Expand tools'}
-                            className={`${utilityButtonClassName} ${showUtilityPanel ? 'border-white/40 bg-white/[0.16] text-white' : ''}`}
-                        >
-                            {/* Filter / funnel icon */}
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <path d="M3 5h14M6 10h8M9 15h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                            <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                <circle cx="8.5" cy="8.5" r="4.75" stroke="currentColor" strokeWidth="1.7" />
+                                <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
                             </svg>
                         </button>
+                        {/* Minimize */}
                         <button
                             type="button"
-                            onClick={toggleExpandedMode}
-                            aria-label={isExpanded ? 'Collapse list' : 'Expand list'}
-                            title={isExpanded ? 'Collapse list' : 'Expand list'}
-                            className={utilityButtonClassName}
+                            onClick={() => setIsMinimized(true)}
+                            title="Minimize panel"
+                            className="flex h-7 w-7 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-slate-500 transition hover:border-white/20 hover:text-slate-300"
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className={`h-3.5 w-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                                <path d="M6 8L10 12L14 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setViewMode('icon')}
-                            aria-label="Minimize to icon"
-                            title="Minimize to icon"
-                            className={utilityButtonClassName}
-                        >
-                            {/* Minus / minimize icon */}
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                            <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
                                 <path d="M5 10h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         </button>
                     </div>
+                </div>
 
-                    {/* Row 2: Title + completion % */}
-                    <div className="flex items-center justify-between gap-2">
-                        {isExpanded ? (
-                            <p className="text-sm font-semibold tracking-tight text-white">Section Navigator</p>
-                        ) : (
-                            <p className="truncate text-sm font-semibold tracking-tight text-slate-100">{activeTitle}</p>
-                        )}
-                        <div className={`shrink-0 rounded-full bg-gradient-to-r ${accentClassName} px-2.5 py-0.5 text-[10px] font-bold tabular-nums text-white`}>
-                            {completionPercent}%
-                        </div>
-                    </div>
+                {/* ── BODY ────────────────────────────────────────────────── */}
+                <div className="relative flex flex-col gap-0 overflow-hidden">
+                    <div className="px-3 pt-3">
 
-                    {/* Row 3: Progress bar */}
-                    <div className="h-1.5 rounded-full bg-white/10 shadow-[inset_0_1px_2px_rgba(15,23,42,0.36)]">
-                        <div
-                            className={`relative h-full rounded-full bg-gradient-to-r ${accentClassName} transition-[width] duration-300`}
-                            style={{ width: `${completionPercent}%` }}
-                        >
-                            <span className="absolute inset-y-0 right-0 w-6 rounded-full bg-white/40 blur-sm" />
-                        </div>
-                    </div>
+                        {/* Module switcher */}
+                        {moduleSwitcher}
 
-                    {/* Row 4: Quick-nav buttons — prev | top | current | bottom | next */}
-                    <div className="flex items-center gap-1">
-                        {/* Prev section */}
-                        <button
-                            type="button"
-                            onClick={() => handleNavigate(previousSectionId)}
-                            disabled={!previousSectionId}
-                            aria-label="Previous section"
-                            title="Previous section"
-                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <span className="sr-only">Previous section</span>
-                        </button>
-                        {/* Jump to top */}
-                        <button
-                            type="button"
-                            onClick={() => handleNavigate(allSections[0]?.id ?? 'overview')}
-                            aria-label="Jump to top"
-                            title="Jump to top"
-                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <path d="M10 14V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                <path d="M7 9l3-3 3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <span className="sr-only">Jump to top</span>
-                        </button>
-                        {/* Jump to current */}
-                        <button
-                            type="button"
-                            onClick={() => handleNavigate(resolvedActiveSection)}
-                            aria-label="Jump to current section"
-                            title="Jump to current section"
-                            className={`flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border bg-gradient-to-r ${accentClassName} border-white/20 text-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all hover:opacity-90`}
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <circle cx="10" cy="10" r="4.5" stroke="currentColor" strokeWidth="2" />
-                                <circle cx="10" cy="10" r="1.8" fill="currentColor" />
-                            </svg>
-                            <span className="sr-only">Jump to current section</span>
-                        </button>
-                        {/* Jump to bottom */}
-                        <button
-                            type="button"
-                            onClick={() => handleNavigate(lastSectionId)}
-                            aria-label="Jump to bottom"
-                            title="Jump to bottom"
-                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <path d="M10 6v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                <path d="M7 11l3 3 3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <span className="sr-only">Jump to bottom</span>
-                        </button>
-                        {/* Next section */}
-                        <button
-                            type="button"
-                            onClick={() => handleNavigate(nextSectionId)}
-                            disabled={!nextSectionId}
-                            aria-label="Next section"
-                            title="Next section"
-                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <span className="sr-only">Next section</span>
-                        </button>
-                    </div>
-
-                    {isExpanded && showUtilityPanel ? (
-                        <div className="mt-2.5 space-y-2 rounded-[1.25rem] border border-white/20 bg-white/[0.08] p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_16px_32px_rgba(2,6,23,0.24)] backdrop-blur-xl">
-                            <div className="flex items-center justify-between gap-2 rounded-[1.1rem] border border-white/20 bg-white/[0.08] px-3 py-2.5">
-                                <div className="min-w-0">
-                                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Now viewing</p>
-                                    <p className="mt-1 truncate text-sm font-semibold text-slate-100">{activeTitle}</p>
-                                </div>
-                                <div className="rounded-full border border-white/20 bg-white/[0.1] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300">
-                                    {completedCount} done
-                                </div>
+                        {/* Progress row */}
+                        <div className="mb-3">
+                            <div className="mb-1.5 flex items-center justify-between gap-2">
+                                <p className="text-[10px] font-semibold text-slate-400">
+                                    <span className="tabular-nums text-white">{Math.max(activeIndex + 1, 1)}</span>
+                                    <span className="text-slate-600"> / {allSections.length} sections</span>
+                                </p>
+                                <span className={`rounded-full bg-gradient-to-r ${accentClassName} px-2.5 py-0.5 text-[10px] font-bold tabular-nums text-white`}>
+                                    {completionPct}%
+                                </span>
                             </div>
+                            <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+                                <div
+                                    className={`h-full rounded-full bg-gradient-to-r ${accentClassName} transition-[width] duration-500`}
+                                    style={{ width: `${completionPct}%` }}
+                                />
+                            </div>
+                        </div>
 
-                            <div className="relative">
-                                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-400">
-                                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                        <circle cx="9" cy="9" r="5.75" stroke="currentColor" strokeWidth="1.6" />
-                                        <path d="M13.25 13.25L17 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        {/* Quick nav */}
+                        {quickNav}
+
+                        {/* Search bar */}
+                        {showSearch && (
+                            <div className="mb-3 relative">
+                                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
+                                    <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                        <circle cx="8.5" cy="8.5" r="4.75" stroke="currentColor" strokeWidth="1.7" />
+                                        <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
                                     </svg>
                                 </div>
                                 <input
                                     type="text"
                                     value={filterQuery}
-                                    onChange={(event) => setFilterQuery(event.target.value)}
-                                    placeholder="Find a section"
-                                    className="w-full rounded-[1.15rem] border border-white/20 bg-white/[0.1] py-2.5 pl-10 pr-12 text-sm font-medium text-slate-100 outline-none shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-xl transition-all duration-200 placeholder:text-slate-400 focus:border-white/40 focus:bg-white/[0.16]"
+                                    onChange={(e) => setFilterQuery(e.target.value)}
+                                    placeholder="Find a section…"
+                                    autoFocus
+                                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.06] py-2 pl-9 pr-9 text-sm text-slate-100 outline-none placeholder:text-slate-600 focus:border-white/25 focus:bg-white/[0.10]"
                                 />
-                                {filterQuery ? (
+                                {filterQuery && (
                                     <button
                                         type="button"
                                         onClick={() => setFilterQuery('')}
-                                        className="absolute inset-y-0 right-2 flex items-center rounded-xl px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-slate-100"
+                                        className="absolute inset-y-0 right-2 flex items-center px-1 text-slate-500 hover:text-slate-300"
                                     >
-                                        Clear
+                                        <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                            <path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                        </svg>
                                     </button>
-                                ) : null}
+                                )}
                             </div>
-
-                            <div className="grid grid-cols-2 gap-2">
-                                <div className="rounded-[1rem] border border-white/20 bg-white/[0.08] px-3 py-2 text-xs font-medium text-slate-300">
-                                    {Math.max(activeIndex + 1, 1)} of {allSections.length} sections
-                                </div>
-                                <div className="rounded-[1rem] border border-white/20 bg-white/[0.08] px-3 py-2 text-xs font-medium text-slate-300">
-                                    {remainingCount} remaining
-                                </div>
-                            </div>
-                        </div>
-                    ) : null}
-                </div>
-
-                {isExpanded ? (
-                    <div className="relative min-h-0 flex-1 pt-2.5">
-                        <div className="max-h-[calc(100vh-14rem)] overflow-y-auto pr-1 pb-1 [scrollbar-color:rgba(139,92,246,0.45)_transparent] [scrollbar-width:thin]">
-                            <ul>{renderLinks(filteredSections)}</ul>
-                            {filteredFlatSections.length === 0 ? (
-                                <div className="rounded-[1rem] border border-dashed border-white/20 bg-white/[0.08] px-4 py-6 text-center backdrop-blur-xl">
-                                    <p className="text-sm font-semibold text-slate-100">No sections found</p>
-                                    <p className="mt-1 text-xs text-slate-400">Try a shorter phrase or clear the filter.</p>
-                                </div>
-                            ) : null}
-                        </div>
+                        )}
                     </div>
-                ) : (
-                    <div className="relative pt-2.5">
-                        <button
-                            type="button"
-                            onClick={() => setViewMode('expanded')}
-                            className={`group flex w-full items-center gap-2 overflow-hidden rounded-[1.05rem] border border-white/80 bg-gradient-to-r ${activeAccentClassName} px-2.5 py-2 text-left text-white shadow-[0_18px_34px_rgba(99,102,241,0.16)] transition-all duration-200 hover:-translate-y-0.5`}
-                        >
-                            <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-[0.85rem] border border-white/20 bg-white/15">
-                                {renderIcon && activePreviewSection
-                                    ? renderIcon(activePreviewSection, true)
-                                    : <span className="h-2 w-2 rounded-full bg-current" />}
-                            </span>
-                            <span className="min-w-0 flex-1">
-                                <span className="block truncate text-[0.82rem] font-semibold leading-5">{activeTitle}</span>
-                                <span className="block text-[10px] uppercase tracking-[0.18em] text-white/72">Tap to expand sections</span>
-                            </span>
-                            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/15">
-                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
-                                    <path d="M7 5L12 10L7 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+
+                    {/* Section list */}
+                    <div className="flex-1 overflow-y-auto px-3 pb-3 [scrollbar-color:rgba(255,255,255,0.12)_transparent] [scrollbar-width:thin]" style={{ maxHeight: 'calc(100vh - 26rem)' }}>
+                        {allSections.length > 0 ? (
+                            <ul className="space-y-0.5">
+                                {renderLinks(filteredSections)}
+                            </ul>
+                        ) : null}
+                        {filterQuery && filteredSections.length === 0 && (
+                            <div className="rounded-xl border border-dashed border-white/10 px-4 py-6 text-center">
+                                <p className="text-sm font-semibold text-slate-300">No matches</p>
+                                <p className="mt-1 text-xs text-slate-600">Try a different search term</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* ── AI CHAT ROW ─────────────────────────────────────── */}
+                    <div className="border-t border-white/[0.07] px-3 py-2.5">
+                        <p className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.28em] text-slate-600">Ask Gemma 3</p>
+                        <div className="flex items-center gap-2 rounded-xl border border-white/[0.10] bg-white/[0.04] px-3 py-2 transition hover:border-white/[0.18] hover:bg-white/[0.07]">
+                            <span className="text-base">🤖</span>
+                            <span className="flex-1 text-sm text-slate-500 italic">Ask anything about this module…</span>
+                            <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-gradient-to-r ${accentClassName} text-white shadow-sm`}>
+                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                    <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                            </span>
-                        </button>
+                            </div>
+                        </div>
+                        <p className="mt-1.5 text-center text-[9px] text-slate-700">
+                            {isSticky ? '⠿ Drag header to reposition' : 'Scroll down to float & drag'}
+                        </p>
                     </div>
-                )}
-                </>
-                )}
+                </div>
             </div>
         </div>
     );

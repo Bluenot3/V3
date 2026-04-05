@@ -96,26 +96,11 @@ const App: React.FC = () => {
                 <Route path="settings" element={<AdminSettings />} />
             </Route>
 
-            <Route
-                path="/hub"
-                element={
-                    <Suspense fallback={<PageLoader />}>
-                        <ProgramHubPage />
-                    </Suspense>
-                }
-            />
-
-            <Route
-                path="/programs/:programId"
-                element={
-                    <Suspense fallback={<PageLoader />}>
-                        <ProgramDashboardPage />
-                    </Suspense>
-                }
-            />
-
             <Route path="/" element={<Layout />}>
                 <Route index element={<Navigate to="/hub" replace />} />
+                {/* Hub and programs now live inside Layout so the sidebar is always present */}
+                <Route path="hub" element={<Suspense fallback={<PageLoader />}><ProgramHubPage /></Suspense>} />
+                <Route path="programs/:programId" element={<Suspense fallback={<PageLoader />}><ProgramDashboardPage /></Suspense>} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route
                     path="guide"

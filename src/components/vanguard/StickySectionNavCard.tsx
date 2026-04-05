@@ -292,22 +292,38 @@ const StickySectionNavCard = <TSection extends NavSection>({
     const cardStyle: React.CSSProperties = isFloating
         ? {
             position: 'fixed',
-            top: Math.max(8, 16 + drag.offset.y),
-            left: Math.max(8, floatLeft + drag.offset.x),
+            top: Math.max(8, Math.min(window.innerHeight - 240, 16 + drag.offset.y)),
+            left: Math.max(8, Math.min(window.innerWidth - (floatWidth || 300) - 8, floatLeft + drag.offset.x)),
             width: floatWidth,
             maxHeight: 'calc(100vh - 24px)',
-            zIndex: 50,
+            zIndex: 9999,
         }
         : { maxHeight: 'calc(100vh - 8rem)', position: 'relative' };
 
     /* ── Minimized pill ──────────────────────────────────────────────── */
     if (isMinimized) {
+        // When floating, keep the pill fixed so it doesn't jump back to document flow
+        const pillStyle: React.CSSProperties = isFloating
+            ? {
+                position: 'fixed',
+                top: Math.max(8, Math.min(window.innerHeight - 80, 16 + drag.offset.y)),
+                left: Math.max(8, Math.min(window.innerWidth - (floatWidth || 300) - 8, floatLeft + drag.offset.x)),
+                width: floatWidth,
+                zIndex: 9999,
+            }
+            : {};
+
         return (
-            <div ref={containerRef} className="w-full">
+            <div
+                ref={containerRef}
+                className="w-full"
+                style={isFloating ? { minHeight: 60 } : undefined}
+            >
                 <button
                     type="button"
                     onClick={() => setIsMinimized(false)}
                     title="Expand navigation panel"
+                    style={pillStyle}
                     className="flex w-full items-center gap-3 rounded-2xl border border-white/[0.12] bg-[linear-gradient(135deg,rgba(12,20,38,0.92)_0%,rgba(8,15,28,0.88)_100%)] px-4 py-3 text-left shadow-[0_8px_30px_rgba(2,6,23,0.45)] backdrop-blur-2xl transition hover:border-white/[0.22]"
                 >
                     <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r ${accentClassName} shadow-md`}>
@@ -357,11 +373,11 @@ const StickySectionNavCard = <TSection extends NavSection>({
                 >
                     {/* Grip indicator — only shown when floating */}
                     {isFloating && (
-                        <div className="flex shrink-0 flex-col gap-1 opacity-40" aria-hidden="true">
+                        <div className="flex shrink-0 flex-col gap-[3px] opacity-60" aria-hidden="true">
                             {[0, 1, 2].map((r) => (
-                                <div key={r} className="flex gap-1">
-                                    <div className="h-[3px] w-[3px] rounded-full bg-slate-300" />
-                                    <div className="h-[3px] w-[3px] rounded-full bg-slate-300" />
+                                <div key={r} className="flex gap-[3px]">
+                                    <div className="h-[3.5px] w-[3.5px] rounded-full bg-slate-400" />
+                                    <div className="h-[3.5px] w-[3.5px] rounded-full bg-slate-400" />
                                 </div>
                             ))}
                         </div>
@@ -375,9 +391,26 @@ const StickySectionNavCard = <TSection extends NavSection>({
 
                     {/* Header actions — RIGHT side */}
                     <div className="flex shrink-0 items-center gap-1.5">
+                        {/* Reset position — only shown when floating */}
+                        {isFloating && (
+                            <button
+                                type="button"
+                                onPointerDown={(e) => e.stopPropagation()}
+                                onClick={(e) => { e.stopPropagation(); drag.reset(); }}
+                                title="Reset panel position"
+                                className="flex h-7 w-7 items-center justify-center rounded-xl border border-white/[0.08] bg-transparent text-slate-600 transition hover:border-white/15 hover:text-slate-300"
+                            >
+                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+                                    <path d="M4 10a6 6 0 1 0 1.5-3.9" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                                    <path d="M4 5.5V10h4.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
+                        )}
+
                         {/* Search */}
                         <button
                             type="button"
+                            onPointerDown={(e) => e.stopPropagation()}
                             onClick={() => { setShowSearch((v) => !v); if (showSearch) setSearchQuery(''); }}
                             title={showSearch ? 'Close search' : 'Search sections'}
                             className={`flex h-7 w-7 items-center justify-center rounded-xl border transition-all ${
@@ -395,6 +428,7 @@ const StickySectionNavCard = <TSection extends NavSection>({
                         {/* Minimize — collapses ONLY this panel, course content unaffected */}
                         <button
                             type="button"
+                            onPointerDown={(e) => e.stopPropagation()}
                             onClick={() => setIsMinimized(true)}
                             title="Minimize this panel"
                             className="flex h-7 w-7 items-center justify-center rounded-xl border border-white/[0.08] bg-transparent text-slate-500 transition hover:border-white/15 hover:text-slate-300"
@@ -407,7 +441,10 @@ const StickySectionNavCard = <TSection extends NavSection>({
                 </div>
 
                 {/* ══ SCROLLABLE BODY ═════════════════════════════════ */}
-                <div className="flex flex-1 flex-col overflow-hidden">
+                <div
+                    className="flex flex-1 flex-col overflow-hidden"
+                    onPointerDown={(e) => e.stopPropagation()}
+                >
                     <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-3.5 py-3 [scrollbar-color:rgba(255,255,255,0.08)_transparent] [scrollbar-width:thin]">
 
                         {/* ── Module Switcher ──────────────────────── */}
@@ -598,7 +635,7 @@ const StickySectionNavCard = <TSection extends NavSection>({
                             </span>
                         </button>
                         {isFloating && (
-                            <p className="mt-2 text-center text-[9px] text-slate-700">⠿ Drag the header bar above to move this panel</p>
+                            <p className="mt-2 text-center text-[9px] text-slate-600">Drag the header bar to reposition · click ↺ to reset</p>
                         )}
                     </div>
                 </div>

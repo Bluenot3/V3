@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface SidebarContextType {
@@ -17,6 +17,8 @@ const SidebarContext = createContext<SidebarContextType>({
 
 export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const location = useLocation();
+    // Track whether the user has manually toggled the sidebar so we never fight their intent
+    const userHasToggled = useRef(false);
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
         // Default: collapsed on module pages, else use saved preference
@@ -25,14 +27,16 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return location.pathname.startsWith('/module/');
     });
 
-    // Auto-collapse when entering a module page
+    // Auto-collapse when entering a module page — but only if the user hasn't explicitly
+    // expanded the sidebar themselves. This prevents the sidebar from fighting user intent.
     useEffect(() => {
-        if (location.pathname.startsWith('/module/')) {
+        if (location.pathname.startsWith('/module/') && !userHasToggled.current) {
             setIsCollapsed(true);
         }
     }, [location.pathname]);
 
     const toggle = useCallback(() => {
+        userHasToggled.current = true;
         setIsCollapsed((prev) => {
             const next = !prev;
             localStorage.setItem('zenSidebarCollapsed', String(next));
@@ -41,11 +45,13 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }, []);
 
     const collapse = useCallback(() => {
+        userHasToggled.current = true;
         setIsCollapsed(true);
         localStorage.setItem('zenSidebarCollapsed', 'true');
     }, []);
 
     const expand = useCallback(() => {
+        userHasToggled.current = true;
         setIsCollapsed(false);
         localStorage.setItem('zenSidebarCollapsed', 'false');
     }, []);

@@ -109,11 +109,11 @@ const GlobalSidebar: React.FC = () => {
                 </Tooltip>
 
                 {/* Expand button */}
-                <Tooltip label="Expand sidebar">
+                <Tooltip label="Expand navigation">
                     <button
                         onClick={toggle}
-                        className="flex h-8 w-8 items-center justify-center rounded-xl border border-zen-gold/15 bg-zen-gold/[0.06] text-zen-gold/70 transition hover:border-zen-gold/30 hover:bg-zen-gold/[0.12] hover:text-zen-gold"
-                        aria-label="Expand sidebar"
+                        className="flex h-8 w-8 items-center justify-center rounded-xl border border-zen-gold/25 bg-zen-gold/[0.10] text-zen-gold/90 shadow-[0_2px_8px_rgba(201,168,76,0.12)] transition hover:border-zen-gold/50 hover:bg-zen-gold/[0.20] hover:text-zen-gold hover:shadow-[0_4px_14px_rgba(201,168,76,0.22)] active:scale-95"
+                        aria-label="Expand navigation sidebar"
                     >
                         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -195,9 +195,10 @@ const GlobalSidebar: React.FC = () => {
     );
 
     /* ─────────────────────────────────────────────────────────
-       EXPANDED — full sidebar (w-72 = 288px)
+       EXPANDED — icon + label rail (w-52 = 208px)
+       Same icons as the collapsed rail, now with labels.
     ───────────────────────────────────────────────────────── */
-    const fullSidebar = (
+    const expandedRail = (
         <>
             {/* Mobile overlay */}
             {isMobileOpen && (
@@ -208,255 +209,134 @@ const GlobalSidebar: React.FC = () => {
             )}
 
             <aside
-                className={`fixed left-0 top-0 z-[55] flex h-screen w-72 flex-col overflow-hidden border-r border-zen-gold/10 bg-[linear-gradient(180deg,rgba(6,11,24,0.98)_0%,rgba(15,23,42,0.96)_52%,rgba(6,11,24,0.98)_100%)] text-white shadow-[20px_0_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-transform duration-300 lg:translate-x-0 ${
+                className={`fixed left-0 top-0 z-[55] flex h-screen w-52 flex-col overflow-hidden border-r border-zen-gold/10 bg-[linear-gradient(180deg,rgba(6,11,24,0.98)_0%,rgba(15,23,42,0.96)_52%,rgba(6,11,24,0.98)_100%)] text-white shadow-[20px_0_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-transform duration-300 lg:translate-x-0 ${
                     isMobileOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
-                <div className="relative z-20 shrink-0 overflow-hidden border-b border-zen-gold/10 bg-[linear-gradient(180deg,rgba(9,16,31,0.94)_0%,rgba(8,15,28,0.9)_100%)] px-5 pb-4 pt-6">
-                    <div className="pointer-events-none absolute inset-0">
-                        <div className="absolute left-6 top-2 h-24 w-24 rounded-full bg-zen-gold/[0.06] blur-3xl" />
-                        <div className="absolute right-5 top-8 h-28 w-28 rounded-full bg-brand-cyan/[0.04] blur-3xl" />
-                    </div>
-
-                    {/* Collapse button */}
-                    <button
-                        onClick={toggle}
-                        className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-xl border border-zen-gold/15 bg-zen-gold/[0.06] text-zen-gold/60 transition hover:border-zen-gold/30 hover:text-zen-gold"
-                        title="Collapse sidebar"
-                        aria-label="Collapse sidebar"
+                {/* Header: logo + brand name + collapse button */}
+                <div className="flex items-center gap-3 border-b border-zen-gold/10 px-3 py-4">
+                    <NavLink
+                        to="/hub"
+                        onClick={handleNavigate}
+                        className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-[0.85rem] border border-zen-gold/24 bg-[radial-gradient(circle_at_28%_22%,rgba(201,168,76,0.32),rgba(6,11,24,0.92)_58%)] shadow-[0_6px_16px_rgba(2,6,23,0.5)]"
                     >
-                        <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <picture>
+                            <source srcSet={zenMonogramLogoAvif} type="image/avif" />
+                            <source srcSet={zenMonogramLogoWebp} type="image/webp" />
+                            <img src={zenMonogramLogoWebp} alt="ZEN" width={28} height={28} className="h-7 w-7 object-contain" />
+                        </picture>
+                    </NavLink>
+                    <div className="min-w-0 flex-1">
+                        <p className="font-display text-sm font-semibold leading-tight tracking-[0.04em] text-[#f6e2ac]">ZEN Vanguard</p>
+                        <p className="mt-0.5 text-[9px] uppercase tracking-[0.22em] text-zen-gold/55">AI Literacy</p>
+                    </div>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); toggle(); }}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl border border-zen-gold/25 bg-zen-gold/[0.10] text-zen-gold/90 transition hover:border-zen-gold/50 hover:bg-zen-gold/[0.20] hover:text-zen-gold active:scale-95"
+                        title="Collapse to icon rail"
+                        aria-label="Collapse navigation to icon rail"
+                    >
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
-
-                    <NavLink to="/hub" className="relative block transition-transform duration-300 hover:translate-x-0.5" onClick={handleNavigate}>
-                        <div className="flex items-start gap-3.5">
-                            <div className="relative mt-0.5 flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[1.1rem] border border-zen-gold/24 bg-[radial-gradient(circle_at_28%_22%,rgba(201,168,76,0.32),rgba(6,11,24,0.92)_58%)] shadow-[0_10px_28px_rgba(2,6,23,0.5),0_0_22px_rgba(201,168,76,0.12)]">
-                                <div className="pointer-events-none absolute inset-[1px] rounded-[1rem] border border-white/14" />
-                                <picture>
-                                    <source srcSet={zenMonogramLogoAvif} type="image/avif" />
-                                    <source srcSet={zenMonogramLogoWebp} type="image/webp" />
-                                    <img
-                                        src={zenMonogramLogoWebp}
-                                        alt="ZEN Vanguard monogram"
-                                        width={44}
-                                        height={44}
-                                        className="relative h-11 w-11 object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
-                                        fetchPriority="high"
-                                        loading="eager"
-                                        decoding="async"
-                                    />
-                                </picture>
-                            </div>
-                            <div className="min-w-0">
-                                <p className="font-display text-[1.55rem] font-semibold tracking-[0.04em] text-[#f6e2ac]">ZEN Vanguard</p>
-                                <p className="mt-1 text-[11px] uppercase tracking-[0.28em] text-zen-gold/70">AI Literacy Console</p>
-                                <p className="mt-3 max-w-[12rem] text-xs leading-6 text-slate-400">
-                                    The first verified AI literacy ecosystem in U.S. history.
-                                </p>
-                            </div>
-                        </div>
-                    </NavLink>
-
-                    <div className="relative mt-4 rounded-[1.6rem] border border-zen-gold/10 bg-zen-surface/60 p-4">
-                        <div className="flex items-center justify-between gap-3">
-                            <div>
-                                <p className="zen-micro-label">Program completion</p>
-                                <p className="mt-2 font-display text-3xl font-semibold text-[#f7e4b0]">{totalCompletion}%</p>
-                            </div>
-                            <div className="rounded-2xl border border-zen-gold/15 bg-zen-gold/[0.06] px-3 py-2 text-right">
-                                <p className="text-sm font-semibold text-zen-gold">{user?.totalPoints || 0} XP</p>
-                                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-zen-gold/60">Momentum</p>
-                            </div>
-                        </div>
-                        <div className="mt-4 h-2 rounded-full bg-white/[0.06]">
-                            <div
-                                className="h-full rounded-full bg-gradient-to-r from-zen-gold via-zen-gold-light to-brand-cyan"
-                                style={{ width: `${totalCompletion}%` }}
-                            />
-                        </div>
-                        <div className="mt-4 grid grid-cols-2 gap-2.5">
-                            <div className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-3 py-2">
-                                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-100/85">Network</p>
-                                <p className="mt-1 text-base font-semibold text-cyan-50">100%</p>
-                            </div>
-                            <div className="rounded-xl border border-emerald-300/20 bg-emerald-300/10 px-3 py-2">
-                                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/85">Integrity</p>
-                                <p className="mt-1 text-base font-semibold text-emerald-50">Secure</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-                    <nav className="space-y-8 px-4 py-5">
-                    <div className="space-y-2">
-                        <div className="flex items-center justify-between px-3">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">Workspace</p>
-                            <span className="rounded-full border border-zen-gold/10 bg-zen-gold/[0.04] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-zen-gold/50">
-                                Core
-                            </span>
-                        </div>
-
-                        {primaryLinks.map((link) => (
+                {/* Navigation links */}
+                <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-2 py-3 [scrollbar-width:none]">
+                    <p className="mb-1 px-2.5 text-[9px] font-bold uppercase tracking-[0.28em] text-slate-600">Workspace</p>
+                    {primaryLinks.map((link) => {
+                        const isActive = currentPath === link.to || currentPath.startsWith(link.to + '/');
+                        return (
                             <NavLink
                                 key={link.to}
                                 to={link.to}
                                 onClick={handleNavigate}
-                                className={({ isActive }) =>
-                                    `block rounded-[1.3rem] border px-4 py-3.5 transition ${
-                                        isActive
-                                            ? 'border-zen-gold/20 bg-zen-gold/[0.06] shadow-[inset_0_1px_0_rgba(201,168,76,0.08)]'
-                                            : 'border-transparent bg-white/[0.01] hover:border-zen-gold/10 hover:bg-zen-gold/[0.03]'
-                                    }`
-                                }
+                                className={`flex items-center gap-3 rounded-xl border px-2.5 py-2.5 transition ${
+                                    isActive
+                                        ? 'border-zen-gold/25 bg-zen-gold/[0.10] text-zen-gold'
+                                        : 'border-transparent text-slate-400 hover:border-zen-gold/12 hover:bg-zen-gold/[0.06] hover:text-slate-200'
+                                }`}
                             >
-                                <div className="flex items-start gap-3">
-                                    <span className="zen-glyph-frame text-[#f1d280]">
-                                        <ZenModuleGlyph name={link.icon} className="h-4 w-4" />
-                                    </span>
-                                    <div className="min-w-0">
-                                        <p className="text-sm font-bold text-white">{link.label}</p>
-                                        <p className="mt-1 text-xs leading-6 text-slate-500">{link.hint}</p>
+                                <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition ${
+                                    isActive ? 'bg-zen-gold/20 text-zen-gold' : 'bg-white/[0.04] text-slate-500'
+                                }`}>
+                                    <ZenModuleGlyph name={link.icon} className="h-3.5 w-3.5" />
+                                </span>
+                                <span className="text-[13px] font-medium leading-none">{link.label}</span>
+                            </NavLink>
+                        );
+                    })}
+
+                    <div className="mx-2.5 my-2 h-px bg-zen-gold/10" />
+
+                    <p className="mb-1 px-2.5 text-[9px] font-bold uppercase tracking-[0.28em] text-slate-600">Modules</p>
+                    {moduleInfo.map((module) => {
+                        const isActive = currentPath.startsWith(`/module/${module.id}`);
+                        const pct = moduleCompletion[module.id] ?? 0;
+                        return (
+                            <NavLink
+                                key={module.id}
+                                to={`/module/${module.id}`}
+                                onClick={handleNavigate}
+                                className={`flex items-center gap-3 rounded-xl border px-2.5 py-2.5 transition ${
+                                    isActive
+                                        ? 'border-zen-gold/25 bg-zen-gold/[0.10]'
+                                        : 'border-transparent hover:border-zen-gold/12 hover:bg-zen-gold/[0.06]'
+                                }`}
+                            >
+                                <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${module.color} shadow-sm`}>
+                                    <ZenModuleGlyph name={module.icon} className="h-3.5 w-3.5 text-zen-navy" />
+                                </span>
+                                <div className="min-w-0 flex-1">
+                                    <p className={`truncate text-[12px] font-semibold leading-tight ${isActive ? 'text-zen-gold' : 'text-slate-300'}`}>{module.title}</p>
+                                    <div className="mt-1 flex items-center gap-1.5">
+                                        <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.07]">
+                                            <div className={`h-full rounded-full bg-gradient-to-r ${module.color}`} style={{ width: `${pct}%` }} />
+                                        </div>
+                                        <span className="text-[9px] tabular-nums text-slate-600">{pct}%</span>
                                     </div>
                                 </div>
                             </NavLink>
-                        ))}
+                        );
+                    })}
 
-                        <NavLink
-                            to="/dashboard#certificates"
-                            onClick={handleNavigate}
-                            className="block rounded-[1.3rem] border border-transparent bg-white/[0.01] px-4 py-3.5 transition hover:border-zen-gold/10 hover:bg-zen-gold/[0.03]"
-                        >
-                            <div className="flex items-start gap-3">
-                                <span className="zen-glyph-frame text-[#f1d280]">
-                                    <ZenModuleGlyph name="certificate" className="h-4 w-4" />
-                                </span>
-                                <div>
-                                    <p className="text-sm font-bold text-white">Certificates</p>
-                                    <p className="mt-1 text-xs leading-6 text-slate-500">Review issued artifacts and achievements</p>
-                                </div>
-                            </div>
-                        </NavLink>
-                    </div>
+                    <div className="mx-2.5 my-2 h-px bg-zen-gold/10" />
 
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between px-3">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">Modules</p>
-                            <span className="rounded-full border border-zen-gold/15 bg-zen-gold/[0.06] px-2 py-1 text-[10px] font-semibold text-zen-gold/80">
-                                4 tracks
-                            </span>
-                        </div>
+                    {/* Settings */}
+                    <button
+                        onClick={() => { openSettings(); setIsMobileOpen(false); }}
+                        className="flex items-center gap-3 rounded-xl border border-transparent px-2.5 py-2.5 text-slate-400 transition hover:border-zen-gold/12 hover:bg-zen-gold/[0.06] hover:text-slate-200"
+                    >
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/[0.04] text-slate-500">
+                            <ZenModuleGlyph name="telemetry" className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-[13px] font-medium leading-none">Settings</span>
+                    </button>
+                </nav>
 
-                        {moduleInfo.map((module) => {
-                            const isActive = currentPath.startsWith(`/module/${module.id}`);
-
-                            return (
-                                <NavLink
-                                    key={module.id}
-                                    to={`/module/${module.id}`}
-                                    onClick={handleNavigate}
-                                    className={`block rounded-[1.65rem] border px-4 py-4 transition duration-300 ${
-                                        isActive
-                                            ? 'border-zen-gold/20 bg-zen-gold/[0.06] shadow-[0_16px_34px_rgba(0,0,0,0.2)]'
-                                            : 'border-white/[0.04] bg-white/[0.015] hover:-translate-y-0.5 hover:border-zen-gold/12 hover:bg-zen-gold/[0.03]'
-                                    }`}
-                                >
-                                    <div className="flex items-start gap-3">
-                                        <div className={`mt-0.5 flex h-11 w-11 items-center justify-center rounded-[1rem] bg-gradient-to-br ${module.color} text-sm font-black text-zen-navy shadow-[0_12px_26px_rgba(0,0,0,0.3)]`}>
-                                            <ZenModuleGlyph name={module.icon} className="h-5 w-5" />
-                                        </div>
-                                        <div className="min-w-0 flex-1">
-                                            <div className="flex items-center justify-between gap-3">
-                                                <p className="text-sm font-bold text-white">{module.title}</p>
-                                                <span className="text-[11px] font-semibold text-zen-gold/70">
-                                                    {moduleCompletion[module.id] ?? 0}%
-                                                </span>
-                                            </div>
-                                            <p className="mt-1 text-xs text-slate-500">{module.subtitle}</p>
-                                            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-                                                <div
-                                                    className={`h-full rounded-full bg-gradient-to-r ${module.color}`}
-                                                    style={{ width: `${moduleCompletion[module.id] ?? 0}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </NavLink>
-                            );
-                        })}
-                    </div>
-
-                    <div className="space-y-2">
-                        <div className="flex items-center justify-between px-3">
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">Support</p>
-                            <span className="rounded-full border border-white/[0.06] bg-white/[0.02] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                                Utility
-                            </span>
-                        </div>
-
-                        <button
-                            onClick={() => {
-                                openSettings();
-                                setIsMobileOpen(false);
-                            }}
-                            className="flex w-full items-center justify-between rounded-[1.3rem] border border-transparent bg-white/[0.01] px-4 py-3.5 text-left transition hover:border-zen-gold/10 hover:bg-zen-gold/[0.03]"
-                        >
-                            <div className="flex items-start gap-3">
-                                <span className="zen-glyph-frame text-[#f1d280]">
-                                    <ZenModuleGlyph name="telemetry" className="h-4 w-4" />
-                                </span>
-                                <div>
-                                    <p className="text-sm font-bold text-white">Theme Settings</p>
-                                    <p className="mt-1 text-xs leading-6 text-slate-500">Adjust shell appearance and viewing mode</p>
-                                </div>
-                            </div>
-                            <span className="rounded-full border border-zen-gold/10 bg-zen-gold/[0.04] px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-zen-gold/60">
-                                {isDark ? 'Dark' : mode}
-                            </span>
-                        </button>
-
-                        <NavLink
-                            to="/guide"
-                            onClick={handleNavigate}
-                            className="block rounded-[1.3rem] border border-transparent bg-white/[0.01] px-4 py-3.5 transition hover:border-zen-gold/10 hover:bg-zen-gold/[0.03]"
-                        >
-                            <div className="flex items-start gap-3">
-                                <span className="zen-glyph-frame text-[#f1d280]">
-                                    <ZenModuleGlyph name="resources" className="h-4 w-4" />
-                                </span>
-                                <div>
-                                    <p className="text-sm font-bold text-white">Deployment Help</p>
-                                    <p className="mt-1 text-xs leading-6 text-slate-500">Review Hugging Face and API setup guidance</p>
-                                </div>
-                            </div>
-                        </NavLink>
-                    </div>
-                    </nav>
-                </div>
-
-                <div className="border-t border-zen-gold/10 p-4 pb-5">
-                    <div className="rounded-[1.6rem] border border-zen-gold/10 bg-zen-surface/60 p-4">
-                        <div className="flex items-center gap-3">
+                {/* User footer */}
+                {user && (
+                    <div className="border-t border-zen-gold/10 px-2 py-3">
+                        <div className="flex items-center gap-2.5 rounded-xl px-2 py-2">
                             <img
-                                src={user?.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${user?.name || 'User'}`}
-                                alt={user?.name || 'User'}
-                                className="h-11 w-11 rounded-full bg-zen-surface ring-2 ring-zen-gold/15"
+                                src={user.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name || 'User'}`}
+                                alt={user.name || 'User'}
+                                className="h-8 w-8 shrink-0 rounded-full ring-2 ring-zen-gold/15"
                             />
                             <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-bold text-white">{user?.name || 'Learner'}</p>
-                                <p className="truncate text-xs text-zen-gold">{user?.totalPoints || 0} XP</p>
+                                <p className="truncate text-[12px] font-semibold text-white">{user.name || 'Learner'}</p>
+                                <p className="text-[10px] text-zen-gold">{user.totalPoints || 0} XP</p>
                             </div>
                             <button
                                 onClick={handleLogout}
-                                className="rounded-xl border border-white/[0.06] px-3 py-2 text-xs font-semibold text-slate-400 transition hover:border-rose-400/30 hover:bg-rose-500/10 hover:text-white"
+                                className="shrink-0 rounded-lg border border-white/[0.06] px-2 py-1 text-[10px] font-semibold text-slate-500 transition hover:border-rose-400/30 hover:text-rose-400"
                             >
-                                Logout
+                                Out
                             </button>
                         </div>
                     </div>
-                </div>
+                )}
             </aside>
         </>
     );
@@ -478,8 +358,8 @@ const GlobalSidebar: React.FC = () => {
                 </svg>
             </button>
 
-            {/* Desktop: show icon rail when collapsed, full sidebar when expanded */}
-            {isCollapsed ? iconRail : fullSidebar}
+            {/* Desktop: collapsed = icon rail, expanded = icon+label rail */}
+            {isCollapsed ? iconRail : expandedRail}
         </>
     );
 };

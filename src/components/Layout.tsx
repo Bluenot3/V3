@@ -51,8 +51,8 @@ const Layout: React.FC = () => {
     }, [pathname]);
 
     // Dynamic left margin based on sidebar state
-    // Collapsed = icon rail (64px = w-16), Expanded = full sidebar (288px = w-72)
-    const sidebarMargin = isCollapsed ? 'lg:ml-16' : 'lg:ml-72';
+    // Collapsed = icon rail (64px = w-16), Expanded = icon+label rail (208px = w-52)
+    const sidebarMargin = isCollapsed ? 'lg:ml-16' : 'lg:ml-52';
 
     const content = (
         <div className={`relative flex min-h-screen font-sans text-brand-text ${isOpsMode ? 'bg-[var(--ops-base)]' : 'bg-transparent'}`}>

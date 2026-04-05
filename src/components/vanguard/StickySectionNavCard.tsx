@@ -390,60 +390,65 @@ const StickySectionNavCard = <TSection extends NavSection>({
                     <div className="absolute right-0 top-0 h-20 w-24 bg-gradient-to-l from-cyan-100/50 to-transparent" />
                 </div>
 
-                {/* Module navigation strip */}
+                {/* ── Module Navigation Strip ─────────────────────── */}
                 {moduleNumber !== undefined && !isIconMode && (
-                    <div className="relative mb-3 flex items-center gap-1 rounded-[1.15rem] border border-white/20 bg-white/[0.06] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                        <button
-                            type="button"
-                            onClick={() => navigate(`/module/${moduleNumber - 1}`)}
-                            disabled={moduleNumber <= 1}
-                            title="Previous module"
-                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[0.85rem] border border-white/20 bg-white/[0.1] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
-                                <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </button>
-                        <div className="flex flex-1 gap-1">
-                            {[1, 2, 3, 4].map((n) => {
-                                const isCurrent = n === moduleNumber;
-                                const isPast = n < moduleNumber;
-                                const isNextUnlocked = completionPercent >= 100;
-                                const isLocked = n > moduleNumber && !isNextUnlocked;
-                                return (
-                                    <button
-                                        key={n}
-                                        type="button"
-                                        onClick={() => !isLocked && navigate(`/module/${n}`)}
-                                        disabled={isLocked}
-                                        title={isLocked ? `Complete Module ${n - 1} first` : `Go to Module ${n}`}
-                                        className={[
-                                            'flex flex-1 items-center justify-center rounded-[0.75rem] border py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] transition-all duration-200',
-                                            isCurrent
-                                                ? `border-white/30 bg-gradient-to-r ${accentClassName} text-white shadow-[0_8px_20px_rgba(0,0,0,0.25)]`
-                                                : isPast
-                                                    ? 'border-white/20 bg-white/[0.12] text-slate-200 hover:bg-white/[0.2] hover:text-white'
-                                                    : isNextUnlocked
-                                                        ? 'border-white/15 bg-white/[0.07] text-slate-400 hover:bg-white/[0.14] hover:text-slate-200'
-                                                        : 'cursor-not-allowed border-white/10 bg-white/[0.04] text-slate-600',
-                                        ].join(' ')}
-                                    >
-                                        M{n}
-                                    </button>
-                                );
-                            })}
+                    <div className="relative mb-3 space-y-1.5">
+                        {/* Label row */}
+                        <p className="px-1 text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">Navigate Modules</p>
+                        {/* Module chips row */}
+                        <div className="flex items-center gap-1.5 rounded-[1.15rem] border border-white/15 bg-white/[0.05] p-1.5">
+                            <button
+                                type="button"
+                                onClick={() => navigate(`/module/${moduleNumber - 1}`)}
+                                disabled={moduleNumber <= 1}
+                                title="Previous module"
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.08] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
+                            >
+                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                    <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
+                            <div className="flex flex-1 gap-1">
+                                {[1, 2, 3, 4].map((n) => {
+                                    const isCurrent = n === moduleNumber;
+                                    const isPast = n < moduleNumber;
+                                    const isNextUnlocked = completionPercent >= 100;
+                                    const isLocked = n > moduleNumber && !isNextUnlocked;
+                                    return (
+                                        <button
+                                            key={n}
+                                            type="button"
+                                            onClick={() => !isLocked && navigate(`/module/${n}`)}
+                                            disabled={isLocked}
+                                            title={isLocked ? `Complete Module ${n - 1} first` : `Go to Module ${n}`}
+                                            className={[
+                                                'flex flex-1 items-center justify-center rounded-[0.7rem] border py-2 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-200',
+                                                isCurrent
+                                                    ? `border-white/30 bg-gradient-to-r ${accentClassName} text-white shadow-[0_6px_16px_rgba(0,0,0,0.3)]`
+                                                    : isPast
+                                                        ? 'border-white/20 bg-white/[0.12] text-slate-200 hover:bg-white/[0.2] hover:text-white'
+                                                        : isNextUnlocked
+                                                            ? 'border-white/15 bg-white/[0.07] text-slate-400 hover:bg-white/[0.14] hover:text-slate-200'
+                                                            : 'cursor-not-allowed border-white/10 bg-white/[0.04] text-slate-600',
+                                            ].join(' ')}
+                                        >
+                                            M{n}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => navigate(`/module/${moduleNumber + 1}`)}
+                                disabled={moduleNumber >= 4 || completionPercent < 100}
+                                title={completionPercent < 100 ? 'Complete this module to unlock the next' : 'Next module'}
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.08] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
+                            >
+                                <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
+                                    <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
                         </div>
-                        <button
-                            type="button"
-                            onClick={() => navigate(`/module/${moduleNumber + 1}`)}
-                            disabled={moduleNumber >= 4 || completionPercent < 100}
-                            title={completionPercent < 100 ? 'Complete this module to unlock the next' : 'Next module'}
-                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[0.85rem] border border-white/20 bg-white/[0.1] text-slate-300 transition-all hover:bg-white/[0.18] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-                        >
-                            <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">
-                                <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </button>
                     </div>
                 )}
 
@@ -466,137 +471,149 @@ const StickySectionNavCard = <TSection extends NavSection>({
                     </div>
                 ) : (
                 <>
-                <div className="relative shrink-0 border-b border-white/20 pb-2.5">
-                    <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                                <p className="truncate text-[11px] font-semibold uppercase tracking-[0.32em] text-slate-300">{moduleLabel}</p>
-                                <span className="h-3.5 w-px bg-white/20" />
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                                    {Math.max(activeIndex + 1, 1)} / {allSections.length}
-                                </p>
-                            </div>
-                            {isExpanded ? (
-                                <p className="mt-1 text-[15px] font-semibold tracking-tight text-white">Section navigator</p>
-                            ) : (
-                                <p className="mt-1 truncate text-sm font-semibold tracking-tight text-slate-100">{activeTitle}</p>
-                            )}
-                        </div>
+                {/* ── Header block ─────────────────────────────────── */}
+                <div className="relative shrink-0 space-y-2.5 border-b border-white/[0.12] pb-3">
 
-                        <div className="flex items-center gap-2">
-                            <div className={`rounded-full bg-gradient-to-r ${accentClassName} px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-[0_14px_30px_rgba(15,23,42,0.12)]`}>
-                                {completionPercent}%
-                            </div>
-                            <button
-                                type="button"
-                                onClick={() => setIsUtilityExpanded((previous) => !previous)}
-                                aria-label={showUtilityPanel ? 'Collapse navigator tools' : 'Expand navigator tools'}
-                                title={showUtilityPanel ? 'Collapse navigator tools' : 'Expand navigator tools'}
-                                className={utilityButtonClassName}
-                            >
-                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className={`h-4 w-4 transition-transform duration-200 ${showUtilityPanel ? 'rotate-180' : ''}`}>
-                                    <path d="M5 7.5H15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                    <path d="M7.5 10H12.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                    <path d="M9 12.5H11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                </svg>
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setViewMode('icon')}
-                                aria-label="Minimize navigator to icon"
-                                title="Minimize navigator to icon"
-                                className={utilityButtonClassName}
-                            >
-                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                    <path d="M12.5 5.5L8 10L12.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                            <button
-                                type="button"
-                                onClick={toggleExpandedMode}
-                                aria-label={isExpanded ? 'Collapse section navigator' : 'Expand section navigator'}
-                                title={isExpanded ? 'Collapse section navigator' : 'Expand section navigator'}
-                                className={utilityButtonClassName}
-                            >
-                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                                    <path d="M6 8L10 12L14 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
+                    {/* Row 1: Module label + section counter + control buttons */}
+                    <div className="flex items-center gap-2">
+                        <div className="flex min-w-0 flex-1 items-center gap-1.5">
+                            <p className="shrink-0 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-300">
+                                {moduleLabel}
+                            </p>
+                            <span className="h-3 w-px shrink-0 bg-white/20" />
+                            <p className="text-[10px] font-semibold tabular-nums text-slate-400">
+                                {Math.max(activeIndex + 1, 1)}&thinsp;/&thinsp;{allSections.length}
+                            </p>
+                        </div>
+                        {/* Control buttons — each in its own space */}
+                        <button
+                            type="button"
+                            onClick={() => setIsUtilityExpanded((previous) => !previous)}
+                            aria-label={showUtilityPanel ? 'Collapse tools' : 'Expand tools'}
+                            title={showUtilityPanel ? 'Collapse tools' : 'Expand tools'}
+                            className={`${utilityButtonClassName} ${showUtilityPanel ? 'border-white/40 bg-white/[0.16] text-white' : ''}`}
+                        >
+                            {/* Filter / funnel icon */}
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M3 5h14M6 10h8M9 15h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                            </svg>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={toggleExpandedMode}
+                            aria-label={isExpanded ? 'Collapse list' : 'Expand list'}
+                            title={isExpanded ? 'Collapse list' : 'Expand list'}
+                            className={utilityButtonClassName}
+                        >
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className={`h-3.5 w-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                                <path d="M6 8L10 12L14 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setViewMode('icon')}
+                            aria-label="Minimize to icon"
+                            title="Minimize to icon"
+                            className={utilityButtonClassName}
+                        >
+                            {/* Minus / minimize icon */}
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M5 10h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Row 2: Title + completion % */}
+                    <div className="flex items-center justify-between gap-2">
+                        {isExpanded ? (
+                            <p className="text-sm font-semibold tracking-tight text-white">Section Navigator</p>
+                        ) : (
+                            <p className="truncate text-sm font-semibold tracking-tight text-slate-100">{activeTitle}</p>
+                        )}
+                        <div className={`shrink-0 rounded-full bg-gradient-to-r ${accentClassName} px-2.5 py-0.5 text-[10px] font-bold tabular-nums text-white`}>
+                            {completionPercent}%
                         </div>
                     </div>
 
-                    <div className="mt-2.5 h-1.5 rounded-full bg-white/10 shadow-[inset_0_1px_2px_rgba(15,23,42,0.36)]">
+                    {/* Row 3: Progress bar */}
+                    <div className="h-1.5 rounded-full bg-white/10 shadow-[inset_0_1px_2px_rgba(15,23,42,0.36)]">
                         <div
                             className={`relative h-full rounded-full bg-gradient-to-r ${accentClassName} transition-[width] duration-300`}
                             style={{ width: `${completionPercent}%` }}
                         >
-                            <span className="absolute inset-y-0 right-0 w-8 rounded-full bg-white/50 blur-sm" />
+                            <span className="absolute inset-y-0 right-0 w-6 rounded-full bg-white/40 blur-sm" />
                         </div>
                     </div>
 
-                    <div className="mt-2.5 grid grid-cols-5 gap-1">
+                    {/* Row 4: Quick-nav buttons — prev | top | current | bottom | next */}
+                    <div className="flex items-center gap-1">
+                        {/* Prev section */}
                         <button
                             type="button"
                             onClick={() => handleNavigate(previousSectionId)}
                             disabled={!previousSectionId}
                             aria-label="Previous section"
                             title="Previous section"
-                            className={quickButtonClassName}
+                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M11.5 5.5L7 10L11.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <span className="sr-only">Previous section</span>
                         </button>
+                        {/* Jump to top */}
                         <button
                             type="button"
                             onClick={() => handleNavigate(allSections[0]?.id ?? 'overview')}
                             aria-label="Jump to top"
                             title="Jump to top"
-                            className={quickButtonClassName}
+                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white"
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                <path d="M10 14.5V5.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                <path d="M6.5 9L10 5.5L13.5 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M10 14V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                <path d="M7 9l3-3 3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <span className="sr-only">Jump to top</span>
                         </button>
+                        {/* Jump to current */}
                         <button
                             type="button"
                             onClick={() => handleNavigate(resolvedActiveSection)}
                             aria-label="Jump to current section"
                             title="Jump to current section"
-                            className={quickButtonClassName}
+                            className={`flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border bg-gradient-to-r ${accentClassName} border-white/20 text-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all hover:opacity-90`}
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                <circle cx="10" cy="10" r="5" stroke="currentColor" strokeWidth="1.8" />
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <circle cx="10" cy="10" r="4.5" stroke="currentColor" strokeWidth="2" />
                                 <circle cx="10" cy="10" r="1.8" fill="currentColor" />
                             </svg>
                             <span className="sr-only">Jump to current section</span>
                         </button>
+                        {/* Jump to bottom */}
                         <button
                             type="button"
                             onClick={() => handleNavigate(lastSectionId)}
                             aria-label="Jump to bottom"
                             title="Jump to bottom"
-                            className={quickButtonClassName}
+                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white"
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                <path d="M10 5.5V14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                <path d="M6.5 11L10 14.5L13.5 11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M10 6v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                <path d="M7 11l3 3 3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <span className="sr-only">Jump to bottom</span>
                         </button>
+                        {/* Next section */}
                         <button
                             type="button"
                             onClick={() => handleNavigate(nextSectionId)}
                             disabled={!nextSectionId}
                             aria-label="Next section"
                             title="Next section"
-                            className={quickButtonClassName}
+                            className="flex h-8 flex-1 items-center justify-center rounded-[0.8rem] border border-white/20 bg-white/[0.06] text-slate-300 transition-all hover:border-white/35 hover:bg-white/[0.12] hover:text-white disabled:cursor-not-allowed disabled:opacity-25"
                         >
-                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-4 w-4">
-                                <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="h-3.5 w-3.5">
+                                <path d="M8.5 5.5L13 10L8.5 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <span className="sr-only">Next section</span>
                         </button>

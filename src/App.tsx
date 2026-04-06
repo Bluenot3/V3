@@ -1,9 +1,12 @@
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAdmin } from './contexts/AdminContext';
+import { useAuth } from './hooks/useAuth';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 
+const LoginPage = React.lazy(() => import('./modules/module1/components/auth/LoginPage'));
+const ResetPasswordPage = React.lazy(() => import('./pages/ResetPasswordPage'));
 const Module1Page = React.lazy(() => import('./pages/Module1Page'));
 const Module2Page = React.lazy(() => import('./pages/Module2Page'));
 const Module3Page = React.lazy(() => import('./pages/Module3Page'));
@@ -63,10 +66,40 @@ const AdminProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children
     return <>{children}</>;
 };
 
+// Redirects unauthenticated users to /login; shows loader while session is resolving
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const { isAuthenticated, loading } = useAuth();
+
+    if (loading) {
+        return <PageLoader />;
+    }
+
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
+    }
+
+    return <>{children}</>;
+};
+
 const App: React.FC = () => {
     return (
         <Routes>
-            <Route path="/login" element={<Navigate to="/hub" replace />} />
+            <Route
+                path="/login"
+                element={
+                    <Suspense fallback={<PageLoader />}>
+                        <LoginPage />
+                    </Suspense>
+                }
+            />
+            <Route
+                path="/reset-password"
+                element={
+                    <Suspense fallback={<PageLoader />}>
+                        <ResetPasswordPage />
+                    </Suspense>
+                }
+            />
             <Route path="/paywall" element={<Navigate to="/hub" replace />} />
             <Route path="/billing/success" element={<Navigate to="/hub" replace />} />
 
@@ -96,9 +129,15 @@ const App: React.FC = () => {
                 <Route path="settings" element={<AdminSettings />} />
             </Route>
 
-            <Route path="/" element={<Layout />}>
+            <Route
+                path="/"
+                element={
+                    <ProtectedRoute>
+                        <Layout />
+                    </ProtectedRoute>
+                }
+            >
                 <Route index element={<Navigate to="/hub" replace />} />
-                {/* Hub and programs now live inside Layout so the sidebar is always present */}
                 <Route path="hub" element={<Suspense fallback={<PageLoader />}><ProgramHubPage /></Suspense>} />
                 <Route path="programs/:programId" element={<Suspense fallback={<PageLoader />}><ProgramDashboardPage /></Suspense>} />
                 <Route path="dashboard" element={<Dashboard />} />

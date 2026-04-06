@@ -14,7 +14,18 @@ import './styles/zen-ops.css';
 
 import { FriendlyErrorBoundary } from './components/FriendlyErrorBoundary';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')!;
+
+// Reuse the existing root across HMR updates instead of calling createRoot() again —
+// calling it twice on the same element mounts two React trees (duplicate UI + removeChild errors).
+type RootElement = HTMLElement & { __reactRoot?: ReactDOM.Root };
+const rootEl = rootElement as RootElement;
+if (!rootEl.__reactRoot) {
+    rootEl.__reactRoot = ReactDOM.createRoot(rootEl);
+}
+const root = rootEl.__reactRoot;
+
+root.render(
     <BrowserRouter>
         <FriendlyErrorBoundary>
             <ThemeProvider>

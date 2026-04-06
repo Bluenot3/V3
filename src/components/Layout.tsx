@@ -18,6 +18,8 @@ const Layout: React.FC = () => {
     const { isCollapsed } = useSidebar();
 
     const isModulePage = pathname.startsWith('/module/');
+    // Hub and program-selection pages are full-width — no sidebar until user enters a course
+    const isHubPage = pathname === '/hub' || pathname === '/' || pathname.startsWith('/programs/');
 
     React.useLayoutEffect(() => {
         if (window.location.hash) {
@@ -50,16 +52,16 @@ const Layout: React.FC = () => {
         };
     }, [pathname]);
 
-    // Dynamic left margin based on sidebar state
+    // Dynamic left margin based on sidebar state — no margin on hub/programs pages (no sidebar there)
     // Collapsed = icon rail (64px = w-16), Expanded = icon+label rail (208px = w-52)
-    const sidebarMargin = isCollapsed ? 'lg:ml-16' : 'lg:ml-52';
+    const sidebarMargin = isHubPage ? '' : isCollapsed ? 'lg:ml-16' : 'lg:ml-52';
 
     const content = (
         <div className={`relative flex min-h-screen font-sans text-brand-text ${isOpsMode ? 'bg-[var(--ops-base)]' : 'bg-transparent'}`}>
             {!isOpsMode && <AnimatedBackground />}
             <LuxuryClickEffects />
 
-            <GlobalSidebar />
+            {!isHubPage && <GlobalSidebar />}
 
             <div className={`relative z-10 flex min-h-screen flex-1 flex-col transition-all duration-300 ${sidebarMargin}`}>
                 {/* Hide the global header on module pages — each module has its own header */}

@@ -8,7 +8,7 @@ interface AuthContextType {
     loading: boolean;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<void>;
-    signup: (email: string, password: string) => Promise<void>;
+    signup: (email: string, password: string) => Promise<{ requiresConfirmation: boolean }>;
     logout: () => Promise<void>;
     updateModuleProgress: (moduleId: 1 | 2 | 3 | 4, sectionId: string, type: 'section' | 'interactive') => void;
     addPoints: (...args: [1 | 2 | 3 | 4, number] | [number]) => void;
@@ -26,7 +26,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const PREVIEW_USER_STORAGE_KEY = 'zenPreviewUser';
-const PREVIEW_ACCESS_ENABLED = true;
+const PREVIEW_ACCESS_ENABLED = false;
 
 const createDefaultModuleProgress = (): ModuleProgress => ({
     completedSections: [],
@@ -162,10 +162,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const nextUser = updater(baseUser);
             const userId = dal.auth.getUserId();
 
-            if (nextUser) {
-                persistPreviewUser(nextUser);
-            }
-
             if (nextUser && userId) {
                 void dal.user.updateUser(userId, nextUser).catch(console.error);
             }
@@ -174,14 +170,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
     }, []);
 
-    const login = useCallback(async () => {
-        setUser(readPreviewUser());
-        setLoading(false);
+    const login = useCallback(async (email: string, password: string) => {
+        try {
+            await dal.auth.login(email, password);
+            // Auth state change will be handled by onAuthStateChanged listener
+        } catch (error) {
+            throw error;
+        }
     }, []);
 
-    const signup = useCallback(async () => {
-        setUser(readPreviewUser());
-        setLoading(false);
+    const signup = useCallback(async (email: string, password: string) => {
+        return await dal.auth.signup(email, password);
     }, []);
 
     const updateModuleProgress = useCallback((
@@ -354,12 +353,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         try {
             await dal.auth.logout();
         } catch (error) {
-            console.warn('DAL logout failed during preview reset.', error);
+            console.warn('Logout failed.', error);
         } finally {
-            const previewUser = readPreviewUser();
             setCurrentSession(null);
-            setUser(previewUser);
-            persistPreviewUser(previewUser);
+            setUser(null);
         }
     }, [currentSession, endSession]);
 
@@ -401,7 +398,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };

@@ -479,6 +479,15 @@ app.get('/api/health', (_req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+// Serve frontend static files
+const distPath = path.join(process.cwd(), 'dist');
+app.use(express.static(distPath));
+
+// Fallback for React Router (must be the last route)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+});
+
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`ZEN Vanguard API server listening on http://localhost:${PORT}`);
 });

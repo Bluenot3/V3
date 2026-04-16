@@ -29,30 +29,6 @@ const isPart2Start = (section: Section): boolean => {
 const MainContent: React.FC<MainContentProps> = ({ sections, sectionRefs, visibleSections }) => {
     const internalRefs = useRef<Record<string, HTMLElement | null>>({});
     const refs = sectionRefs ?? internalRefs;
-    const sectionWrapperRefs = useRef<Map<string, HTMLDivElement>>(new Map());
-
-    // Scroll-triggered reveal via IntersectionObserver
-    useEffect(() => {
-        const entries: HTMLElement[] = [];
-        sectionWrapperRefs.current.forEach((el) => entries.push(el));
-
-        const observer = new IntersectionObserver(
-            (observed) => {
-                observed.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        (entry.target as HTMLElement).style.opacity = '1';
-                        (entry.target as HTMLElement).style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.06, rootMargin: '0px 0px -40px 0px' },
-        );
-
-        entries.forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
-    }, [sections]);
-
     let part2Inserted = false;
 
     const renderSection = (section: Section, level: number = 0): React.ReactNode => {
@@ -77,10 +53,7 @@ const MainContent: React.FC<MainContentProps> = ({ sections, sectionRefs, visibl
                     ref={(el) => { refs.current[section.id] = el; }}
                     className="mb-14 scroll-mt-28"
                 >
-                    <div
-                        ref={(el) => { if (el) sectionWrapperRefs.current.set(section.id, el); }}
-                        style={{ opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1)' }}
-                    >
+                    <div className="relative">
                         <div className="vanguard-section-card glass-card mb-0 overflow-hidden border border-white/10 bg-[linear-gradient(160deg,rgba(7,14,30,0.95)_0%,rgba(12,20,39,0.9)_48%,rgba(9,16,33,0.96)_100%)] p-6 shadow-[0_24px_70px_rgba(2,6,23,0.42)] backdrop-blur-xl md:p-8">
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/60 to-transparent" />
                             {level === 0 && (

@@ -60,7 +60,7 @@ const Tooltip: React.FC<{ label: string; children: React.ReactNode }> = ({ label
 
 const GlobalSidebar: React.FC = () => {
     const { user, logout, getModuleProgress } = useAuth();
-    const { isDark, mode, openSettings } = useTheme();
+    const { openSettings } = useTheme();
     const { isCollapsed, toggle } = useSidebar();
     const location = useLocation();
     const navigate = useNavigate();
@@ -76,10 +76,6 @@ const GlobalSidebar: React.FC = () => {
             return accumulator;
         }, {});
     }, [getModuleProgress, user]);
-
-    const totalCompletion = Math.round(
-        Object.values(moduleCompletion).reduce((sum, value) => sum + value, 0) / moduleInfo.length,
-    );
 
     const handleNavigate = () => {
         setIsMobileOpen(false);
@@ -153,7 +149,7 @@ const GlobalSidebar: React.FC = () => {
                     const isActive = currentPath.startsWith(`/module/${module.id}`);
                     const pct = moduleCompletion[module.id] ?? 0;
                     return (
-                        <Tooltip key={module.id} label={`${module.title} — ${module.subtitle} (${pct}%)`}>
+                        <Tooltip key={module.id} label={`${module.title} - ${module.subtitle} (${pct}%)`}>
                             <NavLink
                                 to={`/module/${module.id}`}
                                 onClick={handleNavigate}

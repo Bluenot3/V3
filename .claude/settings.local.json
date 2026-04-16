@@ -14,7 +14,10 @@
       "Bash(node -e \"const p = require\\(''/c/Users/AlexT/OneDrive/Desktop/VV33/V3-main/node_modules/@google/genai/package.json''\\); console.log\\(''main:'', p.main\\); console.log\\(''module:'', p.module\\); console.log\\(''exports keys:'', p.exports ? Object.keys\\(p.exports\\).slice\\(0,5\\) : ''none''\\)\")",
       "Bash(node -e \"const p = require\\(''C:\\\\\\\\Users\\\\\\\\AlexT\\\\\\\\OneDrive\\\\\\\\Desktop\\\\\\\\VV33\\\\\\\\V3-main\\\\\\\\node_modules\\\\\\\\@google\\\\\\\\genai\\\\\\\\package.json''\\); console.log\\(''main:'', p.main\\); console.log\\(''module:'', p.module\\); console.log\\(''exports:'', JSON.stringify\\(p.exports\\).slice\\(0,200\\)\\)\")",
       "mcp__Claude_Preview__preview_start",
-      "Bash(find C:/Users/AlexT/OneDrive/Desktop/VV33/V3-main -name *.png -o -name *.webp -o -name *.avif)"
+      "Bash(find C:/Users/AlexT/OneDrive/Desktop/VV33/V3-main -name *.png -o -name *.webp -o -name *.avif)",
+      "Bash(xargs grep:*)",
+      "mcp__061bf3ea-2f92-4284-9af5-3b341e177ff8__restore_project",
+      "mcp__061bf3ea-2f92-4284-9af5-3b341e177ff8__apply_migration"
     ]
   }
 }

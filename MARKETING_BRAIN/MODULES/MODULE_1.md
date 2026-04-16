@@ -36,18 +36,18 @@ This module answers the question: **"What is AI, really?"**
 ### Systems Understanding
 | System | Description |
 |--------|-------------|
-| **ZEN OS Operator Mode** | Enterprise-grade dark mode interface with glassmorphic data visualization |
+| **Vanguard Platform** | Enterprise-grade dark mode interface with glassmorphic data visualization |
 | **API Key Authentication** | How access to AI models is controlled |
 | **Inference vs Training** | The difference between using and teaching AI |
 | **Energy & Compute Costs** | Environmental footprint of AI operations |
 
-### Interactive Simulators (ZEN OS)
+### Interactive Simulators (Vanguard Built-in)
 | Lab | Capability |
 |-----|------------|
 | **Neural Network Playground** | Visually manipulate nodes, layers, and weights in real-time |
 | **Adversarial Attack Simulator** | Practice prompt injection and defense strategies |
-| **Algorithm Visualizer** | Watch gradient descent and backpropagation happen live |
-| **Ethics Tracker** | Monitor bias accumulation in training datasets |
+| **Loss Landscape Navigator** | Watch gradient descent and error minimization happen live |
+| **Ethical Bias Mirror** | Monitor bias accumulation in generative outputs |
 
 ---
 
@@ -136,33 +136,33 @@ This module answers the question: **"What is AI, really?"**
 
 ### 1.1 Understanding the Machine Mind
 *   **Concept:** **Neural Networks are Plinko Boards.** Data falls in, hits weights (pegs), and lands in an output bucket.
-*   **Mini-App:** **"The Hot-Dog Detector."** Use *Teachable Machine* to train a vision model on 5 hot dogs and 5 not-hot-dogs.
+*   **Mini-App:** **"ParameterUniverseExplorer."** Visually see how weights and neurons connect to form decisions.
 *   **Sanity Check:** "Did you include varied backgrounds? If all hot dogs are on white plates, it might learn 'white plate' instead of 'hot dog'."
 *   **The Bridge:** "Now that we see pixels, how do we see words?"
 
 ### 1.2 How Machines Learn Predictions
 *   **Concept:** **The Casino of Language.** The AI bets on the next word.
-*   **Mini-App:** **"The Autocomplete Game."** Use OpenAI Playground (Temp=0) to predict the next word of "The quick brown fox...".
+*   **Mini-App:** **"SimplePredictiveModel."** See probabilities for token-by-token generation in real-time.
 *   **The Bridge:** "If it's just guessing, can it guess something evil?"
 
 ### 1.3 Ethics: Programming Morality
 *   **Concept:** **The Mirror Problem.** AI reflects the internet's bias.
-*   **Mini-App:** **"The Bias Hunter."** Generate "A Doctor" in an image generator. Count how many are male vs female.
+*   **Mini-App:** **"EthicalBiasMirror."** See how training data creates stereotypical and dangerous outputs.
 *   **The Bridge:** "Where did it learn that bias? The data."
 
 ### 1.4 Data as Fuel
 *   **Concept:** **The Library vs. The Textbook.** Pre-training (Library) vs. Fine-tuning (Textbook).
-*   **Mini-App:** **"The Knowledge Graph."** Upload a PDF about "Underwater Basket Weaving" and see RAG extract unique terms.
+*   **Mini-App:** **"SemanticSearchLab."** Upload text and see how chunking and retrieval actually extracts relevance.
 *   **The Bridge:** "We have data, but how do we protect it?"
 
 ### 1.5 Safety & Security
 *   **Concept:** **The Hypnotist.** Jailbreaking isn't hacking code; it's hacking *meaning*.
-*   **Mini-App:** **"Gandalf."** Try to trick the AI into revealing a password.
+*   **Mini-App:** **"AdversarialAttackSimulator."** Try to trick the AI into revealing a system prompt or secret.
 *   **The Bridge:** "It's safe, but does it remember me?"
 
 ### 1.6 Memory: The Sliding Window
 *   **Concept:** **The Conveyor Belt.** Tokens fall off the edge as new ones arrive.
-*   **Mini-App:** **"The Goldfish Test."** Feed it a secret word, then 4000 words of junk, then ask for the secret word.
+*   **Mini-App:** **"MemoryDecayLab."** Feed it context, watch it slide off the window, and see when hallucination begins.
 *   **The Bridge:** "How does it actually process that text?"
 
 ### 1.7 Inside the Black Box
@@ -172,12 +172,12 @@ This module answers the question: **"What is AI, really?"**
 
 ### 1.8 Project: Real-World AI Application
 *   **Concept:** **The Wrapper.** AI is the engine; you build the car around it.
-*   **Mini-App:** **"The Email Polisher."** Input: Rude email. Output: Professional email.
+*   **Mini-App:** **"PromptMutationStudio."** Start with an idea, watch the AI build out creative wrappers around it organically.
 *   **The Bridge:** "It works, but is it expensive?"
 
 ### 1.9 The Cost & Risks
 *   **Concept:** **The Electric Bill.** Intelligence costs energy.
-*   **Mini-App:** **"The Carbon Calculator."** Estimate the CO2 of your Email Polisher.
+*   **Mini-App:** **"EnergyCarbonTracker."** Estimate the Compute and CO2 impact of generating outputs continuously.
 *   **The Bridge:** "We understand the machine. Now let's reflect."
 
 ### 1.10 Reflection
@@ -206,3 +206,4 @@ By the end of Module 1, learners can:
 ---
 
 > **"Module 1 is where curiosity becomes competency. You stop asking 'What can AI do?' and start asking 'How does AI think?'"**
+

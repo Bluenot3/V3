@@ -293,5 +293,74 @@ export const dal = {
                 }
             }
         },
+
+        /**
+         * Admin: Load all students' profiles, module progress, and session history.
+         * Requires the current user to be authenticated as an admin email (see RLS policies).
+         */
+        async getAllStudents(): Promise<import('../types').Student[]> {
+            const [profilesResult, progressResult, sessionsResult] = await Promise.all([
+                supabase.from('user_profiles').select('*').order('created_at', { ascending: false }),
+                supabase.from('module_progress').select('*'),
+                supabase.from('session_history').select('*').order('created_at', { ascending: false }),
+            ]);
+
+            const profiles = profilesResult.data ?? [];
+            const allProgress = progressResult.data ?? [];
+            const allSessions = sessionsResult.data ?? [];
+
+            const now = Date.now();
+            const twoDaysAgo = now - 48 * 60 * 60 * 1000;
+            const oneDayAgo = now - 24 * 60 * 60 * 1000;
+
+            return profiles.map((profile) => {
+                const userId = profile.id as string;
+                const userProgress = allProgress.filter((p) => p.user_id === userId);
+                const userSessions = allSessions.filter((s) => s.user_id === userId);
+
+                const moduleProgress: import('../types').Student['moduleProgress'] = {};
+                for (const row of userProgress) {
+                    const moduleId = row.module_id as number;
+                    moduleProgress[moduleId] = rowToModuleProgress(row);
+                }
+                // Fill in missing modules with defaults
+                for (const mId of [1, 2, 3, 4]) {
+                    if (!moduleProgress[mId]) moduleProgress[mId] = createDefaultModuleProgress();
+                }
+
+                const sessionHistory: import('../types').SessionRecord[] = userSessions.map((row) => ({
+                    startedAt: row.started_at as string,
+                    endedAt: row.ended_at as string,
+                    moduleId: row.module_id as number,
+                    sectionsViewed: (row.sections_viewed as string[]) ?? [],
+                }));
+
+                // Determine status
+                const latestSession = userSessions[0];
+                const lastActiveTime = latestSession
+                    ? new Date(latestSession.created_at as string).getTime()
+                    : new Date(profile.created_at as string).getTime();
+
+                let status: 'active' | 'inactive' | 'at-risk' = 'inactive';
+                if (lastActiveTime > oneDayAgo) status = 'active';
+                else if (lastActiveTime < twoDaysAgo) status = 'at-risk';
+
+                return {
+                    id: userId,
+                    email: profile.email as string,
+                    name: profile.name as string,
+                    avatar: profile.picture as string,
+                    enrolledAt: profile.created_at as string,
+                    lastActive: latestSession
+                        ? (latestSession.created_at as string)
+                        : (profile.created_at as string),
+                    totalPoints: profile.total_points as number,
+                    moduleProgress,
+                    assignments: [],
+                    status,
+                    sessionHistory,
+                };
+            });
+        },
     },
 };

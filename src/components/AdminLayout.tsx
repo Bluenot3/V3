@@ -14,6 +14,7 @@ const AdminLayout: React.FC = () => {
     const navItems = [
         { path: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
         { path: '/admin/students', label: 'Students', icon: 'people' },
+        { path: '/admin/activity', label: 'Activity Log', icon: 'activity' },
         { path: '/admin/messages', label: 'Messages', icon: 'mail' },
         { path: '/admin/analytics', label: 'Analytics', icon: 'chart' },
         { path: '/admin/settings', label: 'Settings', icon: 'settings' },
@@ -28,6 +29,11 @@ const AdminLayout: React.FC = () => {
         people: (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>
+        ),
+        activity: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
             </svg>
         ),
         mail: (
@@ -54,22 +60,22 @@ const AdminLayout: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-900 flex">
+        <div className="min-h-screen bg-zen-navy flex">
             {/* Sidebar */}
-            <aside className={`${sidebarCollapsed ? 'w-20' : 'w-72'} bg-slate-800/50 backdrop-blur-xl border-r border-slate-700/50 flex flex-col transition-all duration-300 relative`}>
-                {/* Background effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/5 to-transparent pointer-events-none" />
+            <aside className={`${sidebarCollapsed ? 'w-20' : 'w-72'} bg-[#080E1E]/90 backdrop-blur-xl border-r border-zen-gold/10 flex flex-col transition-all duration-300 relative flex-shrink-0`}>
+                {/* Gold accent gradient */}
+                <div className="absolute inset-0 bg-gradient-to-b from-zen-gold/5 via-transparent to-transparent pointer-events-none" />
 
                 {/* Header */}
-                <div className="p-6 border-b border-slate-700/50 relative">
+                <div className="p-5 border-b border-zen-gold/10 relative">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-purple-600 flex items-center justify-center shadow-lg shadow-brand-primary/20">
-                            <span className="text-white text-lg font-black">Z</span>
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zen-gold to-amber-600 flex items-center justify-center shadow-lg shadow-zen-gold/30 flex-shrink-0">
+                            <span className="text-zen-navy text-lg font-black">Z</span>
                         </div>
                         {!sidebarCollapsed && (
-                            <div className="animate-fade-in">
-                                <h1 className="text-white font-bold text-lg">ZEN Admin</h1>
-                                <p className="text-slate-500 text-xs">Command Center</p>
+                            <div className="animate-fade-in min-w-0">
+                                <h1 className="text-white font-black text-base tracking-wide">ZEN Admin</h1>
+                                <p className="text-zen-gold/50 text-xs tracking-widest uppercase">Command Center</p>
                             </div>
                         )}
                     </div>
@@ -77,7 +83,7 @@ const AdminLayout: React.FC = () => {
                     {/* Collapse button */}
                     <button
                         onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                        className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-slate-700 border border-slate-600 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-600 transition-colors"
+                        className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[#0D1428] border border-zen-gold/20 rounded-full flex items-center justify-center text-slate-400 hover:text-zen-gold transition-colors"
                     >
                         <svg className={`w-3 h-3 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -87,45 +93,46 @@ const AdminLayout: React.FC = () => {
 
                 {/* Quick Stats */}
                 {!sidebarCollapsed && (
-                    <div className="p-4 border-b border-slate-700/50 animate-fade-in">
+                    <div className="p-4 border-b border-zen-gold/10 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="bg-slate-900/50 rounded-lg p-3 border border-slate-700/30">
-                                <p className="text-xs text-slate-500">Students</p>
-                                <p className="text-lg font-bold text-white">{stats.totalStudents}</p>
+                            <div className="bg-white/3 rounded-xl p-3 border border-zen-gold/10">
+                                <p className="text-xs text-slate-500 tracking-wider">Students</p>
+                                <p className="text-xl font-black text-white">{stats.totalStudents}</p>
                             </div>
-                            <div className="bg-slate-900/50 rounded-lg p-3 border border-slate-700/30">
-                                <p className="text-xs text-slate-500">Active</p>
-                                <p className="text-lg font-bold text-green-400">{stats.activeToday}</p>
+                            <div className="bg-white/3 rounded-xl p-3 border border-white/5">
+                                <p className="text-xs text-slate-500 tracking-wider">Active</p>
+                                <p className="text-xl font-black text-green-400">{stats.activeToday}</p>
                             </div>
                         </div>
                     </div>
                 )}
 
                 {/* Navigation */}
-                <nav className="flex-1 p-4 space-y-1 relative">
+                <nav className="flex-1 p-3 space-y-0.5 relative">
                     {navItems.map(item => (
                         <NavLink
                             key={item.path}
                             to={item.path}
                             end={item.end}
                             className={({ isActive }) => `
-                                flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative
+                                flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 group relative
                                 ${isActive
-                                    ? 'bg-brand-primary/20 text-brand-primary border border-brand-primary/30'
-                                    : 'text-slate-400 hover:text-white hover:bg-slate-700/50 border border-transparent'
+                                    ? 'bg-zen-gold/15 text-zen-gold border border-zen-gold/25'
+                                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                                 }
+                                ${sidebarCollapsed ? 'justify-center' : ''}
                             `}
                         >
                             {({ isActive }) => (
                                 <>
-                                    <span className={`transition-colors ${isActive ? 'text-brand-primary' : 'group-hover:text-white'}`}>
+                                    <span className={`transition-colors flex-shrink-0 ${isActive ? 'text-zen-gold' : 'group-hover:text-white'}`}>
                                         {icons[item.icon]}
                                     </span>
                                     {!sidebarCollapsed && (
-                                        <span className="font-medium">{item.label}</span>
+                                        <span className="font-medium text-sm">{item.label}</span>
                                     )}
                                     {isActive && (
-                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-brand-primary rounded-r-full" />
+                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-zen-gold rounded-r-full" />
                                     )}
                                 </>
                             )}
@@ -133,22 +140,31 @@ const AdminLayout: React.FC = () => {
                     ))}
                 </nav>
 
+                {/* Points display */}
+                {!sidebarCollapsed && (
+                    <div className="mx-3 mb-3 p-3 bg-gradient-to-r from-zen-gold/10 to-transparent rounded-xl border border-zen-gold/15">
+                        <p className="text-xs text-zen-gold/60 tracking-widest uppercase mb-1">Total Points</p>
+                        <p className="text-xl font-black text-zen-gold">{stats.totalPoints.toLocaleString()}</p>
+                        <p className="text-xs text-slate-600 mt-0.5">{stats.totalSectionsCompleted} sections · {stats.totalInteractivesCompleted} interactives</p>
+                    </div>
+                )}
+
                 {/* Footer */}
-                <div className="p-4 border-t border-slate-700/50">
+                <div className="p-3 border-t border-zen-gold/10">
                     <button
                         onClick={handleLogout}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all w-full ${sidebarCollapsed ? 'justify-center' : ''}`}
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all w-full ${sidebarCollapsed ? 'justify-center' : ''}`}
                     >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
-                        {!sidebarCollapsed && <span className="font-medium">Sign Out</span>}
+                        {!sidebarCollapsed && <span className="font-medium text-sm">Sign Out</span>}
                     </button>
                 </div>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-auto">
+            <main className="flex-1 overflow-auto bg-zen-navy">
                 <Outlet />
             </main>
         </div>

@@ -8,7 +8,7 @@
 
 Module 4 transforms learners from AI architects into AI governors. Students learn the critical skills needed to deploy, monitor, and maintain AI systems in production environments—where safety, compliance, and reliability are paramount. This module bridges the gap between prototype and professional deployment.
 
-**Lab Environment:** The **ZEN OS Governance Dashboard** gives students an enterprise-view command center to monitor drift, manage security incidents, and visualize compliance in real-time.
+**Lab Environment:** The **Vanguard Platform** gives students an enterprise-view command center to monitor drift, manage security incidents, and visualize compliance in real-time.
 
 This module answers the question: **"How do I make AI safe, reliable, and accountable?"**
 
@@ -43,14 +43,14 @@ This module answers the question: **"How do I make AI safe, reliable, and accoun
 | **Enterprise Integration** | Connect to corporate systems and data |
 | **Security Hardening** | Protect against adversarial attacks |
 
-### Enterprise Command Center (ZEN OS)
+### Enterprise Command Center (Vanguard Labs)
 | Tool | Capability |
 |------|------------|
 | **Data Drift Risk Lens** | Real-time visualization of model performance degradation |
-| **Security Ops Center** | Live monitoring of adversarial attempts and system health |
+| **AiSystemsBlueprintVisualizer** | Reverse-engineer and visualize monolithic AI system architectures |
 | **Governance Card Gen** | Auto-generate compliance documentation for deployed agents |
 | **Live Patent Radar** | Track competing AI innovations in real-time |
-| **Ops Mode Toggle** | Switch between "Development" and "Production" interfaces |
+| **TokenEconomySimulator** | Optimize and model complex token-cost flows at enterprise scale |
 
 ---
 
@@ -193,3 +193,4 @@ Upon completing Module 4, learners who have finished all four modules receive th
 ---
 
 > **"Module 4 is where builders become leaders. You learn that shipping AI is only the beginning—governing it responsibly is what separates professionals from hobbyists."**
+

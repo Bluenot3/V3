@@ -5,6 +5,19 @@ import { dal } from '../../../../services/dal';
 
 type Mode = 'login' | 'signup' | 'forgot';
 
+const authSignals = [
+    'Tracked progress and module state',
+    'Certificates and proof surfaces',
+    'Operational docs, guide, and dashboard access',
+];
+
+const MailGlyph: React.FC = () => (
+    <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7.5h16v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-9Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m5 8 7 5 7-5" />
+    </svg>
+);
+
 const LoginPage: React.FC = () => {
     const [mode, setMode] = useState<Mode>('login');
     const [email, setEmail] = useState('');
@@ -17,6 +30,7 @@ const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     const isLogin = mode === 'login';
+    const showPreviewHint = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO_LOGIN === 'true';
 
     // Redirect once authenticated
     useEffect(() => {
@@ -105,7 +119,7 @@ const LoginPage: React.FC = () => {
                         <span className="text-white text-4xl font-black" style={{ textShadow: '0 0 20px rgba(168,85,247,0.4)' }}>Z</span>
                     </div>
                     <h1 className="text-2xl font-bold text-white tracking-tight">ZEN Vanguard</h1>
-                    <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.45)' }}>AI Professionals Program</p>
+                    <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.45)' }}>Professional AI literacy and deployment training</p>
                 </div>
 
                 {/* Signup confirmation state */}
@@ -116,7 +130,7 @@ const LoginPage: React.FC = () => {
                                 background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(168,85,247,0.2))',
                                 border: '1px solid rgba(168,85,247,0.3)'
                             }}>
-                            <span className="text-2xl">✉️</span>
+                            <MailGlyph />
                         </div>
                         <h2 className="text-xl font-bold text-white mb-3">Check Your Email</h2>
                         <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
@@ -124,7 +138,7 @@ const LoginPage: React.FC = () => {
                             Click it to activate your account, then sign in.
                         </p>
                         <button
-                            onClick={() => { setSignupConfirmation(false); setIsLogin(true); }}
+                            onClick={() => { setSignupConfirmation(false); switchMode('login'); }}
                             className="w-full btn-liquid-glass font-bold py-3 px-8"
                         >
                             Back to Sign In
@@ -142,7 +156,7 @@ const LoginPage: React.FC = () => {
                                         background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(168,85,247,0.2))',
                                         border: '1px solid rgba(168,85,247,0.3)'
                                     }}>
-                                    <span className="text-2xl">✉️</span>
+                                    <MailGlyph />
                                 </div>
                                 <h2 className="text-xl font-bold text-white mb-3">Check Your Email</h2>
                                 <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
@@ -230,6 +244,12 @@ const LoginPage: React.FC = () => {
                                         </div>
                                     )}
 
+                                    {showPreviewHint && isLogin && (
+                                        <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm text-amber-50">
+                                            Local preview access is enabled. Use <span className="font-semibold">demo / demo</span> if you want to test the shell quickly.
+                                        </div>
+                                    )}
+
                                     <div>
                                         <button
                                             type="submit"
@@ -268,6 +288,18 @@ const LoginPage: React.FC = () => {
                                         </div>
                                     )}
                                 </form>
+
+                                <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">Workspace access includes</p>
+                                    <div className="mt-3 grid gap-2">
+                                        {authSignals.map((signal) => (
+                                            <div key={signal} className="flex items-start gap-2 text-sm text-white/70">
+                                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-purple-300" />
+                                                <span>{signal}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </>
                         )}
                     </div>

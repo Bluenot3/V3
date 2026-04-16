@@ -1,16 +1,24 @@
 {
   "name": "zen-vanguard-program",
   "private": true,
-  "version": "1.0.0",
+  "version": "3.1.0",
+  "description": "ZEN Vanguard professional AI literacy platform with guided curriculum, certifications, payments, and operational telemetry.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:server": "node server/index.js",
     "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "start": "node server/index.js",
+    "check": "tsc --noEmit",
     "build": "vite build",
     "preview:vite": "vite preview",
-    "preview": "node scripts/serve-static-preview.cjs --host 127.0.0.1 --port 4173",
-    "preview:open": "node scripts/serve-static-preview.cjs --host 127.0.0.1 --port 4173 --open"
+    "preview": "node scripts/preview-runtime-server.cjs --host 127.0.0.1 --port 4173",
+    "preview:open": "node scripts/preview-runtime-server.cjs --host 127.0.0.1 --port 4173",
+    "preview:static": "node scripts/serve-static-preview.cjs --host 127.0.0.1 --port 4173",
+    "preview:diagnose": "node scripts/diagnose-preview-runtime.cjs"
+  },
+  "engines": {
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "@google/genai": "^1.48.0",
@@ -26,6 +34,7 @@
     "react-dom": "^19.0.0",
     "react-router": "^7.1.0",
     "react-router-dom": "^7.1.0",
+    "resend": "^6.10.0",
     "stripe": "^14.10.0"
   },
   "devDependencies": {

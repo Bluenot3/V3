@@ -26,7 +26,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const PREVIEW_USER_STORAGE_KEY = 'zenPreviewUser';
-const PREVIEW_ACCESS_ENABLED = false;
+const PREVIEW_ACCESS_ENABLED = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO_LOGIN === 'true';
 
 const createDefaultModuleProgress = (): ModuleProgress => ({
     completedSections: [],

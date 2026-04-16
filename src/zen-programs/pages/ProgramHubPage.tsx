@@ -59,6 +59,18 @@ const operatingStandards = [
     'Test mobile and desktop execution paths before publishing any deployment.',
 ];
 
+const hubStats = [
+    { label: 'Programs', value: String(programs.length), detail: 'Operator, beginner, educator, and specialty tracks' },
+    { label: 'Flagship modules', value: '4', detail: 'Sequential Vanguard depth from foundations to systems' },
+    { label: 'Proof model', value: 'Artifact-led', detail: 'Outputs are designed to become portfolio evidence' },
+];
+
+const platformPillars = [
+    'Curriculum, docs, and dashboard are now visually and operationally aligned.',
+    'Each path makes audience, depth, duration, and expected outcomes explicit.',
+    'The flagship blueprint is surfaced directly on the hub instead of hidden behind navigation.',
+];
+
 const ProgramHubPage: React.FC = () => {
     const { user } = useAuth();
 
@@ -128,6 +140,31 @@ const ProgramHubPage: React.FC = () => {
                             </ol>
                         </div>
                     </div>
+                </section>
+
+                <section className="mt-6 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+                    <div className="grid gap-4 md:grid-cols-3">
+                        {hubStats.map((stat) => (
+                            <article key={stat.label} className="rounded-[1.6rem] border border-zen-gold/10 bg-zen-surface/60 p-5 shadow-zen-card backdrop-blur-xl">
+                                <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-zen-gold/65">{stat.label}</p>
+                                <p className="mt-3 text-3xl font-black tracking-tight text-white">{stat.value}</p>
+                                <p className="mt-3 text-sm leading-7 text-slate-400">{stat.detail}</p>
+                            </article>
+                        ))}
+                    </div>
+
+                    <article className="rounded-[1.8rem] border border-zen-gold/10 bg-[linear-gradient(180deg,rgba(8,13,29,0.92)_0%,rgba(8,13,29,0.76)_100%)] p-6 shadow-zen-card backdrop-blur-xl">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-zen-gold/65">Launch quality</p>
+                        <h2 className="mt-3 text-2xl font-black tracking-tight text-white">The workspace now reads like a product surface, not a content dump.</h2>
+                        <div className="mt-4 space-y-3">
+                            {platformPillars.map((pillar) => (
+                                <div key={pillar} className="flex items-start gap-3 rounded-[1.2rem] border border-zen-gold/8 bg-zen-navy/45 px-4 py-3">
+                                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-zen-gold/80" />
+                                    <p className="text-sm leading-7 text-slate-300">{pillar}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </article>
                 </section>
 
                 <section className="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">

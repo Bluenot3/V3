@@ -67,7 +67,17 @@ const Layout: React.FC = () => {
                 {/* Hide the global header on module pages — each module has its own header */}
                 {!isModulePage && <Header />}
 
+                {!isModulePage && (
+                    <a
+                        href="#main-content"
+                        className="absolute left-6 top-4 z-40 -translate-y-24 rounded-full border border-zen-gold/30 bg-zen-navy px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-zen-gold opacity-0 transition duration-200 focus:translate-y-0 focus:opacity-100"
+                    >
+                        Skip to content
+                    </a>
+                )}
+
                 <main
+                    id="main-content"
                     ref={mainContentRef}
                     className={`no-scrollbar flex-1 ${isModulePage ? 'p-0' : 'p-4 lg:p-8'}`}
                 >
@@ -84,7 +94,7 @@ const Layout: React.FC = () => {
                         }`}
                         style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)', paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)' }}
                     >
-                        <p>&copy; {new Date().getFullYear()} ZEN AI Co. — Vanguard Program. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} ZEN AI Co. - Vanguard Program. All rights reserved.</p>
                         <p
                             className={`mt-1 font-medium ${
                                 isOpsMode

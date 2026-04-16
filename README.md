@@ -5,7 +5,7 @@
   <p><strong>The Professional AI Literacy Platform</strong></p>
 
   <p>
-    <img src="https://img.shields.io/badge/Version-3.0-6366f1?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/Version-3.1-6366f1?style=flat-square" alt="Version" />
     <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React" />
     <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript" alt="TypeScript" />
     <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite" alt="Vite" />
@@ -86,7 +86,7 @@ ZEN Vanguard was built to the same standard we hold AI tools to: it should be fa
 | AI Integration | Gemini 2.5 Flash (via server-side proxy) |
 | Auth & Data | Supabase |
 | Payments | Stripe |
-| Hosting | Vercel / any static host |
+| Hosting | Vercel / static host + Node API |
 
 ---
 
@@ -107,9 +107,8 @@ cd V3
 # Install dependencies
 npm install
 
-# Copy environment variables
-cp .env.example .env
-# Add your API keys to .env
+# Copy .env.example to .env.local
+# Then add your API keys and deployment values there
 ```
 
 ### Development
@@ -120,13 +119,17 @@ npm run dev:full
 
 # Frontend only
 npm run dev
+
+# API only
+npm start
 ```
 
-Open `http://localhost:5173`
+Open `http://localhost:3000`
 
 ### Production Build
 
 ```bash
+npm run check
 npm run build
 npm run preview
 ```
@@ -145,6 +148,8 @@ npm run preview
 | `VITE_API_BASE_URL` | Backend API base URL |
 | `VITE_ENABLE_DEMO_LOGIN` | `false` in production |
 
+The API server now loads `.env`, `.env.local`, and `.env.<NODE_ENV>` in that order, so local overrides can stay out of committed defaults.
+
 ### Server-only (never expose to client)
 
 | Variable | Description |
@@ -157,9 +162,23 @@ npm run preview
 
 ---
 
+## Publish Readiness
+
+This release includes a final publish surface for static deployment and richer link previews:
+
+- Route-aware document titles and descriptions
+- Custom `404` experience instead of a blind redirect
+- Web manifest, favicon, and Open Graph image under `public/`
+- Safer API defaults for CORS normalization, Stripe redirect origin handling, and email endpoint failures
+
+If you deploy the API separately from the frontend, make sure `VITE_API_BASE_URL` points at the live API origin and that `CORS_ORIGINS` is set explicitly on the server.
+
+---
+
 ## Project Structure
 
 ```
+public/                  # Favicon, manifest, robots, social preview assets
 src/
 ├── components/          # Shared UI components
 │   └── vanguard/        # Core platform components (Frame, NavCard, Footer)

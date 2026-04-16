@@ -227,7 +227,7 @@ const formatText = (text: string): React.ReactNode => {
 };
 
 const SectionRenderer: React.FC<SectionRendererProps> = ({ item, section, itemIndex = 0 }) => {
-  const animationStyle = { animationDelay: `${200 + itemIndex * 70}ms`, opacity: 0 } as React.CSSProperties;
+  const animationStyle = { animationDelay: `${200 + itemIndex * 70}ms` } as React.CSSProperties;
 
   switch (item.type) {
     case 'paragraph':
@@ -249,7 +249,7 @@ const SectionRenderer: React.FC<SectionRendererProps> = ({ item, section, itemIn
               <li
                 key={i}
                 className="flex items-start gap-3 animate-slide-in-up"
-                style={{ animationDelay: `${200 + itemIndex * 70 + (i * 55)}ms`, opacity: 0 }}
+                style={{ animationDelay: `${200 + itemIndex * 70 + (i * 55)}ms` }}
               >
                 <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-sky-400/70 flex-shrink-0" />
                 <span className="leading-[1.8]">{formatText(li)}</span>

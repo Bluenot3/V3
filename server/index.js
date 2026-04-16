@@ -1,18 +1,42 @@
-import 'dotenv/config';
 import cors from 'cors';
 import crypto from 'crypto';
+import dotenv from 'dotenv';
 import express from 'express';
-import fs from 'fs';
 import path from 'path';
 import Stripe from 'stripe';
 import { fileURLToPath } from 'url';
+import { createClient } from '@supabase/supabase-js';
+import {
+    sendEmail,
+    buildWelcomeEmail,
+    buildCertificateEmail,
+    buildFinalCertificateEmail,
+    buildSubscriptionWelcomeEmail,
+} from './emailService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+dotenv.config({ path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`), override: false });
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local'), override: false });
+dotenv.config();
+
 const app = express();
 const PORT = Number(process.env.API_PORT || 3001);
-const ENTITLEMENTS_FILE = path.join(__dirname, 'entitlements.json');
+const ADMIN_SESSION_TTL_MS = 12 * 60 * 60 * 1000;
+const DEFAULT_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:4173',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:4173',
+];
+
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
 
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 const adminSessions = new Map();
@@ -22,53 +46,63 @@ const AZURE_AI_KEY = process.env.AZURE_AI_KEY || '';
 const AZURE_AI_MODEL = process.env.AZURE_AI_MODEL || 'Kimi-K2.5';
 const AZURE_API_VERSION = process.env.AZURE_AI_API_VERSION || '2024-12-01-preview';
 
-function loadEntitlements() {
-    try {
-        if (!fs.existsSync(ENTITLEMENTS_FILE)) {
-            return {};
-        }
-
-        return JSON.parse(fs.readFileSync(ENTITLEMENTS_FILE, 'utf8'));
-    } catch (error) {
-        console.error('Failed to load entitlements:', error);
-        return {};
-    }
-}
-
-function saveEntitlements(data) {
-    try {
-        fs.writeFileSync(ENTITLEMENTS_FILE, JSON.stringify(data, null, 2));
-    } catch (error) {
-        console.error('Failed to save entitlements:', error);
-    }
-}
+// Entitlements are now managed in Supabase via user_profiles table
 
 function generateSessionToken() {
     return crypto.randomBytes(32).toString('hex');
 }
 
+function normalizeOrigin(origin) {
+    if (!origin || typeof origin !== 'string') {
+        return null;
+    }
+
+    try {
+        const url = new URL(origin);
+        return `${url.protocol}//${url.host}`;
+    } catch {
+        return null;
+    }
+}
+
 function getAllowedOrigins() {
     const configuredOrigins = (process.env.CORS_ORIGINS || '')
         .split(',')
-        .map((origin) => origin.trim())
+        .map((origin) => normalizeOrigin(origin.trim()))
         .filter(Boolean);
 
     if (configuredOrigins.length > 0) {
-        return configuredOrigins;
+        return [...new Set(configuredOrigins)];
     }
 
-    return [
-        'http://localhost:5173',
-        'http://localhost:3000',
-        'http://localhost:4173',
-        'http://127.0.0.1:5173',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:4173',
-    ];
+    return DEFAULT_ALLOWED_ORIGINS;
 }
 
 function isAdminBypassConfigured() {
     return Boolean(process.env.ADMIN_BYPASS_USERNAME && process.env.ADMIN_BYPASS_PASSWORD);
+}
+
+function cleanupExpiredAdminSessions(now = Date.now()) {
+    for (const [token, session] of adminSessions.entries()) {
+        if (session.expiresAt <= now) {
+            adminSessions.delete(token);
+        }
+    }
+}
+
+function getTrustedOrigin(candidateOrigin) {
+    const allowedOrigins = getAllowedOrigins();
+    const normalizedOrigin = normalizeOrigin(candidateOrigin);
+
+    if (normalizedOrigin && allowedOrigins.includes(normalizedOrigin)) {
+        return normalizedOrigin;
+    }
+
+    return allowedOrigins[0] || DEFAULT_ALLOWED_ORIGINS[0];
+}
+
+function isValidEmail(value) {
+    return typeof value === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
 function requireStripe(res) {
@@ -113,11 +147,14 @@ async function createAzureChatCompletion(messages, temperature = 0.7, maxTokens 
     return data.choices?.[0]?.message?.content || '';
 }
 
+app.disable('x-powered-by');
+
 app.use(cors({
     origin(origin, callback) {
         const allowedOrigins = getAllowedOrigins();
+        const normalizedOrigin = normalizeOrigin(origin);
 
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || (normalizedOrigin && allowedOrigins.includes(normalizedOrigin))) {
             callback(null, true);
             return;
         }
@@ -128,6 +165,15 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    next();
+});
+
+app.use((req, res, next) => {
     if (req.path === '/api/stripe/webhook') {
         next();
         return;
@@ -135,6 +181,9 @@ app.use((req, res, next) => {
 
     express.json({ limit: '1mb' })(req, res, next);
 });
+
+const adminSessionCleanupTimer = setInterval(() => cleanupExpiredAdminSessions(), 15 * 60 * 1000);
+adminSessionCleanupTimer.unref?.();
 
 app.post('/api/admin/bypass', (req, res) => {
     if (!isAdminBypassConfigured()) {
@@ -149,6 +198,14 @@ app.post('/api/admin/bypass', (req, res) => {
     const validUsername = process.env.ADMIN_BYPASS_USERNAME;
     const validPassword = process.env.ADMIN_BYPASS_PASSWORD;
 
+    if (!isValidEmail(userEmail)) {
+        res.status(400).json({
+            success: false,
+            error: 'A valid user email is required.',
+        });
+        return;
+    }
+
     if (username === validUsername && password === validPassword) {
         const token = generateSessionToken();
 
@@ -156,7 +213,7 @@ app.post('/api/admin/bypass', (req, res) => {
             userEmail,
             isAdmin: true,
             createdAt: Date.now(),
-            expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+            expiresAt: Date.now() + ADMIN_SESSION_TTL_MS,
         });
 
         console.log(`Admin bypass granted for ${userEmail}`);
@@ -179,7 +236,7 @@ app.get('/api/billing/status', (req, res) => {
     const userEmail = req.query.email;
     const adminToken = req.query.token;
 
-    if (!userEmail || typeof userEmail !== 'string') {
+    if (!isValidEmail(userEmail)) {
         res.status(400).json({ error: 'Email required.' });
         return;
     }
@@ -196,11 +253,26 @@ app.get('/api/billing/status', (req, res) => {
         }
     }
 
-    const entitlements = loadEntitlements();
-    const entitled = entitlements[userEmail]?.entitled === true;
+    let entitled = false;
+
+    if (supabase && userEmail) {
+        supabase.from('user_profiles').select('is_entitled').eq('email', userEmail).single().then(({ data }) => {
+            if (data) {
+                entitled = data.is_entitled === true;
+            }
+            res.json({
+                entitled: isAdmin || entitled,
+                is_admin: isAdmin,
+                email: userEmail,
+            });
+        }).catch(() => {
+            res.json({ entitled: isAdmin, is_admin: isAdmin, email: userEmail });
+        });
+        return;
+    }
 
     res.json({
-        entitled,
+        entitled: isAdmin,
         is_admin: isAdmin,
         email: userEmail,
     });
@@ -213,8 +285,8 @@ app.post('/api/stripe/create-checkout-session', async (req, res) => {
 
     const { userEmail } = req.body;
 
-    if (!userEmail) {
-        res.status(400).json({ error: 'Email required.' });
+    if (!isValidEmail(userEmail)) {
+        res.status(400).json({ error: 'A valid email is required.' });
         return;
     }
 
@@ -224,6 +296,7 @@ app.post('/api/stripe/create-checkout-session', async (req, res) => {
     }
 
     try {
+        const trustedOrigin = getTrustedOrigin(req.headers.origin);
         const session = await stripe.checkout.sessions.create({
             mode: 'subscription',
             payment_method_types: ['card'],
@@ -234,8 +307,8 @@ app.post('/api/stripe/create-checkout-session', async (req, res) => {
                     quantity: 1,
                 },
             ],
-            success_url: `${req.headers.origin || 'http://localhost:5173'}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin || 'http://localhost:5173'}/paywall?canceled=true`,
+            success_url: `${trustedOrigin}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${trustedOrigin}/paywall?canceled=true`,
             metadata: { userEmail },
         });
 
@@ -278,16 +351,26 @@ app.post(
                 const session = event.data.object;
                 const userEmail = session.customer_email || session.metadata?.userEmail;
 
-                if (userEmail) {
-                    const entitlements = loadEntitlements();
-                    entitlements[userEmail] = {
-                        entitled: true,
-                        stripeCustomerId: session.customer,
-                        subscriptionId: session.subscription,
-                        grantedAt: new Date().toISOString(),
-                    };
-                    saveEntitlements(entitlements);
-                    console.log(`Entitlement granted for ${userEmail}`);
+                if (userEmail && supabase) {
+                    // Fetch user profile so we can personalise the email
+                    const { data: profile } = await supabase
+                        .from('user_profiles')
+                        .select('name')
+                        .eq('email', userEmail)
+                        .single();
+
+                    await supabase.from('user_profiles').update({
+                        is_entitled: true,
+                        stripe_customer_id: session.customer,
+                        stripe_subscription_id: session.subscription
+                    }).eq('email', userEmail);
+                    console.log(`Entitlement granted for ${userEmail} via Supabase`);
+
+                    // Send subscription welcome email
+                    await sendEmail(
+                        userEmail,
+                        buildSubscriptionWelcomeEmail({ name: profile?.name, email: userEmail })
+                    );
                 }
                 break;
             }
@@ -295,15 +378,13 @@ app.post(
             case 'customer.subscription.deleted':
             case 'customer.subscription.updated': {
                 const subscription = event.data.object;
-                const entitlements = loadEntitlements();
 
-                for (const [email, data] of Object.entries(entitlements)) {
-                    if (data.subscriptionId === subscription.id) {
-                        entitlements[email].entitled = subscription.status === 'active';
-                        saveEntitlements(entitlements);
-                        console.log(`Subscription ${subscription.status} for ${email}`);
-                        break;
-                    }
+                if (supabase) {
+                    const isEntitled = ['active', 'trialing'].includes(subscription.status);
+                    await supabase.from('user_profiles').update({
+                        is_entitled: isEntitled
+                    }).eq('stripe_subscription_id', subscription.id);
+                    console.log(`Subscription ${subscription.status} for sub ${subscription.id} via Supabase`);
                 }
                 break;
             }
@@ -333,14 +414,67 @@ app.post('/api/ai/generate', async (req, res) => {
     }
 });
 
+// ─── Email endpoints ───────────────────────────────────────────────────────
+
+/**
+ * POST /api/email/welcome
+ * Called from the frontend after a successful signup.
+ * Body: { email, name? }
+ */
+app.post('/api/email/welcome', async (req, res) => {
+    const { email, name } = req.body;
+
+    if (!isValidEmail(email)) {
+        res.status(400).json({ error: 'A valid email is required.' });
+        return;
+    }
+
+    try {
+        const result = await sendEmail(email, buildWelcomeEmail({ name, email }));
+        res.json({ sent: true, id: result?.id ?? null });
+    } catch (error) {
+        console.error('Welcome email error:', error);
+        res.status(502).json({ error: 'Unable to send welcome email.' });
+    }
+});
+
+/**
+ * POST /api/email/certificate
+ * Called from the frontend when a module certificate is earned.
+ * Body: { email, name?, moduleName, moduleNumber, certificateId, certificateHash }
+ */
+app.post('/api/email/certificate', async (req, res) => {
+    const { email, name, moduleName, moduleNumber, certificateId, certificateHash } = req.body;
+
+    if (!isValidEmail(email) || !moduleName || !certificateId) {
+        res.status(400).json({ error: 'A valid email, moduleName, and certificateId are required.' });
+        return;
+    }
+
+    const template = moduleNumber === 'final'
+        ? buildFinalCertificateEmail({ name, email, certificateId, certificateHash })
+        : buildCertificateEmail({ name, email, moduleName, moduleNumber, certificateId, certificateHash });
+
+    try {
+        const result = await sendEmail(email, template);
+        res.json({ sent: true, id: result?.id ?? null });
+    } catch (error) {
+        console.error('Certificate email error:', error);
+        res.status(502).json({ error: 'Unable to send certificate email.' });
+    }
+});
+
 app.get('/api/health', (_req, res) => {
     res.json({
         status: 'ok',
+        version: process.env.npm_package_version || '3.1.0',
         timestamp: new Date().toISOString(),
         features: {
             stripe: Boolean(stripe),
             adminBypass: isAdminBypassConfigured(),
             aiProxy: Boolean(AZURE_AI_ENDPOINT && AZURE_AI_KEY),
+            email: Boolean(process.env.RESEND_API_KEY),
+            supabase: Boolean(supabase),
         },
     });
 });

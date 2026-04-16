@@ -20,12 +20,15 @@ const MobileBottomNav: React.FC = () => {
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-zen-gold/10 bg-zen-navy/95 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl lg:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
             <div className="flex h-16 items-center justify-around">
                 {navItems.map((item) => {
-                    const isActive = location.pathname === item.path;
+                    const isActive = item.path === '/hub'
+                        ? location.pathname === '/hub' || location.pathname.startsWith('/programs/')
+                        : location.pathname === item.path;
 
                     return (
                         <NavLink
                             key={item.path}
                             to={item.path}
+                            aria-label={item.label}
                             className={`relative flex h-full w-full flex-col items-center justify-center transition-all duration-300 ${isActive ? 'text-zen-gold' : 'text-slate-500 hover:text-zen-gold/70'}`}
                         >
                             {/* Gold glow bar above active tab */}

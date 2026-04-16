@@ -105,6 +105,64 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [messages, setMessages] = useState<Message[]>([]);
     const [activityFeed, setActivityFeed] = useState<ActivityEvent[]>([]);
 
+    // Build activity feed from student data
+    const buildActivityFeed = useCallback((loadedStudents: Student[]): ActivityEvent[] => {
+        const events: ActivityEvent[] = [];
+        loadedStudents.forEach((student) => {
+            student.sessionHistory.forEach((session, i) => {
+                events.push({
+                    id: `${student.id}-login-${i}`,
+                    studentId: student.id,
+                    studentName: student.name,
+                    type: 'login',
+                    description: `Logged in — Module ${session.moduleId ?? '?'} session`,
+                    timestamp: session.startedAt,
+                    moduleId: session.moduleId,
+                });
+                (session.sectionsViewed ?? []).forEach((sectionId, si) => {
+                    events.push({
+                        id: `${student.id}-section-${i}-${si}`,
+                        studentId: student.id,
+                        studentName: student.name,
+                        type: 'section_complete',
+                        description: `Completed section: ${sectionId}`,
+                        timestamp: session.startedAt,
+                        moduleId: session.moduleId,
+                        points: 10,
+                    });
+                });
+            });
+            Object.entries(student.moduleProgress).forEach(([modId, mp]) => {
+                const moduleId = Number(modId);
+                (mp.completedInteractives ?? []).forEach((interactiveId, ii) => {
+                    events.push({
+                        id: `${student.id}-interactive-${modId}-${ii}`,
+                        studentId: student.id,
+                        studentName: student.name,
+                        type: 'interactive_complete',
+                        description: `Completed interactive: ${interactiveId}`,
+                        timestamp: mp.startedAt ?? student.enrolledAt,
+                        moduleId,
+                        points: 25,
+                    });
+                });
+                if (mp.certificateId) {
+                    events.push({
+                        id: `${student.id}-cert-${modId}`,
+                        studentId: student.id,
+                        studentName: student.name,
+                        type: 'certificate_earned',
+                        description: `Earned Module ${moduleId} certificate`,
+                        timestamp: mp.completedAt ?? student.enrolledAt,
+                        moduleId,
+                        points: 500,
+                    });
+                }
+            });
+        });
+        return events.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }, []);
+
     // Load real data from DAL
     const loadRealData = useCallback(async () => {
         if (!isAdminAuthenticated) return;
@@ -112,10 +170,11 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             const loadedStudents = await dal.user.getAllStudents();
             setStudents(loadedStudents);
+            setActivityFeed(buildActivityFeed(loadedStudents));
         } catch (error) {
             console.error("Failed to load admin data:", error);
         }
-    }, [isAdminAuthenticated]);
+    }, [isAdminAuthenticated, buildActivityFeed]);
 
     useEffect(() => {
         if (isAdminAuthenticated) {

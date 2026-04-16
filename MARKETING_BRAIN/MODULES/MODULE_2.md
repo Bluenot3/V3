@@ -8,7 +8,7 @@
 
 Module 2 elevates learners from AI comprehenders to AI architects. Students learn to design, build, and deploy autonomous agents—AI systems that can reason through problems, use tools, maintain memory, collaborate with other agents, and operate safely within defined boundaries.
 
-**Lab Environment:** Students work within the **ZEN OS Agent Workbench**, a drag-and-drop system architecture visualizer that allows for real-time monitoring of agent "thought processes" and execution plans.
+**Lab Environment:** Students work within the **Vanguard Platform**, a drag-and-drop system architecture visualizer that allows for real-time monitoring of agent "thought processes" and execution plans.
 
 This module answers the question: **"How do I build AI that works for me?"**
 
@@ -41,13 +41,13 @@ This module answers the question: **"How do I build AI that works for me?"**
 | **Audit Logging** | Track all agent decisions for accountability |
 | **Deployment Pipelines** | Move agents from dev to production safely |
 
-### Interactive Agent Tools (ZEN OS)
+### Interactive Agent Tools (Vanguard Built-in)
 | Tool | Capability |
 |------|------------|
 | **Agent System Designer** | Visual graph-based builder for agent cognitive architectures |
-| **Logic Gate Simulator** | Test boolean logic and decision trees before deployment |
-| **CI/CD Pipeline Sim** | Practice safe deployment with automated testing stages |
-| **Chain-of-Thought Visualizer** | Watch agents "think" step-by-step in real-time |
+| **DataDecisionFlowchartBuilder** | Test boolean logic and decision trees before deployment |
+| **AgentCiCdPipeline** | Practice safe deployment with automated testing stages |
+| **LangGraphVisualizer** | Watch agents "think" step-by-step in real-time |
 
 ---
 
@@ -191,3 +191,4 @@ By the end of Module 2, learners can:
 ---
 
 > **"Module 2 is where you stop using AI and start building AI. You become the architect of digital workers that think, plan, and act autonomously."**
+

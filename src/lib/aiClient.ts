@@ -47,10 +47,14 @@ function buildMessages(config: any): Message[] {
 }
 
 async function proxyChatCompletion(messages: Message[], temperature = 0.7, maxTokens = 2048): Promise<string> {
+    const { data: { session } } = await import('./supabase').then(m => m.supabase.auth.getSession());
+    const token = session?.access_token;
+    
     const response = await fetch(`${API_BASE}/api/ai/generate`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
         },
         body: JSON.stringify({
             messages,
@@ -152,49 +156,7 @@ class ProxyAIClient {
     }
 }
 
-class MockChat {
-    async sendMessage(): Promise<{ text: string }> {
-        return {
-            text: 'Simulation mode is active. Start the API server and configure AZURE_AI_ENDPOINT and AZURE_AI_KEY to enable live responses.',
-        };
-    }
-}
-
-class MockAIClient {
-    getGenerativeModel() {
-        return {
-            startChat: () => new MockChat(),
-            generateContent: async () => ({
-                response: {
-                    text: () => 'Simulation mode is active. Configure the backend AI proxy for live responses.',
-                },
-                text: 'Simulation mode is active. Configure the backend AI proxy for live responses.',
-            }),
-        };
-    }
-
-    chats = {
-        create: () => new MockChat(),
-    };
-
-    models = {
-        generateContent: async () => ({
-            text: 'Simulation mode is active. Configure the backend AI proxy for live responses.',
-            response: {
-                text: () => 'Simulation mode is active. Configure the backend AI proxy for live responses.',
-            },
-            candidates: [
-                {
-                    content: {
-                        parts: [{ text: 'Simulation mode is active. Configure the backend AI proxy for live responses.' }],
-                    },
-                },
-            ],
-        }),
-    };
-}
-
-let aiClientInstance: ProxyAIClient | MockAIClient | null = null;
+let aiClientInstance: ProxyAIClient | null = null;
 
 export async function getAiClient(): Promise<any> {
     if (aiClientInstance) {
@@ -210,8 +172,8 @@ export async function getAiClient(): Promise<any> {
 
         aiClientInstance = new ProxyAIClient();
     } catch (error) {
-        console.warn('AI proxy unavailable. Falling back to simulation mode.', error);
-        aiClientInstance = new MockAIClient();
+        console.error('AI proxy unavailable. Ensure server is running and configured.', error);
+        throw new Error('AI Generation service is currently unavailable. Please verify API configurations or subscription status.');
     }
 
     return aiClientInstance;
@@ -222,5 +184,5 @@ export function clearAiClient(): void {
 }
 
 export function isImageSimulationMode(): boolean {
-    return true;
+    return false;
 }

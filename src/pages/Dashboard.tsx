@@ -100,6 +100,11 @@ const Dashboard: React.FC = () => {
     ), [user]);
     const isCourseComplete = stats.modulesCompleted >= moduleInfo.length;
     const completionMilestone = Math.round((stats.modulesCompleted / moduleInfo.length) * 100);
+    const nextRecommendedModule = useMemo(
+        () => moduleInfo.find((moduleDefinition) => !getModuleProgress(moduleDefinition.id).certificateId) ?? moduleInfo[moduleInfo.length - 1],
+        [getModuleProgress],
+    );
+    const issuedArtifacts = certificates.length + (isCourseComplete ? 1 : 0);
 
     useEffect(() => {
         const frame = certificateCanvasFrameRef.current;
@@ -132,7 +137,7 @@ const Dashboard: React.FC = () => {
         }
 
         let cancelled = false;
-        let activeTask: { destroy: () => void } | null = null;
+        let activeTask: { destroy: () => void; promise: Promise<unknown> } | null = null;
 
         const renderPreview = async () => {
             const canvas = certificateCanvasRef.current;
@@ -236,6 +241,34 @@ const Dashboard: React.FC = () => {
                 <div className="grid gap-4 sm:grid-cols-2">
                     <ZenStatGauge title="Readiness" value={Math.max(68, stats.overallProgress)} subtitle="The dashboard now reflects a more complete ZEN operating identity." icon="readiness" variant="readiness" />
                     <ZenStatGauge title="Network" value={100} subtitle="Hub, dashboard, and module shell are visually synchronized." icon="network" variant="network" />
+                </div>
+            </section>
+
+            <section className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+                <article className="zen-panel rounded-[1.9rem] p-6">
+                    <p className="zen-micro-label">Next best move</p>
+                    <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
+                        <div className="max-w-3xl">
+                            <h2 className="font-display text-3xl font-semibold tracking-[0.04em] text-[#f7e4b0]">
+                                Continue with {nextRecommendedModule.title}
+                            </h2>
+                            <p className="mt-3 text-sm leading-8 text-slate-300 sm:text-base">
+                                {nextRecommendedModule.description} The fastest route to a publishable proof surface is to
+                                finish the next unfinished module, document the outcome, and convert it into a visible artifact.
+                            </p>
+                        </div>
+                        <Link
+                            to={`/module/${nextRecommendedModule.id}`}
+                            className="rounded-full bg-gradient-to-r from-zen-gold to-zen-gold-light px-5 py-3 text-sm font-semibold text-zen-navy transition duration-300 hover:-translate-y-0.5 hover:shadow-glowing-gold"
+                        >
+                            Open Module {nextRecommendedModule.id}
+                        </Link>
+                    </div>
+                </article>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                    <ZenTelemetryCard title="Artifacts" value={String(issuedArtifacts)} subtitle="Issued certificates and visible proof generated so far." icon="certificate" variant="integrity" />
+                    <ZenTelemetryCard title="Course state" value={isCourseComplete ? 'Unlocked' : 'In motion'} subtitle={isCourseComplete ? 'Final certification preview is fully available.' : 'The final credential unlocks automatically at 100% completion.'} icon="ship" variant="network" />
                 </div>
             </section>
 

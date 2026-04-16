@@ -41,10 +41,9 @@ const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabase
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 const adminSessions = new Map();
 
-const AZURE_AI_ENDPOINT = process.env.AZURE_AI_ENDPOINT || '';
-const AZURE_AI_KEY = process.env.AZURE_AI_KEY || '';
-const AZURE_AI_MODEL = process.env.AZURE_AI_MODEL || 'Kimi-K2.5';
-const AZURE_API_VERSION = process.env.AZURE_AI_API_VERSION || '2024-12-01-preview';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || '';
+const OPENAI_CHAT_MODEL = 'gpt-4o-mini';
+const OPENAI_IMAGE_MODEL = 'dall-e-2';
 
 // Entitlements are now managed in Supabase via user_profiles table
 
@@ -117,34 +116,60 @@ function requireStripe(res) {
     return false;
 }
 
-async function createAzureChatCompletion(messages, temperature = 0.7, maxTokens = 2048) {
-    if (!AZURE_AI_ENDPOINT || !AZURE_AI_KEY) {
-        throw new Error('Azure AI is not configured on the server.');
+async function createOpenAIChatCompletion(messages, temperature = 0.7, maxTokens = 2048) {
+    if (!OPENAI_API_KEY) {
+        throw new Error('OpenAI is not configured on the server.');
     }
 
-    const baseEndpoint = AZURE_AI_ENDPOINT.replace(/\/$/, '');
-    const url = `${baseEndpoint}/openai/deployments/${AZURE_AI_MODEL}/chat/completions?api-version=${AZURE_API_VERSION}`;
-
-    const response = await fetch(url, {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'api-key': AZURE_AI_KEY,
+            'Authorization': `Bearer ${OPENAI_API_KEY}`,
         },
         body: JSON.stringify({
             messages,
             temperature,
             max_tokens: maxTokens,
+            model: OPENAI_CHAT_MODEL
         }),
     });
 
     if (!response.ok) {
         const errorBody = await response.text();
-        throw new Error(errorBody || `Azure AI request failed with status ${response.status}`);
+        throw new Error(errorBody || `OpenAI request failed with status ${response.status}`);
     }
 
     const data = await response.json();
     return data.choices?.[0]?.message?.content || '';
+}
+
+async function createOpenAIImageGeneration(prompt) {
+    if (!OPENAI_API_KEY) {
+        throw new Error('OpenAI is not configured on the server.');
+    }
+
+    const response = await fetch('https://api.openai.com/v1/images/generations', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+            prompt,
+            n: 1,
+            size: '512x512',
+            model: OPENAI_IMAGE_MODEL
+        }),
+    });
+
+    if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(errorBody || `OpenAI image request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data?.[0]?.url || '';
 }
 
 app.disable('x-powered-by');
@@ -406,10 +431,27 @@ app.post('/api/ai/generate', async (req, res) => {
     }
 
     try {
-        const text = await createAzureChatCompletion(messages, temperature, maxTokens);
+        const text = await createOpenAIChatCompletion(messages, temperature, maxTokens);
         res.json({ text });
     } catch (error) {
         console.error('AI generation error:', error);
+        res.status(503).json({ error: error.message });
+    }
+});
+
+app.post('/api/ai/image', async (req, res) => {
+    const { prompt } = req.body;
+
+    if (!prompt || typeof prompt !== 'string') {
+        res.status(400).json({ error: 'prompt must be a valid string.' });
+        return;
+    }
+
+    try {
+        const url = await createOpenAIImageGeneration(prompt);
+        res.json({ url });
+    } catch (error) {
+        console.error('AI image generation error:', error);
         res.status(503).json({ error: error.message });
     }
 });
@@ -472,7 +514,7 @@ app.get('/api/health', (_req, res) => {
         features: {
             stripe: Boolean(stripe),
             adminBypass: isAdminBypassConfigured(),
-            aiProxy: Boolean(AZURE_AI_ENDPOINT && AZURE_AI_KEY),
+            aiProxy: Boolean(OPENAI_API_KEY),
             email: Boolean(process.env.RESEND_API_KEY),
             supabase: Boolean(supabase),
         },

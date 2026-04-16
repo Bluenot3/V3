@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import BackToTopButton from './BackToTopButton';
 import AnimatedBackground from './AnimatedBackground';
@@ -9,8 +9,17 @@ import OpsShell from './ops/OpsShell';
 import { useOpsThemeSafe } from '../theme/OpsThemeContext';
 import { useSidebar } from '../contexts/SidebarContext';
 import LuxuryClickEffects from './LuxuryClickEffects';
+import { OnboardingChat } from './onboarding/OnboardingChat';
 
 const Layout: React.FC = () => {
+    const [showOnboarding, setShowOnboarding] = useState(false);
+
+    useEffect(() => {
+        if (!localStorage.getItem('zen_onboarding_answered')) {
+            setShowOnboarding(true);
+        }
+    }, []);
+
     const { pathname } = useLocation();
     const mainContentRef = React.useRef<HTMLDivElement>(null);
     const opsTheme = useOpsThemeSafe();
@@ -108,6 +117,7 @@ const Layout: React.FC = () => {
                 )}
             </div>
 
+            {showOnboarding && <OnboardingChat onComplete={() => setShowOnboarding(false)} />}
             <BackToTopButton />
             <MobileBottomNav />
         </div>

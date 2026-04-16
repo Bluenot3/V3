@@ -72,7 +72,29 @@ async function proxyChatCompletion(messages: Message[], temperature = 0.7, maxTo
     return data.text || '';
 }
 
-const IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.0-flash-image'];
+async function proxyImageGeneration(prompt: string): Promise<string> {
+    const { data: { session } } = await import('./supabase').then(m => m.supabase.auth.getSession());
+    const token = session?.access_token;
+
+    const response = await fetch(`${API_BASE}/api/ai/image`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({ prompt }),
+    });
+
+    if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(errorBody || `AI image proxy request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.url || '';
+}
+
+const IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.0-flash-image', 'dall-e-2', 'dall-e-3'];
 
 function isImageRequest(config: any): boolean {
     if (IMAGE_MODELS.includes(config?.model)) {
@@ -86,16 +108,34 @@ class ProxyAIClient {
     models = {
         generateContent: async (config: any) => {
             if (isImageRequest(config)) {
-                return {
-                    text: 'Image generation is not configured in this environment.',
-                    candidates: [
-                        {
-                            content: {
-                                parts: [{ text: 'Image generation is not configured in this environment.' }],
+                try {
+                    const prompt = typeof config.contents === 'string' 
+                        ? config.contents 
+                        : config.contents?.parts?.map((p: any) => p.text).join(' ') || 
+                          (Array.isArray(config.contents) ? config.contents.map((p: any) => p.parts?.map((x:any)=>x.text).join(' ')).join(' ') : "futuristic art");
+
+                    const url = await proxyImageGeneration(prompt);
+                    
+                    return {
+                        text: url,
+                        response: { text: () => url },
+                        candidates: [
+                            {
+                                content: {
+                                    parts: [{ text: url }],
+                                },
                             },
-                        },
-                    ],
-                };
+                        ],
+                    };
+                } catch (e: any) {
+                    console.error("Image gen failed:", e);
+                    const errorText = `Image generation error: ${e.message}`;
+                    return {
+                        text: errorText,
+                        response: { text: () => errorText },
+                        candidates: [{ content: { parts: [{ text: errorText }] } }],
+                    };
+                }
             }
 
             const messages = buildMessages(config);

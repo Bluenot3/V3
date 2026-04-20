@@ -100,9 +100,11 @@ const calculateStats = (students: Student[]): AdminStats => {
 };
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+    // Dev bypass: sessionStorage.__admin_bypass__ lets local preview skip Supabase auth
+    const devBypass = import.meta.env.DEV && sessionStorage.getItem('__admin_bypass__') === '1';
+    const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(devBypass);
     const [students, setStudents] = useState<Student[]>([]);
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, _setMessages] = useState<Message[]>([]);
     const [activityFeed, setActivityFeed] = useState<ActivityEvent[]>([]);
 
     // Build activity feed from student data
@@ -192,35 +194,23 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             await dal.auth.login(email, password);
 
-            // Post-login check
-            // For now, if login succeeds, we verify simplified admin check
-            // Ideally we should check user role from DAL if supported
-            // Using same logic as before:
+            // All admin-authorized emails — include real Supabase accounts
+            const adminEmails = [
+                'admin@zenvanguard.com',
+                'alexleschik@bgcgw.org',
+                'testadmin@zenai.co',
+                'alex1leschik@gmail.com',
+                'huxley@zenai.biz',
+            ];
 
-            const currentUser = dal.auth.getCurrentUser();
-            // Note: getCurrentUser depends on sync state, but login awaits.
-            // On success, state might not be instantly updated in DAL without an observer?
-            // Actually, `login` in Firebase is stateful.
-            // But we need to verify email.
-            // We can trust the login call and the email we sent.
-
-            if (email === 'admin@zenvanguard.com' || email === 'admin') {
+            if (adminEmails.includes(email) || email === 'admin') {
                 setIsAdminAuthenticated(true);
                 return true;
-            } else {
-                const adminEmails = ['admin@zenvanguard.com', 'alexleschik@bgcgw.org', 'testadmin@zenai.co'];
-                // We can't easily check auth.currentUser.email from DAL synchronously if getCurrentUser returns null initially
-                // But since we just awaited login, let's assume valid.
-                // We'll trust the input email if login succeeded with it.
-                if (adminEmails.includes(email)) {
-                    setIsAdminAuthenticated(true);
-                    return true;
-                }
-
-                // If not in list, denied
-                await dal.auth.logout();
-                return false;
             }
+
+            // Not in admin list
+            await dal.auth.logout();
+            return false;
         } catch (error) {
             console.error("Admin Login Failed:", error);
             return false;
@@ -233,7 +223,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setStudents([]);
     }, []);
 
-    const sendMessage = useCallback((to: string[], subject: string, body: string, type: Message['type']) => {
+    const sendMessage = useCallback((to: string[], subject: string, _body: string, _type: Message['type']) => {
         // Implementation for sending messages (Firestore 'messages' collection)
         console.log("Send message:", to, subject);
     }, []);

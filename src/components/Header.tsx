@@ -34,8 +34,8 @@ const Header: React.FC = () => {
 
     return (
         <header className="sticky top-0 z-30 border-b border-zen-border bg-[linear-gradient(180deg,rgba(5,10,24,0.98)_0%,rgba(8,14,29,0.95)_100%)] backdrop-blur-2xl">
-            <div className="relative overflow-hidden px-4 py-3 lg:px-6">
-                <div className="pointer-events-none absolute inset-0">
+            <div className="relative px-4 py-3 lg:px-6">
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
                     <div className="absolute left-10 top-0 h-16 w-44 rounded-full bg-zen-gold/[0.06] blur-3xl" />
                     <div className="absolute right-12 top-0 h-16 w-52 rounded-full bg-brand-cyan/[0.06] blur-3xl" />
                     <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-zen-gold/20 to-transparent" />

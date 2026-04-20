@@ -16,6 +16,7 @@ const ResetPasswordPage: React.FC = () => {
     // Supabase embeds the recovery token in the URL hash and fires
     // an SIGNED_IN / PASSWORD_RECOVERY auth event — we just wait for it.
     useEffect(() => {
+        // @ts-expect-error - Type definition clash with local node_modules
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
             if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') {
                 setValidSession(true);

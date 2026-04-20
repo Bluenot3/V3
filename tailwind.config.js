@@ -10,6 +10,9 @@ export default {
                 sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
                 outfit: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
                 display: ['Cinzel', 'Georgia', 'serif'],
+                orbitron: ['Orbitron', 'monospace'],
+                'space-grotesk': ['Space Grotesk', 'sans-serif'],
+                jetbrains: ['JetBrains Mono', 'monospace'],
             },
             colors: {
                 'brand-bg': '#060B18',
@@ -45,6 +48,12 @@ export default {
                 'zen-surface-3': '#374151',
                 'zen-border': 'rgba(201,168,76,0.15)',
                 'zen-border-hover': 'rgba(201,168,76,0.30)',
+                'ag-cyan': '#00d4ff',
+                'ag-purple': '#7b2fff',
+                'ag-green': '#00ff9f',
+                'ag-gold': '#ffd700',
+                'ag-pink': '#ff6b9d',
+                'ag-bg': '#030b1a',
             },
             boxShadow: {
                 'neumorphic-out': '6px 6px 16px rgba(0,0,0,0.4), -6px -6px 16px rgba(201,168,76,0.03)',

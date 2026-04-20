@@ -145,7 +145,12 @@ export type InteractiveComponentType =
     | 'RedTeamBot'
     | 'PromptUnitTester'
     | 'ModelPickerLab'
-    | 'CredentialMintPreview';
+    | 'CredentialMintPreview'
+    | 'ProjectSubmission'
+    | 'DataDriftRiskLens'
+    | 'OrbitalHabitatDesigner'
+    | 'AiGovernanceCardGenerator'
+    | 'MemoryRecallTuner';
 
 export interface ContentItem {
     type: ContentItemType;

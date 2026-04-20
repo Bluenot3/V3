@@ -112,4 +112,4 @@ const LuxuryClickEffects: React.FC = () => {
     return <div ref={layerRef} aria-hidden data-click-effects-layer="luxury-spark" className="pointer-events-none fixed inset-0 z-[120] overflow-hidden" />;
 };
 
-export default LuxuryClickEffects;
+export default React.memo(LuxuryClickEffects);
